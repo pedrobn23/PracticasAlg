@@ -9,8 +9,6 @@ do
     
     for i in {1 .. 25}
     do
-	#./guion.sh ejecutable/$j
-
 	echo "" > resultados/$j.dat
 	k=1000
 	 while [ $k -le 100000 ]
