@@ -40,7 +40,7 @@ void hanoi (int M, int i, int j)
   }
 }
 
-int main(int argc, char** argv[])
+int main(int argc, char* argv[])
 {
   clock_t tantes;    // Valor del reloj antes de la ejecución
   clock_t tdespues;  // Valor del reloj después de la ejecución
