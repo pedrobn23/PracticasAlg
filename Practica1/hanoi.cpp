@@ -51,7 +51,7 @@ int main(int argc, char* argv[])
       return 1;
     }
 
-  M = atoi(argv[1]);
+  int M = atoi(argv[1]);
   tantes = clock();
   hanoi(M, 1, 2);
   tdespues = clock();

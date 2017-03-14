@@ -7,14 +7,14 @@ do
 
     echo $j
 
-    for o in {1 .. 25}
-    do
+    #for o in {1 .. 25}
+    #do
 	      echo "" > resultados/$j.dat
-	      k="1000"
-	      while [ $k -le 100000 ]
+	      k="100"
+	      while [ $k -le 1000 ]
 	      do
 	          ./ejecutable/$j $k >> resultados/$j.dat
-	          k=$[$k+1000]
+	          k=$[$k+100]
 	      done
 	      # k=1000
 	      # for ((k=1000;k<100000;k=k+1000))
@@ -22,6 +22,6 @@ do
 	      #     ./ejecutable/$j $k >> resultados/$j.dat
 	      # done
 
-    done
+    #done
 done
 
