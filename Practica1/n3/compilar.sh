@@ -10,11 +10,11 @@ do
     #for o in {1 .. 25}
     #do
 	      echo "" > ../resultados/$j.dat
-	      k="500"
-	      while [ $k -le 50000 ]
+	      k="100"
+	      while [ $k -le 10000 ]
 	      do
 	          ../ejecutable/$j $k >> ../resultados/$j.dat
-	          k=$[$k+500]
+	          k=$[$k+100]
 	      done
 	      # k=1000
 	      # for ((k=1000;k<100000;k=k+1000))
