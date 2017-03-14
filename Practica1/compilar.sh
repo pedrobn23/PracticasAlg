@@ -9,12 +9,12 @@ do
     
     for i in {1 .. 25}
     do
-	echo "" > resultados/$j.dat
-	k=1000
+	 echo "" > resultados/$j.dat
+	 k="1000"
 	 while [ $k -le 100000 ]
 	 do
 	     ./ejecutable/$j $k >> resultados/$j.dat
-	     k=$k+1000
+	     k=$[$k+1000]
 	 done
 	# k=1000
 	# for ((k=1000;k<100000;k=k+1000))
