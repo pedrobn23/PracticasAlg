@@ -202,11 +202,30 @@ Tamaño Vector & Burbuja  & Inserción & Selección  \\ \midrule
 \end{tabular}
 
 
-Ahora, la gráfica resultante para \textbf{Burbuja} es:
+Ahora, la gráfica resultante para \textbf{Burbuja} es:\\
+\includegraphics[scale=0.5]{pngs/Burbuja}\\
+Que, ajustada al modelo conveniente ($n^2$), es:\\
+\includegraphics[scale=0.5]{pngs/BurbujaAjustada}
 \newpage
 
-\subsection{Tablas de algoritmos $n^3$}
+La gráfica resultante para \textbf{Inserción} es:\\
+\includegraphics[scale=0.4]{pngs/Insercion}\\
+Que, ajustada al modelo conveniente ($n^2$), es:\\
+\includegraphics[scale=0.4]{pngs/InsercionAjustada}
+\newpage
 
+Por último, la gráfica resultante para \textbf{Selección} es:\\
+\includegraphics[scale=0.4]{pngs/Seleccion}\\
+Que, ajustada al modelo conveniente ($n^2$), es:\\
+\includegraphics[scale=0.4]{pngs/SeleccionAjustada}
+\newpage
+
+Si juntamos ahora las ejecuciones en una tabla, vemos que el resultado es:\\
+\includegraphics[scale=0.4]{pngs/Eficiencian2}
+
+Donde se observa que burbuja tiene un grado mayor de escalabilidad con el tiempo, pero inserción y selección escalan de forma muy similar con el número de datos a tratar.
+
+\subsubsection{Tablas algoritmos $nlogn$}
 \begin{tabular}{@{}llll@{}}
 \toprule
 Tamaño Vector & Mergesort   & Heapsort & Quicksort \\ \midrule
@@ -252,7 +271,36 @@ Tamaño Vector & Mergesort   & Heapsort & Quicksort \\ \midrule
 40000         & 0.003039    & 0.003069 & 0.002246  \\\bottomrule
 \end{tabular}
 
+Ahora, la gráfica resultante para \textbf{Mergesort} es:\\
+\includegraphics[scale=0.4]{pngs/Mergesort}\\
+Que, ajustada al modelo conveniente ($nlogn$), es:\\
+\includegraphics[scale=0.4]{pngs/MergesortAjustada}
+\newpage
 
+
+La gráfica resultante para \textbf{Heapsort} es:\\
+\includegraphics[scale=0.4]{pngs/Heapsort}\\
+Que, ajustada al modelo conveniente ($nlogn$), es:\\
+\includegraphics[scale=0.4]{pngs/HeapsortAjustada}
+\newpage
+
+Por último dentro de este bloque, la gráfica resultante para \textbf{Quicksort} es:\\
+\includegraphics[scale=0.4]{pngs/Quicksort}\\
+Que, ajustada al modelo conveniente ($nlogn$), es:\\
+\includegraphics[scale=0.4]{pngs/QuicksortAjustada}
+\newpage
+
+Estos tres algoritmos son comparables en eficiencia en la siguiente gráfica:
+\includegraphics[scale=0.4]{pngs/nlogn}
+
+Donde podemos comprobar que tienen comportamientos de eficiencia muy similares.
+
+
+\subsubsection{Comparativa ordenación}
+
+
+Habiendo terminado el bloque de algoritmos de ordenación, podemos establecer una comparativa entre ellos con la siguiente gráfica:\\
+\includegraphics[scale=0.5]{pngs/Ordenacion}
 \subsubsection{Tabla algoritmo Hanoi}
 
 
@@ -288,6 +336,14 @@ Tamaño Vector & Hanoi    \\ \midrule
 27            & 0.276828 \\
 28            & 0.552919 \\ \bottomrule
 \end{tabular}
+\newpage
+
+De estos datos, podemos obtener la gráfica del algoritmo de \textbf{Hanoi} siguiente:\\
+\includegraphics[scale=0.4]{pngs/Hanoi}\\
+Que, ajustada a su modelo $2^n$, da como resultado la gráfica:\\
+\includegraphics[scale=0.4]{pngs/HanoiAjustada}
+
+Esta puede parecer distinta a una gráfica de una función $2^n$, pero sin embargo esto ocurre por el bajo rango de sus datos, pues la escalabilidad en tiempo de esta función es demasiado alta y no se podría mantener unos datos mucho más altos si queremos que el programa se ejecute en un tiempo razonable.
 
 \subsubsection{Tabla algoritmo Floyd}
 \begin{tabular}{@{}ll@{}}
@@ -334,6 +390,11 @@ Tamaño Vector & Floyd    \\ \midrule
 1000          & 0.759402 \\ \bottomrule
 \end{tabular}
 
-\includesvg[pdf,eps]{Mergesort}
+De estos datos, podemos obtener la gráfica del algoritmo de \textbf{Floyd} siguiente:\\
+\includegraphics[scale=0.4]{pngs/Floyd}\\
+Que, ajustada a su modelo $2^n$, da como resultado la gráfica:\\
+\includegraphics[scale=0.4]{pngs/FloydAjustada}
+
+Donde podemos comprobar que los resultados obtenidos, salvo ruido, se ajustan bien a los teóricos.
 
 \end{document}
