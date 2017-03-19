@@ -17,6 +17,9 @@
 \uselanguage{Spanish}       % Traducciones beamer
 \languagepath{Spanish}      % (tex.stackexchange.com/questions/168208)
 
+\usepackage{multicol}
+\usepackage{multirow}
+
 % Matemáticas
 \usepackage{amsfonts}
 \usepackage{amsmath}
@@ -102,10 +105,10 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1
 \renewcommand\textbullet{\ensuremath{\bullet}}
 
 %% Título y otros %%
-\title{Practica 1}                                               % Título
-\subtitle{Una practica escrita en \beamer}                                  % Subtítulo
+\title{Práctica 1}                                               % Título
+\subtitle{Eficiencia de algoritmos}                                  % Subtítulo
 
-\date{2º Doble Grado Infomática y Matemáticas}                                                            % Fecha
+\date{2º Doble Grado Informática y Matemáticas}                                                            % Fecha
 
 
 %% Presentación %%
@@ -120,35 +123,35 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1
   \tableofcontents
   
 \end{frame}
-\section{Introducción}
-\begin{frame}
-En estas diapositivas desarrollaremos como hemos realizado la prática, con el objetivo de que quede claro como se resuelven y el por qué de sus resultados.
-\end{frame}
+%\section{Introducción}
+%\begin{frame}
+%En estas diapositivas desarrollaremos como hemos realizado la práctica, con el objetivo de que quede claro cómo se resuelven y el por qué de sus resultados.
+%\end{frame}
 
-\section{Ejecicio 1}
-\subsection{enunciado}
+\section{Ejercicio 1}
+\subsection{Enunciado}
 \begin{frame}
 
 \frametitle{Enunciado}
-	Calcule  la eficiencia empírica, siguiendo las indicaciones de la sección 3. Defina adecuadamente los tamaños de entrada de forma tal que se generen al menos 25 datos. Incluya en l amemoria tablas diferentes paara los algoritmos de distinto orden de eficiencia (una con algoritmos O($n^2$), otra con los O($nlog(n)$), otra con los O($n^3$) y otra con los O($2^n$).
-	\begin{figure}
-  \centering
-    \includegraphics[width=0.3\textwidth]{eficiencia.png}
-  \label{fig:ejemplo}
-\end{figure}
+	Calcule  la eficiencia empírica de los distintos algoritmos. Defina adecuadamente los tamaños de entrada de forma tal que se generen al menos 25 datos. Incluya en la memoria tablas diferentes paara los algoritmos de distinto orden de eficiencia.
+	%\begin{figure}
+  %\centering
+   % \includegraphics[width=0.3\textwidth]{eficiencia.png}
+  %\label{fig:ejemplo}
+%\end{figure}
 \end{frame}
 
 
-\subsection{solución}
-\begin{frame}
-Para facilitar los numerosos casos de prueba que suceden, realizamos un script en bash para automatizar los procesos de compilación y ejecución de los scripts. Utilizamos el lenguaje bash porque consideramos que facilita el uso de programa y scripts externos.
-\end{frame}
+\subsection{Solución}
+%\begin{frame}
+%Para facilitar los numerosos casos de prueba que suceden, realizamos un script en bash para automatizar los procesos de compilación y ejecución de los scripts. Utilizamos el lenguaje bash porque consideramos que facilita el uso de programa y scripts externos.
+%\end{frame}
 
-\begin{frame}
-\frametitle{Código del Script}
-\begin{columns}
-\column{0.5\textwidth}
-AQUÍ VA EL CÓDIGO DEL SCRIPT, HELP PLEASE
+%\begin{frame}
+%\frametitle{Código del Script}
+%\begin{columns}
+%\column{0.5\textwidth}
+%AQUÍ VA EL CÓDIGO DEL SCRIPT, HELP PLEASE
 %\begin{lstlisting}
 %mkdir resultados ejecutable 2> /dev/null
 
@@ -169,22 +172,39 @@ AQUÍ VA EL CÓDIGO DEL SCRIPT, HELP PLEASE
 %done
 
 %\end{lstlisting}
-\column{0.5\textwidth}
-	Como podemos observar en el código, primero buscamos todos los archivos .cpp, para proseguir con su compilado. Después generamos o vaciamos el archivo ../resultado/ejecutable.dat. Por último ejecutamos un bucle while de estilo for, con el número máximo de la variable y cuanto aumenta en el paso a paso.
-\end{columns}
-\end{frame}
+%\column{0.5\textwidth}
+%	Como podemos observar en el código, primero buscamos todos los archivos .cpp, para proseguir con su compilado. Después generamos o vaciamos el archivo ../resultado/ejecutable.dat. Por último ejecutamos un bucle while de estilo for, con el número máximo de la variable y cuanto aumenta en el paso a paso.
+%\end{columns}
+%\end{frame}
 
 \begin{frame}
-	A cada orden de comlejidad le hemos definido una cantidad diferente de elementos con los que trabajar.
-	\begin{itemize}
-\item Para los algoritmos $nlog(n)$ (mergesort, quicksort, heapsort) hemos definido que empieze en 1000, y llegue a 100000 subiendo de 1000 en 1000. Un total de 100 iteraciones.
-\item Para los algoritmos $n^2$ (burbuja, insercción, selección) hemos definido que empieze en 500, y suba hasta 500000. Un total de 100 iteraciones.
-\item El algoritmo Floyd de orden $n^3$ parte de 25, y sube de 25 en 25 hasta 2500. Un total de 100 iteraciones.
-\item El algoritmo hanoi de orden $2^n$ parte de 1 y va subiendo unidad a unidad hasta 28. Un total de 28 iteraciones.
-\end{itemize}
+	Para cada orden de complejidad hemos definido un rango diferente, en el cual se va a mover el tamaño de los datos de entrada a los algoritmos.
+%	\begin{itemize}
+%\item Para los algoritmos $nlog(n)$ (mergesort, quicksort, heapsort) hemos definido que empieze en 1000, y llegue a 100000 subiendo de 1000 en 1000. Un total de 100 iteraciones.
+%\item Para los algoritmos $n^2$ (burbuja, insercción, selección) hemos definido que empieze en 500, y suba hasta 500000. Un total de 100 iteraciones.
+%\item El algoritmo Floyd de orden $n^3$ parte de 25, y sube de 25 en 25 hasta 2500. Un total de 100 iteraciones.
+%\item El algoritmo hanoi de orden $2^n$ parte de 1 y va subiendo unidad a unidad hasta 28. Un total de 28 iteraciones.
+%\end{itemize}
 
-Con el objetivo de poner de manifiesto de un modo más accesible la información, exponemos la gráfica, necesarias para el ejercicio siguiente.
+%Con el objetivo de poner de manifiesto de un modo más accesible la información, exponemos la gráfica, %necesarias para el ejercicio siguiente.
+
+\vspace{3mm}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{lllll}
+	Orden de eficiencia & Algoritmo & Tamaño inicial & Incremento & Tamaño final\\ \hline\noalign{\smallskip}
+	\multirow{3}{*}{$O(n\log n)$} & \textit{Heapsort} & \multirow{3}{*}{1000} & \multirow{3}{*}{1000} & \multirow{3}{*}{100000} \\
+	& \textit{Mergesort} & & &\\
+	& \textit{Quicksort} & & &\\ \hline\noalign{\smallskip}
+	\multirow{3}{*}{$O\left(n^2\right)$} & Burbuja & \multirow{3}{*}{500} & \multirow{3}{*}{500} & \multirow{3}{*}{50000} \\
+	& Inserción & & &\\
+	& Selección & & &\\ \hline\noalign{\smallskip}
+	$O\left(n^3\right)$ & Floyd & 25 & 25 & 2500 \\ \noalign{\smallskip} \hline\noalign{\smallskip}
+	$O\left(2^n\right)$ & Hanoi & 1 & 1 & 28
+	
+\end{tabular}
+}
 \end{frame}
+
 \begin{frame}
 \frametitle{tablas orden $nlog(n)$}
 	\begin{figure}
@@ -219,7 +239,7 @@ Con el objetivo de poner de manifiesto de un modo más accesible la información
 \end{frame}
 
 \section{Ejercicio 2}
-\subsection{enunciado}
+\subsection{Enunciado}
 
 \begin{frame}
 	2. Con cada una de las tablas anteriores, genere un gráfico comparando los tiempos  de
@@ -232,7 +252,7 @@ eficiencia.
   \label{fig:ejemplo}
 \end{figure}
 \end{frame}
-\subsection{solución}
+\subsection{Solución}
 \begin{frame}
 Las gráficas por ordenes de eficiencia ya las mostramos en el ejercicio anterior. Ahora proseguiremos explicando como las generamos y exponiedo como las hallamos (uso de gnuplot)
 \end{frame}
