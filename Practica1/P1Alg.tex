@@ -7,6 +7,7 @@
 \usepackage{mathpazo}
 \usepackage{booktabs}
 \usepackage{multicol}
+\usepackage{multirow}
 
 % Indentación de párrafos para Palatino
 \setlength{\parindent}{0pt}
@@ -66,7 +67,7 @@
 }
 
 %% Título
-\title{\textbf{Práctica 1}\\ % Title
+\title{\textbf{Memoria de la práctica 1}\\ % Title
 Algorítmica} % Subtitle
 
 \author{\textsc{Fco. Javier Sáez Maldonado}\\ % Author
@@ -100,58 +101,73 @@ Algorítmica} % Subtitle
 
 \section*{Introducción}
 
-En esta primera práctica, vamos a centrarnos en el estudio de la eficiencia tanto empírica como teórica de ciertos algoritmos. Para ello, realizaremos pruebas empíricas con nuestros propios equipos para comprobar que la eficiencia empírica se ajusta de forma más o menos adecuada a la eficiencia que calcularemos de forma teórica.
+En esta primera práctica, vamos a estudiar la eficiencia tanto empírica como teórica de ciertos algoritmos. Para ello, realizaremos pruebas empíricas con nuestros propios equipos para comprobar que la eficiencia se ajusta a la que calculada de forma teórica.
 
-Para ello, comenzaremos presentando los algoritmos que vamos a estudiar. Son algoritmos bastante conocidos y cuyas eficiencias teóricas también son conocidas. Estos son:
+Comenzaremos presentando los algoritmos que vamos a estudiar. Son algoritmos bastante conocidos, así como sus eficiencias teóricas. Estos son:
 \begin{enumerate}
-	\item Algoritmo de ordenación \textbf{burbuja}
-	\item Algoritmo de ordenación por \textbf{inserción}
-	\item Algoritmo de ordenación por \textbf{selección}
-	\item Algoritmo de ordenación \textbf{mergesort}, basado en la técnica divide y vencerás
-	\item Algoritmo de ordenación \textbf{quicksort}
-	\item Algoritmo de ordenación \textbf{heapsort}
-	\item Algoritmo de Floyd
-	\item Algoritmo de Hanoi
+	\item Algoritmo de ordenación \textbf{burbuja}.
+	\item Algoritmo de ordenación por \textbf{inserción}.
+	\item Algoritmo de ordenación por \textbf{selección}.
+	\item Algoritmo de ordenación \textbf{mergesort}, basado en la técnica divide y vencerás.
+	\item Algoritmo de ordenación \textbf{quicksort}.
+	\item Algoritmo de ordenación \textbf{heapsort}.
+	\item Algoritmo de \textbf{Floyd}.
+	\item Algoritmo de \textbf{Hanoi}.
 \end{enumerate}
 
-Para obtener unos buenos resultados, hemos decidido hacer las ejecuciones de estos algoritmos en varias máquinas. Las máquinas que usaremos serán:
+Los ejecutaremos en varias máquinas, a saber:
 \begin{enumerate}    
 	\item Máquina A: Procesador Intel Core I7-5700HQ, 6M Cache y 3.5 Ghz.
 	\item Máquina B: Procesador Intel Core I7-4712mq , 6M cache y 3.30Ghz
 	\item Máquina C: Procesador: Intel Core i7-4510U ,2.00GHz
-	\item Máquina D: Máquina Virtual VirtualBox version 5.1.112r112440(Qt5.6.2) dentro de una Máquina C.
+	\item Máquina D: Máquina Virtual VirtualBox versión 5.1.112r112440(Qt5.6.2) dentro de una Máquina C.
 
 \end{enumerate}
 
 \section{Cálculo de la eficiencia empírica}
-Para facilitar el cálculo de la eficiencia empírica, realizamos un script en \emph{bash} que automatizara el proceso de realizar las ejecuciones pedidas por programa y cambiara iterativamente las iteraciones de nuestros programas. El script además, compila los programas y deja los resultados en una carpeta de resultados para poder después hacer las gráficas. El código es el siguiente:
+A fin de facilitar el cálculo de la eficiencia empírica, escribimos un guion que automatizase el proceso de realizar las ejecuciones pedidas para cada algoritmo, recoger los datos y organizarlos en carpetas. %El código es el siguiente:
 
-\begin{lstlisting}
-mkdir resultados ejecutable 2> /dev/null
+%\begin{lstlisting}
+%mkdir resultados ejecutable 2> /dev/null
 
-for i in *.cpp
-do
-    j=`echo $i | cut -f 1 -d .`
-    g++ -O2 $i -o ../ejecutable/$j
+%for i in *.cpp
+%do
+%    j=`echo $i | cut -f 1 -d .`
+%    g++ -O2 $i -o ../ejecutable/$j
 
-    echo $j
+%    echo $j
 
-	      echo "" > ../resultados/$j.dat
-	      k="1"
-	      while [ $k -le 28 ]
-	      do
-	          ../ejecutable/$j $k >> ../resultados/$j.dat
-	          k=$[$k+1]
-	      done
-done
+%	      echo "" > ../resultados/$j.dat
+%	      k="1"
+%	      while [ $k -le 28 ]
+%	      do
+%	          ../ejecutable/$j $k >> ../resultados/$j.dat
+%	          k=$[$k+1]
+%	      done
+%done
 
-\end{lstlisting}
-Además, según el tipo de algoritmo, hemos ido variando el número de veces que se ejecuta el código. El que hemos mostrado es el que ejecuta el programa de Hanoi. Los algoritmos de eficiencia $n^2$ se han ejecutado de $500$ en $500$ hasta llegar al valor de $50000$.  El algoritmo Floyd lo ejecutaremos de 25 en 25 hasta llegar a $2500$ de tamaño del vector.  Los algoritmos de eficiencie $nlogn$ los ejecutaremos de $1000$ en $1000$ hasta llegar a $100000$.
+%\end{lstlisting}
+Además, según el tipo de algoritmo, hemos ido variando el número de veces que se ejecuta el código.
+ %El que hemos mostrado es el que ejecuta el programa de Hanoi. 
+En la siguiente tabla se muestra el tamaño de los datos de entrada en cada iteración, para cada algoritmo.
+
+\begin{tabular}{lllll}
+	Orden de eficiencia & Algoritmo & Tamaño inicial & Incremento & Tamaño final\\ \midrule
+	\multirow{3}{*}{$O(n\log n)$} & \textit{Heapsort} & \multirow{3}{*}{1000} & \multirow{3}{*}{1000} & \multirow{3}{*}{100000} \\
+	& \textit{Mergesort} & & &\\
+	& \textit{Quicksort} & & &\\ \midrule
+	\multirow{3}{*}{$O\left(n^2\right)$} & Burbuja & \multirow{3}{*}{500} & \multirow{3}{*}{500} & \multirow{3}{*}{50000} \\
+	& Inserción & & &\\
+	& Selección & & &\\ \midrule
+	$O\left(n^3\right)$ & Floyd & 25 & 25 & 2500 \\\midrule
+	$O\left(2^n\right)$ & Hanoi & 1 & 1 & 28
+	
+\end{tabular}
 
 \subsection{Tablas de las ejecuciones}
 Tras realizas las ejecuciones de los distintos algoritmos, los hemos agrupado por órdenes de eficiencia y hemos escrito tablas con ellos. Escribiremos  las tablas recortadas y generadas por el computador de tipo $A$, para no ocupar todo el documento con las tablas. Estas tablas podrán ser consultadas en una carpeta incluída en el proyecto.
 
-\subsubsection{ Tablas algoritmos $n^2$}
+\subsubsection{ Tablas algoritmos $O(n^2)$}
 \begin{tabular}{@{}llll@{}}
 \toprule
 Tamaño Vector & Burbuja  & Inserción & Selección  \\ \midrule
