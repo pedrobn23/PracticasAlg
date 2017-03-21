@@ -235,7 +235,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1
 \scalebox{0.53}[0.5]{
 %	\begin{figure}
 %  \centering
-    \includegraphics[]{n3.eps}
+    \includegraphics[]{n3_ajuste.eps}
 %  \label{fig:ejemplo}
 %\end{figure}
 }
@@ -253,6 +253,109 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1
 }
 \end{center}
 \end{frame}
+
+\frame{
+\frametitle{Coeficientes de los ajustes de las curvas $O(n\log n)$}
+\begin{block}{Curva parametrizada}
+	$ax\log(x)+bx$
+\end{block}
+}
+
+\frame{
+\frametitle{Coeficientes de los ajustes de las curvas $O(n\log n)$}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{ll}
+	Algoritmo & Coeficientes\\ \hline\noalign{\smallskip}
+	\textit{Heapsort} & $\begin{array}{ll}
+	a = 4,45661980236212e-9\\
+b = 4,57091330896553e-8
+\end{array}$ \\\hline\noalign{\smallskip}
+	\textit{Mergesort} & $\begin{array}{ll}
+	a = 1,04427553800116e-8\\
+b = -2,58720994439492e-8
+\end{array}$\\\hline\noalign{\smallskip}
+	\textit{Quicksort} & $\begin{array}{ll}
+	a = 2,79493370281663e-9\\
+b = 3,29731080614046e-8
+\end{array}$\\ \hline\noalign{\smallskip}
+	
+\end{tabular}
+}
+}
+
+\frame{
+\frametitle{Coeficientes de los ajustes de las curvas $O\left(n^2\right)$}
+\begin{block}{Curva parametrizada}
+	$a+bx+cx^2$
+\end{block}
+
+
+}
+
+\frame{
+\frametitle{Coeficientes de los ajustes de las curvas $O\left(n^2\right)$}
+\begin{center}
+\begin{tabular}{ll}
+Algoritmo & Coeficientes\\ \hline\noalign{\smallskip}
+Burbuja  &  $\begin{array}{lll}
+	a = 0,00082695543722856\\
+b = -1,78008100621617e-6\\
+c = 1,41949043281942e-9
+\end{array}$  \\\hline\noalign{\smallskip}
+	Inserción  & $\begin{array}{lll}
+	a = 9,34565785754161e-6\\
+b = 4,03176585100252e-8\\
+c = 4,60339062991612e-10
+\end{array}$\\\hline\noalign{\smallskip}
+	Selección  & $\begin{array}{lll}
+	a = -3,46794858274209e-5\\
+b = 1,18720037408458e-7\\
+c = 3,13826775410318e-10
+\end{array}$\\
+\end{tabular}
+\end{center}
+}
+\frame{
+\frametitle{Coeficientes de los ajustes de la curva $O\left(n^3\right)$ (Floyd)}
+\begin{block}{Curva parametrizada}
+	$a+bx+cx^2+dx^3$
+\end{block}
+}
+
+\frame{
+\frametitle{Coeficientes de los ajustes de la curva $O\left(n^3\right)$ (Floyd)}
+\begin{center}
+\begin{tabular}{ll}
+Algoritmo & Coeficientes\\ \hline\noalign{\smallskip}
+Floyd  & $\begin{array}{llll}
+	a = -0,0001373576928425\\
+b = 7,19449328754654e-6\\
+c = -6,0356967827879e-8\\
+d = 1,02809541531643e-9
+\end{array}$\\
+\end{tabular}
+\end{center}
+}
+
+\frame{
+\frametitle{Coeficientes de los ajustes de la curva $O\left(2^n\right)$ (Hanoi)}
+\begin{block}{Curva parametrizada}
+	$a2^{bx}$
+\end{block}
+}
+
+\frame{
+\frametitle{Coeficientes de los ajustes de la curva $O\left(2^n\right)$ (Hanoi)}
+\begin{center}
+\begin{tabular}{ll}
+Algoritmo & Coeficientes\\ \hline\noalign{\smallskip}
+Hanoi  & $\begin{array}{ll}
+	a = 7,0670287742651e-9\\
+b = 0,92649353651508
+\end{array}$
+\end{tabular}
+\end{center}
+}
 
 \section{Ejercicio 2}
 \subsection{Enunciado}
