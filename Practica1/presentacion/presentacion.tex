@@ -231,15 +231,16 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1
 \end{frame}
 \begin{frame}
 \frametitle{Gráfica del algoritmo $O(n^3)$}
-	\begin{center}
-\scalebox{0.53}[0.5]{
+	ESTA GRÁFICA NO COMPILA, AHORA LO ARREGLO
+%	\begin{center}
+%\scalebox{0.53}[0.5]{
 %	\begin{figure}
 %  \centering
-    \includegraphics[]{n3_ajuste.eps}
+ %   \includegraphics[]{n3_ajuste.eps}
 %  \label{fig:ejemplo}
 %\end{figure}
-}
-\end{center}
+%}
+	%\end{center}
 \end{frame}
 \begin{frame}
 \frametitle{Gráfica del algoritmo $O(2^n)$}
@@ -254,6 +255,45 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1
 \end{center}
 \end{frame}
 
+
+\section{Ejercicio 2}
+\subsection{Enunciado}
+
+\begin{frame}
+	2. Con cada una de las tablas anteriores, genere un gráfico comparando los tiempos  de
+los algoritmos. Indique claramente el significado de cada serie. Para los algoritmos que
+realizan la misma tarea (ordenar) exponga una tabla compartida dondea poder apreciar las diferencias en rendimiento de algoritmos con diferente orden de
+eficiencia.
+	\begin{figure}
+  \centering
+    \includegraphics[width=0.3\textwidth]{graf.png}
+  \label{fig:ejemplo}
+\end{figure}
+\end{frame}
+\subsection{Solución}
+\begin{frame}
+Las gráficas por ordenes de eficiencia ya las mostramos en el ejercicio anterior. Ahora proseguiremos explicando como las generamos y exponiedo como las hallamos (uso de gnuplot)
+\end{frame}
+\begin{frame}
+\frametitle{Comparación algoritmos ordenación}
+	\begin{figure}
+  \centering
+    \includegraphics[width=0.98\textwidth]{Ordenacion.png}
+  \label{fig:ejemplo}
+\end{figure}
+\end{frame}
+\section{Ejercicio 3}
+\subsection{Enunciado}
+\begin{frame}
+3. Calcule también la eficiencia híbrida de todos los algoritmos,  siguiendo las pautas inidcadas en la sección 4. Pruebe también con otros ajustes que no se correpondan con la eficiencia teórica (ajuste lineal, cuadrático, etc) y copruebe la variación en la calidad del ajuste.
+\end{frame}
+\subsection{Solución}
+\frame{
+	Esto es una explicación accesoria que quita seriedad, borradla si os parece oportuno.\\
+	
+	
+	Para realizar la eficiencia teórica vamos a coger el analisis hecho en teoría y a ajustar las curva por mínimos cuadrados. Ahora expondremos los resultados de nuestro análisis.
+}
 \frame{
 \frametitle{Coeficientes de los ajustes de las curvas $O(n\log n)$}
 \begin{block}{Curva parametrizada}
@@ -356,32 +396,8 @@ b = 0,92649353651508
 \end{tabular}
 \end{center}
 }
-
-\section{Ejercicio 2}
+\section{Ejercicio 4}
 \subsection{Enunciado}
-
-\begin{frame}
-	2. Con cada una de las tablas anteriores, genere un gráfico comparando los tiempos  de
-los algoritmos. Indique claramente el significado de cada serie. Para los algoritmos que
-realizan la misma tarea (ordenar) exponga una tabla compartida dondea poder apreciar las diferencias en rendimiento de algoritmos con diferente orden de
-eficiencia.
-	\begin{figure}
-  \centering
-    \includegraphics[width=0.3\textwidth]{graf.png}
-  \label{fig:ejemplo}
-\end{figure}
-\end{frame}
-\subsection{Solución}
-\begin{frame}
-Las gráficas por ordenes de eficiencia ya las mostramos en el ejercicio anterior. Ahora proseguiremos explicando como las generamos y exponiedo como las hallamos (uso de gnuplot)
-\end{frame}
-\begin{frame}
-\frametitle{Comparación algoritmos ordenación}
-	\begin{figure}
-  \centering
-    \includegraphics[width=0.98\textwidth]{Ordenacion.png}
-  \label{fig:ejemplo}
-\end{figure}
-	
-\end{frame}
+\frame{Otro aspecto interesante a analizar mediante este tipo de estudio es la variación de la eficiencia empírica en función de parámetros externs tales como: las opciones de compilación utilizada (con/sin optimización), el ordenador donde se realizan las pruebas, el sistea operativo, etc. Sugiera algún estudio de este tipo,consulte con el profesor de prácticas y llevelo a cabo.} 
+\subsection{solución}
 \end{document}
