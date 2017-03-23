@@ -128,6 +128,18 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1
 %En estas diapositivas desarrollaremos como hemos realizado la práctica, con el objetivo de que quede claro cómo se resuelven y el por qué de sus resultados.
 %\end{frame}
 
+\section{Máquinas usadas}
+\frame{
+Para el desarrollo de esta práctica, hemos usado cuatro máquinas distintas, a saber:
+\begin{enumerate}    
+	\item \textbf{Máquina A}: Procesador Intel Core I7-5700HQ, 6M caché, a 3.5 Ghz.
+	\item \textbf{Máquina B}: Procesador Intel Core I7-4712MQ , 6M caché, a 2.30Ghz.
+	\item \textbf{Máquina C}: Procesador: Intel Core i7-4510U, a 2.00GHz.
+	\item \textbf{Máquina D}: Máquina Virtual VirtualBox versión 5.1.112r112440(Qt5.6.2), sobre una máquina C.
+
+\end{enumerate}
+}
+
 \section{Ejercicio 1}
 \subsection{Enunciado}
 \begin{frame}
@@ -259,9 +271,9 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1
 \subsection{Enunciado}
 
 \begin{frame}
-	2. Con cada una de las tablas anteriores, genere un gráfico comparando los tiempos  de
+	Con cada una de las tablas anteriores, genere un gráfico comparando los tiempos  de
 los algoritmos. Indique claramente el significado de cada serie. Para los algoritmos que
-realizan la misma tarea (ordenar) exponga una tabla compartida dondea poder apreciar las diferencias en rendimiento de algoritmos con diferente orden de
+realizan la misma tarea (ordenar) exponga una tabla compartida donde poder apreciar las diferencias en rendimiento de algoritmos con diferente orden de
 eficiencia.
 	%\begin{figure}
   %\centering
@@ -271,28 +283,47 @@ eficiencia.
 \end{frame}
 \subsection{Solución}
 \begin{frame}
-Las gráficas por ordenes de eficiencia ya las mostramos en el ejercicio anterior. Ahora proseguiremos explicando como las generamos y exponiedo como las hallamos (uso de gnuplot)
+Las gráficas por órdenes de eficiencia ya las mostramos en el ejercicio anterior. Ahora mostraremos las gráficas correspondientes a los algoritmos de ordenación. %Ahora proseguiremos explicando como las generamos y exponiedo como las hallamos (uso de gnuplot)
 \end{frame}
+
 \begin{frame}
 \frametitle{Comparación algoritmos ordenación}
-	\begin{figure}
-  \centering
-    \includegraphics[width=0.98\textwidth]{Ordenacion.png}
-  \label{fig:ejemplo}
-\end{figure}
+	\begin{center}
+\scalebox{0.53}[0.5]{
+%	\begin{figure}
+%  \centering
+    \includegraphics[]{ord.eps}
+%  \label{fig:ejemplo}
+%\end{figure}
+}
+\end{center}
 \end{frame}
+
+\begin{frame}
+\frametitle{Comparación algoritmos ordenación}
+	\begin{center}
+\scalebox{0.53}[0.5]{
+%	\begin{figure}
+%  \centering
+    \includegraphics[]{ord_mod.eps}
+%  \label{fig:ejemplo}
+%\end{figure}
+}
+\end{center}
+\end{frame}
+
 \section{Ejercicio 3}
 \subsection{Enunciado}
 \begin{frame}
-3. Calcule también la eficiencia híbrida de todos los algoritmos,  siguiendo las pautas inidcadas en la sección 4. Pruebe también con otros ajustes que no se correpondan con la eficiencia teórica (ajuste lineal, cuadrático, etc) y copruebe la variación en la calidad del ajuste.
+Calcule también la eficiencia híbrida de todos los algoritmos, siguiendo las pautas indicadas. %Pruebe también con otros ajustes que no se correpondan con la eficiencia teórica (ajuste lineal, cuadrático, etc) y compruebe la variación en la calidad del ajuste.
 \end{frame}
 \subsection{Solución}
-\frame{
-	Esto es una explicación accesoria que quita seriedad, borradla si os parece oportuno.\\
+%\frame{
+	%Esto es una explicación accesoria que quita seriedad, borradla si os parece oportuno.\\
 	
 	
-	Para realizar la eficiencia teórica vamos a coger el analisis hecho en teoría y a ajustar las curva por mínimos cuadrados. Ahora expondremos los resultados de nuestro análisis.
-}
+%	Para realizar la eficiencia teórica vamos a coger el analisis hecho en teoría y a ajustar las curva por mínimos cuadrados. Ahora expondremos los resultados de nuestro análisis.
+%}
 \frame{
 \frametitle{Coeficientes de los ajustes de las curvas $O(n\log n)$}
 \begin{block}{Curva parametrizada}
@@ -397,6 +428,115 @@ b = 0,92649353651508
 }
 \section{Ejercicio 4}
 \subsection{Enunciado}
-\frame{Otro aspecto interesante a analizar mediante este tipo de estudio es la variación de la eficiencia empírica en función de parámetros externs tales como: las opciones de compilación utilizada (con/sin optimización), el ordenador donde se realizan las pruebas, el sistea operativo, etc. Sugiera algún estudio de este tipo,consulte con el profesor de prácticas y llevelo a cabo.} 
-\subsection{solución}
+\frame{Otro aspecto interesante a analizar mediante este tipo de estudio es la variación de la eficiencia empírica en función de parámetros externos tales como: las opciones de compilación utilizada (con/sin optimización), el ordenador donde se realizan las pruebas, el sistema operativo, etc. Sugiera algún estudio de este tipo, consulte con el profesor de prácticas y llévelo a cabo.} 
+\subsection{Solución}
+
+\frame{
+Estudiaremos las variaciones en el tiempo de ejecución entre las distintas máquinas usadas.
+}
+
+\begin{frame}
+\frametitle{Burbuja}
+	\begin{center}
+\scalebox{0.53}[0.5]{
+%	\begin{figure}
+%  \centering
+    \includegraphics[]{burbuja_todos.eps}
+%  \label{fig:ejemplo}
+%\end{figure}
+}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Inserción}
+	\begin{center}
+\scalebox{0.53}[0.5]{
+%	\begin{figure}
+%  \centering
+    \includegraphics[]{insercion_todos.eps}
+%  \label{fig:ejemplo}
+%\end{figure}
+}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Selección}
+	\begin{center}
+\scalebox{0.53}[0.5]{
+%	\begin{figure}
+%  \centering
+    \includegraphics[]{seleccion_todos.eps}
+%  \label{fig:ejemplo}
+%\end{figure}
+}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{\textit{Heapsort}}
+	\begin{center}
+\scalebox{0.53}[0.5]{
+%	\begin{figure}
+%  \centering
+    \includegraphics[]{heapsort_todos.eps}
+%  \label{fig:ejemplo}
+%\end{figure}
+}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{\textit{Mergesort}}
+	\begin{center}
+\scalebox{0.53}[0.5]{
+%	\begin{figure}
+%  \centering
+    \includegraphics[]{mergesort_todos.eps}
+%  \label{fig:ejemplo}
+%\end{figure}
+}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{\textit{Quicksort}}
+	\begin{center}
+\scalebox{0.53}[0.5]{
+%	\begin{figure}
+%  \centering
+    \includegraphics[]{quicksort_todos.eps}
+%  \label{fig:ejemplo}
+%\end{figure}
+}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Hanoi}
+	\begin{center}
+\scalebox{0.53}[0.5]{
+%	\begin{figure}
+%  \centering
+    \includegraphics[]{hanoi_todos.eps}
+%  \label{fig:ejemplo}
+%\end{figure}
+}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Floyd}
+	\begin{center}
+\scalebox{0.53}[0.5]{
+%	\begin{figure}
+%  \centering
+    \includegraphics[]{floyd_todos.eps}
+%  \label{fig:ejemplo}
+%\end{figure}
+}
+\end{center}
+\end{frame}
+
 \end{document}
