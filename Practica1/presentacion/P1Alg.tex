@@ -126,30 +126,31 @@ Los ejecutaremos en varias máquinas, a saber:
 \end{enumerate}
 
 \section{Cálculo de la eficiencia empírica}
-A fin de facilitar el cálculo de la eficiencia empírica, escribimos un guion que automatizase el proceso de realizar las ejecuciones pedidas para cada algoritmo, recoger los datos y organizarlos en carpetas. %El código es el siguiente:
+A fin de facilitar el cálculo de la eficiencia empírica, escribimos un guion que automatizase el proceso de realizar las ejecuciones pedidas para cada algoritmo, recoger los datos y organizarlos en carpetas. El código es el siguiente:
 
-%\begin{lstlisting}
-%mkdir resultados ejecutable 2> /dev/null
+\begin{lstlisting}
+mkdir resultados ejecutable 2> /dev/null
 
-%for i in *.cpp
-%do
-%    j=`echo $i | cut -f 1 -d .`
-%    g++ -O2 $i -o ../ejecutable/$j
+for i in *.cpp
+do
+    j=`echo $i | cut -f 1 -d .`
+   g++ -O2 $i -o ../ejecutable/$j
 
-%    echo $j
+    echo $j
 
-%	      echo "" > ../resultados/$j.dat
-%	      k="1"
-%	      while [ $k -le 28 ]
-%	      do
-%	          ../ejecutable/$j $k >> ../resultados/$j.dat
-%	          k=$[$k+1]
-%	      done
-%done
+	      echo "" > ../resultados/$j.dat
+	      k="1"
+	      while [ $k -le 28 ]
+	      do
+	          ../ejecutable/$j $k >> ../resultados/$j.dat
+	          k=$[$k+1]
+	      done
+done
 
-%\end{lstlisting}
+\end{lstlisting}
+
 Además, según el tipo de algoritmo, hemos ido variando el número de veces que se ejecuta el código.
- %El que hemos mostrado es el que ejecuta el programa de Hanoi. 
+El que hemos mostrado es el que ejecuta el programa de Hanoi. 
 En la siguiente tabla se muestra el tamaño de los datos de entrada en cada iteración, para cada algoritmo.
 
 \begin{tabular}{lllll}
