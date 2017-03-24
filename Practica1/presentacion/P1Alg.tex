@@ -434,29 +434,45 @@ Para llevar a cabo la resolución de este ejercicio, utilizando el script de rea
 
 \begin{enumerate}
   \item Burbuja:\\
-  \includegraphics[scale=0.5]{burbuja_todos.eps}\\
-  Podemos observar que las máquinas de prestaciones similares tienen tiempos similares en este pesado algoritmo, y que la máquina D(la máquina virtual) comienza pronto a realizar las ejecuciones mucho más despacio que las demás y luego, por razones de procesamiento, consigue en una ejecución acercarse al tiempo normal de ejecución pero luego vuelve a su estado de procesamiento lento.
+    \begin{center}
+      \includegraphics[scale=0.5]{burbuja_todos.eps}\\
+    \end{center}
+    Podemos observar que las máquinas de prestaciones similares tienen tiempos similares en este pesado algoritmo, y que la máquina D(la máquina virtual) comienza pronto a realizar las ejecuciones mucho más despacio que las demás y luego, por razones de procesamiento, consigue en una ejecución acercarse al tiempo normal de ejecución pero luego vuelve a su estado de procesamiento lento.
   \item Inserción:\\
-  \includegraphics[scale=0.5]{insercion_todos.eps}\\
-  Podemos ver que nuestra máquina con mejor procesador realiza las ejecuciones de este algoritmo mejor que las demás, alejándose al aumentar el tamaño de las demás. Además, también tenemos un comportamiento extraño en la máquina D, que a veces hace ejecuciones muy lentas y otras veces realiza ejecuciones con velocidad similar a las máquinas B y C.
+    \begin{center}
+      \includegraphics[scale=0.5]{insercion_todos.eps}\\
+    \end{center}
+    Podemos ver que nuestra máquina con mejor procesador realiza las ejecuciones de este algoritmo mejor que las demás, alejándose al aumentar el tamaño de las demás. Además, también tenemos un comportamiento extraño en la máquina D, que a veces hace ejecuciones muy lentas y otras veces realiza ejecuciones con velocidad similar a las máquinas B y C.
   \item Selección:\\
-  \includegraphics[scale=0.5]{seleccion_todos.eps}\\
-  En este algoritmo, todas las máquinas comienzan tardando lo mismo hasta la mitad del tamaño de las ejecuciones, lo cual es sorprendente por parte de la máquina D, pero luego se aleja mucho realizando grandes oscilaciones en los tiempos de ejecución.
+    \begin{center}
+      \includegraphics[scale=0.5]{seleccion_todos.eps}\\
+    \end{center}
+    En este algoritmo, todas las máquinas comienzan tardando lo mismo hasta la mitad del tamaño de las ejecuciones, lo cual es sorprendente por parte de la máquina D, pero luego se aleja mucho realizando grandes oscilaciones en los tiempos de ejecución.
   \item Heapsort:\\
-  \includegraphics[scale=0.5]{heapsort_todos.eps}\\
-  En el algoritmo Heapsort, podemos observar un comportamiento un tanto peculiar de la máquina virtual. Como se puede observar, comienza con los tiempos en cero, por lo que probablemente la máquina no pudo ejecutar el algoritmo y luego se ve como va ascendiendo en escalones, tardando exactamente el mismo tiempo para varios tamaños del vector, lo cual no tiene mucho sentido. Las demás máquinas sí que realizan un comportamiento normal. Es importante denotar que este error es producido por la máquina, ya que todas las máquinas utilizan el mismo script para realizar las ejecuciones.
+    \begin{center}
+      \includegraphics[scale=0.5]{heapsort_todos.eps}\\
+    \end{center}
+    En el algoritmo Heapsort, podemos observar un comportamiento un tanto peculiar de la máquina virtual. Como se puede observar, comienza con los tiempos en cero, por lo que probablemente la máquina no pudo ejecutar el algoritmo y luego se ve como va ascendiendo en escalones, tardando exactamente el mismo tiempo para varios tamaños del vector, lo cual no tiene mucho sentido. Las demás máquinas sí que realizan un comportamiento normal. Es importante denotar que este error es producido por la máquina, ya que todas las máquinas utilizan el mismo script para realizar las ejecuciones.
   \item Mergesort:\\
-  \includegraphics[scale=0.5]{mergesort_todos.eps}\\
-  En Mergesort, de nuevo la máquina virtual da un comportamiento extraño, empieza ejecutando bien(aunque lento) el algoritmo, luego hasta $4x10^4$ no puede ejecutar el algoritmo y por último realiza las ejecuciones con tiempos, como en el anterior algoritmo, que ascienden en escalón. Por otro lado, también es notable el comportamiento de las máquinas A,B y C, que llevan un ritmo bastante similar durante toda la ejecución.
+    \begin{center}
+      \includegraphics[scale=0.5]{mergesort_todos.eps}\\
+    \end{center}
+    En Mergesort, de nuevo la máquina virtual da un comportamiento extraño, empieza ejecutando bien(aunque lento) el algoritmo, luego hasta $4x10^4$ no puede ejecutar el algoritmo y por último realiza las ejecuciones con tiempos, como en el anterior algoritmo, que ascienden en escalón. Por otro lado, también es notable el comportamiento de las máquinas A,B y C, que llevan un ritmo bastante similar durante toda la ejecución.
   \item Quicksort:\\
-  \includegraphics[scale=0.5]{quicksort_todos.eps}\\
-  En este algoritmo, las tres máquinas principales llevan un ritmo bastante similar y la máquina virtual se separa mucho de ellas desde el principio, teniendo un comportamiento similar al que tiene en los algoritmos anteriores.
+    \begin{center}
+      \includegraphics[scale=0.5]{quicksort_todos.eps}\\
+    \end{center}
+    En este algoritmo, las tres máquinas principales llevan un ritmo bastante similar y la máquina virtual se separa mucho de ellas desde el principio, teniendo un comportamiento similar al que tiene en los algoritmos anteriores.
   \item Hanoi:\\
-  \includegraphics[scale=0.5]{hanoi_todos.eps}\\
-  En este caso, volvemos a la normalidad con la máquina $D$, aunque podemos notarle que aunque las tres máquinas reales vayan al mismo ritmo, la máquina virtual se separa antes de ellas para comenzar a realizar la curva ascendente.
+    \begin{center}
+      \includegraphics[scale=0.5]{hanoi_todos.eps}\\
+    \end{center}
+    En este caso, volvemos a la normalidad con la máquina $D$, aunque podemos notarle que aunque las tres máquinas reales vayan al mismo ritmo, la máquina virtual se separa antes de ellas para comenzar a realizar la curva ascendente.
   \item Floyd:\\
-  \includegraphics[scale=0.5]{floyd_todos.eps}\\
-
+    \begin{center}
+      \includegraphics[scale=0.5]{floyd_todos.eps}\\
+    \end{center}
+    
   En el último algoritmo a analizar, podemos ver que la máquina virtual se separa rápidamente d elas demás en cuanto a tiempo de ejecución y que en torno al tamaño $2000$ del vector, la máquina $A$ también se separa del resto de máquinas y tarda menos en el tiempo de ejecución
   \subsection{Conclusiones}
   Como conclusión a este ejercicio, podemos afirmar que las tres máquinas reales ($A,B$ y $C$) tienen comportamientos muy similares en las ejecuciones aunque, por lo general, la máquina $A$ consigue sacar ventaja en tiempo a las otras dos debido a su ventaja en características de procesamiento. Por otro lado, también se observa fácilmente que en la mayoría de los algoritmos, la máquina virtual genera tiempos muy dispares a los de las demás máquinas.
