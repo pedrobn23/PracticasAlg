@@ -33,7 +33,7 @@
 
 %%% Matemáticas
 \usepackage{amsmath}
-
+\usepackage{hyperref}
 %%% Código
 
 
@@ -345,5 +345,54 @@ Tamaño Vector & Floyd    \\ \midrule
 1000          & 0.759402 \\ \bottomrule
 \end{tabular}
 
+\section{Realización de las gráficas.}
+Para la realización de las gráficas usamos, sobre los datos previamente ofrecidos, el programa veusz (\hyperref[github]{https://github.com/jeremysanders/veusz} |hyperref[pagina oficial]{http://home.gna.org/veusz/}). En  ellas hemos buscado la máxima claridad y legibilidad de estas.
+
+\begin{frame}
+\subsection{Gráfica de algoritmos $O(n\log n)$}
+	\begin{center}
+\scalebox{0.53}[0.5]{
+%	\begin{figure}
+%  \centering
+    \includegraphics[]{nlogn_ajuste.eps}
+%  \label{fig:ejemplo}
+%\end{figure}
+}
+\end{center}
+\end{frame}
+\begin{frame}
+\subsection{Gráfica de algoritmos $O(n^2)$}
+\begin{center}
+\scalebox{0.53}[0.5]{
+%	\begin{figure}
+%  \centering
+    \includegraphics[]{n2_ajuste}
+%  \label{fig:ejemplo}
+%\end{figure}
+}
+\end{center}
+\end{frame}
+\begin{frame}
+\subsection{Gráfica del algoritmo $O(n^3)$}
+	\begin{center}
+\scalebox{0.53}[0.5]{
+	%\begin{figure}
+ %\centering
+    \includegraphics[]{n3_ajuste.eps}
+  %\label{fig:ejemplo}
+%\end{figure}
+}
+	\end{center}
+\end{frame}
+\begin{frame}
+\subsection{Gráfica del algoritmo $O(2^n)$}
+	\begin{center}
+\scalebox{0.53}[0.5]{
+%	\begin{figure}
+%  \centering
+    \includegraphics[]{2n_ajuste.eps}
+%  \label{fig:ejemplo}
+%\end{figure}
+}
 
 \end{document}
