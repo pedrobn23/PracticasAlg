@@ -7,7 +7,8 @@
 
  int i = 0
 
- for(i; i < n; ++i) {
+ for(i; i < n; ++i)
+ {
      if(v[i] > v[i+1])
        return i;
  }
