@@ -53,6 +53,8 @@ double uniforme(){ //Genera un número uniformemente distribuido en el
 }
 
 int main(int argc, char * argv[]){
+	clock_t tantes,tantes1;    // Valor del reloj antes de la ejecuci�n
+	clock_t tdespues,tdespues1;  // Valor del reloj despu�s de la ejecuci�n
 	if (argc != 2){
       cerr << "Formato " << argv[0] << " <num_elem>" << endl;
       return -1;
@@ -70,9 +72,18 @@ int main(int argc, char * argv[]){
 	for (int i=0; i<p; i++) T[i]=i;
 	for (int i=p+1; i<n; i++) T[i]=n-1-i+p;
 
-	for (int j=0; j<n; j++) {cout << T[j] << " ";}
+	//for (int j=0; j<n; j++) {cout << T[j] << " ";}
 
-	cout << "\nFuerza Bruta: " << fuerzaBruta(T,n) << "\n Divide y Vencerás " << divideYVenceras(T,n) <<endl;
+	//Tiempo con fuerza bruta
+	tantes = clock();
+	fuerzaBruta(T, n);
+  	tdespues = clock();
+	//Tiempo con divide y vencerás
+	tantes1 = clock();
+	divideYVenceras(T,n);
+	tdespues1 = clock();
+
+  	cout << argv[1] << " " << ((double)(tdespues-tantes))/CLOCKS_PER_SEC << " " << ((double)(tdespues1-tantes1))/CLOCKS_PER_SEC << endl;
 
 	delete T;
 
