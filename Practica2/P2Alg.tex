@@ -154,10 +154,32 @@ Así,nuestro algoritmo en\textbf{ \emph{c++} } sería:
 este algoritmo es de orden lineal y queremos mediante la estrategia ``divide y vencerás'' encontrar un algoritmo de orden menor.
 
 \subsection{Divide y vencerás}
-Utilizamos ahora la estrategia \textbf{Divide y vencerás} para crear un algoritmo de orden logarítmico. El algoritmo consiste en ir mirando en la mitad del vector y comparando si los elementos en la posición de la mitad del vector están en orden ascendente, y en cuyo 
+Utilizamos ahora la estrategia \textbf{Divide y vencerás} para crear un algoritmo de orden logarítmico. El algoritmo consiste en ir mirando en la mitad del vector (sea esta mitad la posición $p$) y comparando si los elementos en las posiciones $p-1,p$ y $p+1$ están en orden ascendente, y en cuyo caso realizar de nuevo esta operación sobre el vector que queda a la izquierda de esta posición, o si están en orden descendente, y entonces realizar esta operación sobre el vector que queda a la derecha de esta posición.
 
+Siguiendo este algoritmo escrito en texto, el resultante escrito en el lenguaje \emph{\textbf{c++}} es:
+\begin{lstlisting}
+	adsg
+\end{lstlisting}
 
+Sabemos que nuestro método utiliza la técnica Divide y vencerás pues lo que estamos haciendo es dividir el vector en mitades de forma sucesiva.
 
+\subsubsection{La complejidad del algoritmo}
+Es un algoritmo de complejidad $log(n)$, dado que para un vector de tamaño n, examinará primero el vector original, después un vector de tamaño $n/2$, después de uno de $n/4$, y así sucesivamente. Por lo tanto para un vector de tamaño $2^n$, hará $n$ examinciones. Así pués, para uno de tamaño $n$, realizará $log_2(n)$. Por esto, es de orden logarítmico.
+
+\subsubsection{Eficiencia práctica}
+Para comparar la eficiencia entre algoritmos, hemos realizado prácticas empíricas. Realizamos *INCLUYE EJECUCIONES* ejecuciones de cada algoritmo, y obtuvimos estos resultados:
+
+*INCLUIR TABLA*
+
+*INCLUIR GRÁFICA*
+
+\subsubsection{Eficiencia híbrida}
+Una vez sabemos que la eficiencia es de orden logarítmico, realizaremos una aproximación por mínimos cuadrados a una función de tipo $a\cdot log_2(x) + b$ par el algoritmo divide y vencerás y otra de tipo $a\cdot x + b$ para el de orden lineal.
+
+*INCLUIR RESULTADOS*
+
+\subsection{Conclusión}
+Como podemos ver en los resultados expuestos, el algoritmo de orden logarítmico o divide y vencerás es claramente mejor a el de orden lineal, lo cual hace clarividente la superioridad de este estilo de algoritmo frente a la fuerza bruta.
 
 
 \end{document}
