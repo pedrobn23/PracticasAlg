@@ -110,6 +110,30 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1
 
 \date{2º Doble Grado Informática y Matemáticas}                                                            % Fecha
 
+%% Listing settings
+
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
 
 %% Presentación %%
 \begin{document}
@@ -145,6 +169,13 @@ $$\forall \ i,j \leq p , \ i < j \rightarrow v[i] < v[j] \quad y \quad \forall \
 \end{frame}
 
 \begin{frame}
-	
+	\begin{lstlisting}
+  int fuerzaBruta(int* v, int n){
+    for(int i=1; i < n-1; ++i){
+         if(v[i] > v[i+1])
+         return i;
+    }
+  }
+\end{lstlisting}
 \end{frame}
 \end{document}
