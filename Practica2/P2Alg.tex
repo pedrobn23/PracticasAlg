@@ -40,6 +40,31 @@
 \usepackage{listings}
 \usepackage{graphicx}
 
+%% Listing settings
+
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
 
 
 %%% Bibliografía
@@ -98,6 +123,41 @@ Algorítmica} % Subtitle
 \pagebreak
 
 %%% Inicio del documento
+
+
+\section{Problema}
+
+Sea un vector $v$ de números de tamaño $n$, todos distintos, de forma que existe un índice $p$ (que no es ni el primero ni el último) tal que a la izquierda de $p$ los números están ordenados de forma creciente y a la derecha de $p$ están ordenados de forma decreciente; es decir
+\[
+\forall \ i,j \leq p , \ i < j \rightarrow v[i] < v[j] \quad y \quad \forall \ i,j \geq p, \ i < j \rightarrow v[i]>v[j]
+\]
+
+(de forma que el máximo se encuentra en la posición $p$). Diseñe un algoritmo ``divide y vencerás'' que permita determinar $p$. ¿Cuál es la complejidad del algoritmo? Compárelo con el algoritmo ``obvio'' para realizar esta tarea. Realizar también un estudio empírico e híbrido de la eficiencia de ambos algoritmos.
+
+\section{Solución}
+
+\subsection{El algoritmo obvio}
+Lo primero que se nos pedía hacer en la práctica era la implementación de un algoritmo que realice nuestro problema de forma obvia. Como los números no están repetidos y son ascendentes hasta el índice $p$, este $v[p]$ es el máximo del vector. Por tanto, nos bastaría encontrar el índice $t$ tal que:
+\[
+v[t-1] < v[t] \quad y \quad v[t] > v[t+1]
+\]
+Así,nuestro algoritmo en\textbf{ \emph{c++} } sería:
+\begin{lstlisting}
+	int fuerzaBruta(int* v, int n){
+		for(int i=1; i < n-1; ++i){
+     		if(v[i] > v[i+1])
+       	return i;
+		}
+	}
+\end{lstlisting}
+
+este algoritmo es de orden lineal y queremos mediante la estrategia ``divide y vencerás'' encontrar un algoritmo de orden menor.
+
+\subsection{Divide y vencerás}
+Utilizamos ahora la estrategia \textbf{Divide y vencerás} para crear un algoritmo de orden logarítmico. El algoritmo consiste en ir mirando en la mitad del vector y comparando si los elementos en la posición de la mitad del vector están en orden ascendente, y en cuyo 
+
+
+
 
 
 \end{document}
