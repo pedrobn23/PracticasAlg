@@ -22,6 +22,9 @@ int divideYVenceras(int* v, int n){
 	if(n==1)
 		return n;
 
+	else if(n==2)
+		return v[0]>v[1]?0:1;
+
 	else if(v[k] > v[k+1] && v[k] < v[k-1]) 
 		return k;
 
