@@ -4,9 +4,9 @@ def buscar (x, n, i):
     a= 3
     if (n > 2):
         if (x[n2] < x[n2+1]):
-            a = buscar(x[1:n2, n2)
+            a = buscar(x[1:n2, n2, i)
         else:
-            a = buscar(x[n2:n), (n-n2) 
+            a = buscar(x[n2:n), (n-n2), (i+n2)) 
 
     else:
         i if x[0]>x[1] else i+1
