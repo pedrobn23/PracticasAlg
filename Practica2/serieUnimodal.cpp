@@ -107,7 +107,7 @@ int main(int argc, char * argv[]){
 
   	// cout << argv[1] << " " <<(double)std::chrono::duration_cast<std::chrono::milliseconds>(t2-t1).count() << " " << (double)std::chrono::duration_cast<std::chrono::milliseconds>(t3-t2).count() << endl;
 
-	std::cout << argv[1] << " " << t1 /*<< " " << t2 << "e-05"*/ << std::endl;
+	std::cout << argv[1] << " " << t1 << " " << t2 << std::endl;
 	
 	delete T;
 
