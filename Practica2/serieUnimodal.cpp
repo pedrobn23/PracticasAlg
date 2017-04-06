@@ -75,15 +75,20 @@ int main(int argc, char * argv[]){
 
   int n = atoi(argv[1]);
 
-  int * T = new int[n];
+  int* T = new int[n];
+  int* T2 = new int[n];
   assert(T);
 
 	srand(time(0));
 	double u=uniforme();
 	int p=1+(int)((n-2)*u);
+	int p2 = n/2;
 	T[p]=n-1;
 	for (int i=0; i<p; i++) T[i]=i;
 	for (int i=p+1; i<n; i++) T[i]=n-1-i+p;
+
+	for (int i=0; i<p2; i++) T2[i]=i;
+	for (int i=p+1; i<n; i++) T2[i]=n-1-i+p2;
 
 	//for (int j=0; j<n; j++) {cout << T[j] << " ";}
 
@@ -94,16 +99,16 @@ int main(int argc, char * argv[]){
 	// divideYVenceras(T,n);
 	// auto t3 = std::chrono::high_resolution_clock::now();
 
-	int bruteForceExecs = 100;
+	int bruteForceExecs = 2;
 	
-	double t1 = measureTime(bruteForceExecs, fuerzaBruta, T, n);
+	double t1 = measureTime(bruteForceExecs, fuerzaBruta, T2, n);
 	double t2 = measureTime(100000, divideYVenceras, T, n);
 	
 
   	// cout << argv[1] << " " <<(double)std::chrono::duration_cast<std::chrono::milliseconds>(t2-t1).count() << " " << (double)std::chrono::duration_cast<std::chrono::milliseconds>(t3-t2).count() << endl;
 
-	std::cout << argv[1] << " " << t1/bruteForceExecs << " " << t2 << "e-05" << std::endl;
-
+	std::cout << argv[1] << " " << t1 /*<< " " << t2 << "e-05"*/ << std::endl;
+	
 	delete T;
 
 }

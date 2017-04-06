@@ -33,7 +33,7 @@
 
 %%% Matemáticas
 \usepackage{amsmath}
-\usepackage{hyperref}
+\usepackage[hidelinks]{hyperref}
 %%% Código
 
 
@@ -129,7 +129,7 @@ Algorítmica} % Subtitle
 
 Sea un vector $v$ de números de tamaño $n$, todos distintos, de forma que existe un índice $p$ (que no es ni el primero ni el último) tal que a la izquierda de $p$ los números están ordenados de forma creciente y a la derecha de $p$ están ordenados de forma decreciente; es decir
 \[
-\forall \ i,j \leq p , \ i < j \rightarrow v[i] < v[j] \quad y \quad \forall \ i,j \geq p, \ i < j \rightarrow v[i]>v[j]
+\forall \ i,j \leq p , \ i < j \Rightarrow v[i] < v[j] \quad y \quad \forall \ i,j \geq p, \ i < j \Rightarrow v[i]>v[j]
 \]
 
 (de forma que el máximo se encuentra en la posición $p$). Diseñe un algoritmo ``divide y vencerás'' que permita determinar $p$. ¿Cuál es la complejidad del algoritmo? Compárelo con el algoritmo ``obvio'' para realizar esta tarea. Realizar también un estudio empírico e híbrido de la eficiencia de ambos algoritmos.
@@ -164,7 +164,7 @@ int divideYVenceras(int* v, int n){
 		return 0; //Caso trivial
 	
 	if(n==2)
-		return v[0]>v[1]? 0:1 ; //Entre dos elementos, manda el menor.
+		return v[0]>v[1]? 0:1 ; //Entre dos elementos, devuelve el mayor.
 
 	if(v[k] > v[k+1]){
 
