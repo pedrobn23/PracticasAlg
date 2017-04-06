@@ -3,6 +3,8 @@
 #include <cstdlib>
 #include <climits>
 #include <cassert>
+#include <cstdio>
+#include <chrono>
 
  using namespace std;
 #define Millon 1000000 
@@ -76,16 +78,15 @@ int main(int argc, char * argv[]){
 	//for (int j=0; j<n; j++) {cout << T[j] << " ";}
 
 	//Tiempo con fuerza bruta
-	tantes = clock();
+	auto t1 = std::chrono::high_resolution_clock::now();
 	fuerzaBruta(T, n);
-  	tdespues = clock();
-	//Tiempo con divide y vencerás
-	tantes1 = clock();
+	auto t2= std::chrono::high_resolution_clock::now();
 	divideYVenceras(T,n);
-	tdespues1 = clock();
+	auto t3 = std::chrono::high_resolution_clock::now();
+
 	
 
-  	cout << argv[1] << " " << (((double)(tdespues-tantes))/CLOCKS_PER_SEC) << " " << (((double)(tdespues1-tantes1))/CLOCKS_PER_SEC) << endl;
+  	cout << argv[1] << " " <<(double)std::chrono::duration_cast<std::chrono::milliseconds>(t2-t1).count() << " " << (double)std::chrono::duration_cast<std::chrono::milliseconds>(t3-t2).count() << endl;
 
 	delete T;
 
