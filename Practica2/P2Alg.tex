@@ -191,7 +191,7 @@ Es un algoritmo de complejidad $log(n)$, dado que para un vector de tamaño n, e
 Para comparar la eficiencia entre algoritmos, hemos realizado prácticas empíricas. Para el algoritmo lineal realizamos 100 ejecuciones, con $n$ desde $10^6$ hasta $10^8$, con 2 ejecuciones del algoritmo cada ejecución del programa; para el logarítmico las mismas ejecuciones, con $10^5$ ejecuciones del algoritmo cada ejecución del programa, y obtuvimos los resultados adjuntos en la entrega en el fichero ``ejecuciones.dat'', que dan lugar a la siguiente gráfica:
 
 \begin{center}
-	\includegraphics[scale=0.22]{grafica1.pdf}
+	\includegraphics[scale=0.22]{imagen1.pdf}
 \end{center}
 
 \subsubsection{Eficiencia híbrida}
@@ -213,7 +213,7 @@ Y ahora, los ajustamos a los datos, sabiendo que debido a nuestro formato de sal
 
 Y por último realizamos el gráfico con GNUPLOT mediante:
 \begin{lstlisting}
-	gnuplot> plot "ejecuciones.dat" using 1:2 title "Fuerza bruta" , "ejecuciones.dat" using 1:3 title "Divide y vencerás", f(x), g(x)
+	gnuplot> plot ''ejecuciones.dat'' using 1:2 title ''Fuerza bruta'', ''ejecuciones.dat'' using 1:3 title ''Divide y venceras'', f(x), g(x)
 \end{lstlisting}
 
 Obteniendo el gráfico:
