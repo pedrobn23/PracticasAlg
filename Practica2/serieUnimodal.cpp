@@ -94,13 +94,15 @@ int main(int argc, char * argv[]){
 	// divideYVenceras(T,n);
 	// auto t3 = std::chrono::high_resolution_clock::now();
 
-	double t1 = measureTime(10, fuerzaBruta, T, n);
+	int bruteForceExecs = 100;
+	
+	double t1 = measureTime(bruteForceExecs, fuerzaBruta, T, n);
 	double t2 = measureTime(100000, divideYVenceras, T, n);
 	
 
   	// cout << argv[1] << " " <<(double)std::chrono::duration_cast<std::chrono::milliseconds>(t2-t1).count() << " " << (double)std::chrono::duration_cast<std::chrono::milliseconds>(t3-t2).count() << endl;
 
-	std::cout << argv[1] << " " << t1 << " " << t2 << "e-05" << std::endl;
+	std::cout << argv[1] << " " << t1/bruteForceExecs << " " << t2 << "e-05" << std::endl;
 
 	delete T;
 
