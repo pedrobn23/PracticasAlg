@@ -55,6 +55,16 @@ double uniforme(){ //Genera un número uniformemente distribuido en el
 	return u;
 }
 
+double measureTime(int nExecutions, int(*f)(int*,int), int* v, int n)
+{
+  auto t1 = std::chrono::high_resolution_clock::now();
+  for(int i=0; i<nExecutions; i++)
+    f(v, n);
+  auto t2 = std::chrono::high_resolution_clock::now();
+
+  return (double)std::chrono::duration_cast<std::chrono::milliseconds>(t2-t1).count();
+}
+
 int main(int argc, char * argv[]){
 	clock_t tantes,tantes1;    // Valor del reloj antes de la ejecuci�n
 	clock_t tdespues,tdespues1;  // Valor del reloj despu�s de la ejecuci�n
@@ -78,15 +88,19 @@ int main(int argc, char * argv[]){
 	//for (int j=0; j<n; j++) {cout << T[j] << " ";}
 
 	//Tiempo con fuerza bruta
-	auto t1 = std::chrono::high_resolution_clock::now();
-	fuerzaBruta(T, n);
-	auto t2= std::chrono::high_resolution_clock::now();
-	divideYVenceras(T,n);
-	auto t3 = std::chrono::high_resolution_clock::now();
+	// auto t1 = std::chrono::high_resolution_clock::now();
+	// fuerzaBruta(T, n);
+	// auto t2= std::chrono::high_resolution_clock::now();
+	// divideYVenceras(T,n);
+	// auto t3 = std::chrono::high_resolution_clock::now();
 
+	double t1 = measureTime(10, fuerzaBruta, T, n);
+	double t2 = measureTime(100000, divideYVenceras, T, n);
 	
 
-  	cout << argv[1] << " " <<(double)std::chrono::duration_cast<std::chrono::milliseconds>(t2-t1).count() << " " << (double)std::chrono::duration_cast<std::chrono::milliseconds>(t3-t2).count() << endl;
+  	// cout << argv[1] << " " <<(double)std::chrono::duration_cast<std::chrono::milliseconds>(t2-t1).count() << " " << (double)std::chrono::duration_cast<std::chrono::milliseconds>(t3-t2).count() << endl;
+
+	std::cout << argv[1] << " " << t1 << " " << t2 << "e-05" << std::endl;
 
 	delete T;
 
