@@ -8,7 +8,7 @@
 \PassOptionsToPackage{unicode}{hyperref}  % Evita errores con caracteres no ASCII
 \PassOptionsToPackage{naturalnames}{hyperref} % tex.stackexchange.com/questions/10555
 \documentclass[compress]{beamer}
-
+\usepackage{adjustbox}
 % Idioma
 \usepackage[spanish]{babel} % Traducciones
 \usepackage[utf8]{inputenc} % Uso de caracteres UTF-8
@@ -168,20 +168,56 @@ $$\forall \ i,j \leq p , \ i < j \rightarrow v[i] < v[j] \quad y \quad \forall \
 	Para empezar buscamos un algoritmo obvio que utilice la fuerza bruta para buscar la solución. En este algoritmo hacemos una búsqueda lineal del punto donde empiece a decrecer el vector.
 \end{frame}
 
-\begin{frame}
- AQUÍ VA EL CÓDIGO
+\begin{frame}[fragile]
+	\frametitle{Código fuerza bruta}
+ \begin{lstlisting}
+ int fuerzaBruta(int* v, int n){
+   for(int i=1; i < n-1; ++i){
+     if(v[i] > v[i+1])
+       return i;
+   }
+ }
+ \end{lstlisting}
 \end{frame}
 
 \subsection{Divide y vencerás}
 \begin{frame}
         Utilizamos ahora la estrategia Divide y Vencerás para crear un algoritmo
 de orden logarítmico.\\
-	Sabemos que nuestro método utiliza la técnica divide y vencerás pues lo
-%que estamos haciendo es dividir el vector en mitades de forma sucesiva. El algoritmo consiste en ir mirando en la mitad del vector (sea esta mitad la posición p) y comparando si los elementos en las posiciones p − 1, p y p + 1 están en orden ascendente, y en cuyo caso realizar de nuevo esta operación sobre el vector que queda a la izquierda de esta posición, o si están en orden descendente, y entonces realizar esta operación sobre el vector que queda a la derecha de esta posición.
+	%Sabemos que nuestro método utiliza la técnica divide y vencerás pues lo que estamos haciendo es dividir el vector en mitades de forma sucesiva. El algoritmo consiste en ir mirando en la mitad del vector (sea esta mitad la posición p) y comparando si los elementos en las posiciones p − 1, p y p + 1 están en orden ascendente, y en cuyo caso realizar de nuevo esta operación sobre el vector que queda a la izquierda de esta posición, o si están en orden descendente, y entonces realizar esta operación sobre el vector que queda a la derecha de esta posición.
 
 \end{frame}
+\newlength\someheight
+\setlength\someheight{3.5cm}
 
-\begin{frame}
- 		AQUÍ VA EL CÓDIGO EN DOS COLUMNAS
+\begin{frame}[fragile]
+\frametitle{Código divide y vencerás}
+\begin{center}
+ \begin{adjustbox}{width=\textwidth,height=\someheight,keepaspectratio}
+ 	\begin{lstlisting}
+ 	int divideYVenceras(int* v, int n){
+ 	int k = n/2;
+ 	if(n==1)
+	 	return 0; //Caso trivial
+ 	
+ 	if(n==2)
+	 	 return v[0]>v[1]?0:1; //Entre dos elementos, manda el más grande.
+ 	
+	 if(v[k] > v[k+1]){
+
+ 		if(v[k] > v[k-1]) 
+	 		return k;
+ 		
+	 	//else
+ 		return divideYVenceras(v,k);
+ 	}
+ 		
+ 	//else
+ 	return k + 1 + divideYVenceras(v+k+1,n-k-1);
+ 	}
+ 		\end{lstlisting}
+ 		\end{adjustbox}
+ 		\end{center}
 \end{frame}
+
 \end{document}
