@@ -5,6 +5,7 @@
 #include <cassert>
 
  using namespace std;
+#define Millon 1000000 
 
 /*
  * Empezamos en i=1 porque sabemos por el enunciado que nunca estará el máximo en la posición 0 
@@ -83,7 +84,7 @@ int main(int argc, char * argv[]){
 	divideYVenceras(T,n);
 	tdespues1 = clock();
 
-  	cout << argv[1] << " " << ((double)(tdespues-tantes))/CLOCKS_PER_SEC << " " << ((double)(tdespues1-tantes1))/CLOCKS_PER_SEC << endl;
+  	cout << argv[1] << " " << (((double)(tdespues-tantes))/CLOCKS_PER_SEC) << " " << (((double)(tdespues1-tantes1))/CLOCKS_PER_SEC) << endl;
 
 	delete T;
 

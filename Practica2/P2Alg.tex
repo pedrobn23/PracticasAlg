@@ -151,20 +151,41 @@ Así,nuestro algoritmo en\textbf{ \emph{c++} } sería:
 	}
 \end{lstlisting}
 
-este algoritmo es de orden lineal y queremos mediante la estrategia ``divide y vencerás'' encontrar un algoritmo de orden menor.
+Este algoritmo es de orden lineal y queremos mediante la estrategia ``divide y vencerás'' encontrar un algoritmo de orden menor.
 
 \subsection{Divide y vencerás}
-Utilizamos ahora la estrategia \textbf{Divide y vencerás} para crear un algoritmo de orden logarítmico. El algoritmo consiste en ir mirando en la mitad del vector (sea esta mitad la posición $p$) y comparando si los elementos en las posiciones $p-1,p$ y $p+1$ están en orden ascendente, y en cuyo caso realizar de nuevo esta operación sobre el vector que queda a la izquierda de esta posición, o si están en orden descendente, y entonces realizar esta operación sobre el vector que queda a la derecha de esta posición.
+Utilizamos ahora la estrategia \textbf{Divide y Vencerás} para crear un algoritmo de orden logarítmico. El algoritmo consiste en ir mirando en la mitad del vector (sea esta mitad la posición $p$) y comparando si los elementos en las posiciones $p-1,p$ y $p+1$ están en orden ascendente, y en cuyo caso realizar de nuevo esta operación sobre el vector que queda a la izquierda de esta posición, o si están en orden descendente, y entonces realizar esta operación sobre el vector que queda a la derecha de esta posición.
 
 Siguiendo este algoritmo escrito en texto, el resultante escrito en el lenguaje \emph{\textbf{c++}} es:
 \begin{lstlisting}
-	adsg
+int divideYVenceras(int* v, int n){
+	int k = n/2;
+	if(n==1)
+		return 0; //Caso trivial
+	
+	if(n==2)
+		return v[0]>v[1]? 0:1 ; //Entre dos elementos, manda el menor.
+
+	if(v[k] > v[k+1]){
+
+		if(v[k] > v[k-1]) 
+			return k;
+
+		//else
+		return divideYVenceras(v,k);
+
+	}
+
+	//else
+	return k + 1 + divideYVenceras(v+k+1,n-k-1);
+}
+
 \end{lstlisting}
 
-Sabemos que nuestro método utiliza la técnica Divide y vencerás pues lo que estamos haciendo es dividir el vector en mitades de forma sucesiva.
+Sabemos que nuestro método utiliza la técnica divide y vencerás pues lo que estamos haciendo es dividir el vector en mitades de forma sucesiva.
 
 \subsubsection{La complejidad del algoritmo}
-Es un algoritmo de complejidad $log(n)$, dado que para un vector de tamaño n, examinará primero el vector original, después un vector de tamaño $n/2$, después de uno de $n/4$, y así sucesivamente. Por lo tanto para un vector de tamaño $2^n$, hará $n$ examinciones. Así pués, para uno de tamaño $n$, realizará $log_2(n)$. Por esto, es de orden logarítmico.
+Es un algoritmo de complejidad $log(n)$, dado que para un vector de tamaño n, examinará primero el vector original, después un vector de tamaño $n/2$, después de uno de $n/4$, y así sucesivamente. Por lo tanto para un vector de tamaño $2^n$, hará $n$ examinaciones. Así pués, para uno de tamaño $n$, realizará $log_2(n)$. Por esto, es de orden logarítmico.
 
 \subsubsection{Eficiencia práctica}
 Para comparar la eficiencia entre algoritmos, hemos realizado prácticas empíricas. Realizamos *INCLUYE EJECUCIONES* ejecuciones de cada algoritmo, y obtuvimos estos resultados:
