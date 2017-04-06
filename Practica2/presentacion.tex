@@ -222,13 +222,35 @@ de orden logarítmico.\\
  		
 \end{frame}
 
-\subsection{Resultados empíricas}
+\begin{frame}[fragile]
+  \frametitle{El funcionamiento de la solución}
+  \begin{lstlisting}
+   if(v[k] > v[k+1]){
+     if(v[k] > v[k-1]) 
+       return k;
+     return divideYVenceras(v,k);
+   }
+   return k + 1 + divideYVenceras(v+k+1,n-k-1);
+\end{lstlisting}
+
+\begin{center}
+  \begin{tabular}{|l|l|l|l|l|l|l|l|l|l|}
+\hline
+1 & 2 & 3 & 4 & 5 & 6 & 10 & 9 & 8 & 7 \\ \hline
+\end{tabular}
+\end{center}
+\end{frame}
+
+
+
+\subsection{Resultados empíricos}
 \begin{frame}
-	Ahora expondremos los resultados de la ejecución de ambos códigos:	AQUI VA LA GRÁFICA
+	Ahora expondremos los resultados de la ejecución de ambos códigos:
+	%\includegraphics{grafica1.pdf}
 \end{frame}
 	
 \begin{frame}
-\frametitle{Coeficientes de los ajustes de las curvas $O(n\log n)$}
+\frametitle{Coeficientes de los ajustes de las curvas}
 Por ultimo vamos a ajustar por mínimos cuadrados cada una de las gráficas en base a la curva obtenida en el análisis teórico para hallar la eficiencia híbrida.
 
 \begin{block}{Curva parametrizada Divide y venceras}
@@ -241,20 +263,26 @@ Por ultimo vamos a ajustar por mínimos cuadrados cada una de las gráficas en b
 \end{frame}
 
 \begin{frame}
-	AQUÍ COMPLETAMOS RESULTADOS.
 	\begin{center}
 	\begin{tabular}{ll}
 	Algoritmo & Coeficientes\\ \hline\noalign{\smallskip}
 	\textit{Divide y Vencerás} & $\begin{array}{ll}
-	a = \\
-b = 
+	a = 0.754033 \\
+b = 4.34225 
 \end{array}$ \\\hline\noalign{\smallskip}
 	\textit{Fuerta bruta} & $\begin{array}{ll}
-	a = \\
-b = 
+	a = 1.64383e-06 \\
+b = 4.33354
 
 \end{array}$ \\\hline\noalign{\smallskip}
 \end{tabular}
+\end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Ajuste de los datos}
+  \begin{center}
+  \includegraphics[scale=0.23]{ajuste.pdf}
 \end{center}
 \end{frame}
 \end{document}
