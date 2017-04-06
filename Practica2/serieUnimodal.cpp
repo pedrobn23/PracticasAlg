@@ -83,6 +83,7 @@ int main(int argc, char * argv[]){
 	tantes1 = clock();
 	divideYVenceras(T,n);
 	tdespues1 = clock();
+	
 
   	cout << argv[1] << " " << (((double)(tdespues-tantes))/CLOCKS_PER_SEC) << " " << (((double)(tdespues1-tantes1))/CLOCKS_PER_SEC) << endl;
 
