@@ -188,7 +188,7 @@ Sabemos que nuestro método utiliza la técnica divide y vencerás pues lo que e
 Es un algoritmo de complejidad $log(n)$, dado que para un vector de tamaño n, examinará primero el vector original, después un vector de tamaño $n/2$, después de uno de $n/4$, y así sucesivamente. Por lo tanto para un vector de tamaño $2^n$, hará $n$ examinaciones. Así pués, para uno de tamaño $n$, realizará $log_2(n)$. Por esto, es de orden logarítmico.
 
 \subsubsection{Eficiencia práctica}
-Para comparar la eficiencia entre algoritmos, hemos realizado prácticas empíricas. Para el algoritmo lineal realizamos 100 ejecuciones, con $n$ desde $10^6$ hasta $10^8$, con 2 ejecuciones del algoritmo cada ejecución del programa; para el logarítmico las mismas ejecuciones, con $10^5$ ejecuciones del algoritmo cada ejecución del programa, y obtuvimos los resultados adjuntos en la entrega, que dan lugar a la siguiente gráfica:
+Para comparar la eficiencia entre algoritmos, hemos realizado prácticas empíricas. Para el algoritmo lineal realizamos 100 ejecuciones, con $n$ desde $10^6$ hasta $10^8$, con 2 ejecuciones del algoritmo cada ejecución del programa; para el logarítmico las mismas ejecuciones, con $10^5$ ejecuciones del algoritmo cada ejecución del programa, y obtuvimos los resultados adjuntos en la entrega en el fichero ``ejecuciones.dat'', que dan lugar a la siguiente gráfica:
 
 \begin{center}
 	\includegraphics[scale=0.22]{grafica1.pdf}
@@ -197,9 +197,31 @@ Para comparar la eficiencia entre algoritmos, hemos realizado prácticas empíri
 \subsubsection{Eficiencia híbrida}
 Una vez sabemos que la eficiencia es de orden logarítmico, realizaremos una aproximación por mínimos cuadrados a una función de tipo $alog(bx) + c$ par el algoritmo divide y vencerás y otra de tipo $ax + b$ para el de orden lineal.
 
-*INCLUIR RESULTADOS*
+Lo hacemos mediante la herramienta de la GNU: \emph{gnuplot}.
+Para ello, primero creamos las funciones:
+\begin{lstlisting}
+	gnuplot> f(x) = a*x+ b
+	gnuplot> g(x) = a*log(x) + b
+\end{lstlisting}
 
-\subsection{Conclusión}
+Y ahora, los ajustamos a los datos, sabiendo que debido a nuestro formato de salida, en la primera columna están los tamaños del vector, en la segunda el tiempo del algoritmo de fuerza bruta y en la tercera el tiempo del algoritmo divide y vencerás.
+
+\begin{lstlisting}
+	gnuplot> fit f(x) "ejecuciones.dat" using 1:2 via a,b
+	gnuplot> fit g(x) "ejecuciones.dat" using 1:3 via a,b
+\end{lstlisting}
+
+Y por último realizamos el gráfico con GNUPLOT mediante:
+\begin{lstlisting}
+	gnuplot> plot "ejecuciones.dat" using 1:2 title "Fuerza bruta" , "ejecuciones.dat" using 1:3 title "Divide y vencerás", f(x), g(x)
+\end{lstlisting}
+
+Obteniendo el gráfico:
+\begin{center}
+	\includegraphics[scale=0.22]{ajuste.pdf}
+\end{center}
+
+\section{Conclusión}
 Como podemos ver en los resultados expuestos, el algoritmo de orden logarítmico o divide y vencerás es claramente mejor a el de orden lineal, lo cual hace clarividente la superioridad de este estilo de algoritmo frente a la fuerza bruta.
 
 
