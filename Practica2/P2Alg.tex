@@ -141,7 +141,7 @@ Lo primero que se nos pedía hacer en la práctica era la implementación de un 
 \[
 v[t-1] < v[t] \quad y \quad v[t] > v[t+1]
 \]
-Así,nuestro algoritmo en\textbf{ \emph{c++} } sería:
+Así,nuestro algoritmo en\textbf{ \emph{C++} } sería:
 \begin{lstlisting}
 	int fuerzaBruta(int* v, int n){
 		for(int i=1; i < n-1; ++i){
@@ -154,9 +154,9 @@ Así,nuestro algoritmo en\textbf{ \emph{c++} } sería:
 Este algoritmo es de orden lineal y queremos mediante la estrategia ``divide y vencerás'' encontrar un algoritmo de orden menor.
 
 \subsection{Divide y vencerás}
-Utilizamos ahora la estrategia \textbf{Divide y Vencerás} para crear un algoritmo de orden logarítmico. El algoritmo consiste en ir mirando en la mitad del vector (sea esta mitad la posición $p$) y comparando si los elementos en las posiciones $p-1,p$ y $p+1$ están en orden ascendente, y en cuyo caso realizar de nuevo esta operación sobre el vector que queda a la izquierda de esta posición, o si están en orden descendente, y entonces realizar esta operación sobre el vector que queda a la derecha de esta posición.
+Utilizamos ahora la estrategia \textbf{divide y vencerás} para crear un algoritmo de orden logarítmico. El algoritmo consiste en ir mirando en la mitad del vector (sea esta mitad la posición $p$) y comparando si los elementos en las posiciones $p-1,p$ y $p+1$ están en orden ascendente, y en cuyo caso realizar de nuevo esta operación sobre el vector que queda a la izquierda de esta posición, o si están en orden descendente, y entonces realizar esta operación sobre el vector que queda a la derecha de esta posición.
 
-Siguiendo este algoritmo escrito en texto, el resultante escrito en el lenguaje \emph{\textbf{c++}} es:
+Siguiendo este algoritmo escrito en texto, el resultante escrito en el lenguaje \emph{\textbf{C++}} es:
 \begin{lstlisting}
 int divideYVenceras(int* v, int n){
 	int k = n/2;
@@ -197,7 +197,7 @@ Para comparar la eficiencia entre algoritmos, hemos realizado prácticas empíri
 \subsubsection{Eficiencia híbrida}
 Una vez sabemos que la eficiencia es de orden logarítmico, realizaremos una aproximación por mínimos cuadrados a una función de tipo $alog(bx) + c$ par el algoritmo divide y vencerás y otra de tipo $ax + b$ para el de orden lineal.
 
-Lo hacemos mediante la herramienta de la GNU: \emph{gnuplot}.
+Lo hacemos mediante una popular herramienta de generación de gráficos: \emph{gnuplot}.
 Para ello, primero creamos las funciones:
 \begin{lstlisting}
 	gnuplot> f(x) = a*x+ b
@@ -211,7 +211,7 @@ Y ahora, los ajustamos a los datos, sabiendo que debido a nuestro formato de sal
 	gnuplot> fit g(x) "ejecuciones.dat" using 1:3 via a,b
 \end{lstlisting}
 
-Y por último realizamos el gráfico con GNUPLOT mediante:
+Y por último realizamos el gráfico con \emph{gnuplot} mediante:
 \begin{lstlisting}
 	gnuplot> plot ''ejecuciones.dat'' using 1:2 title ''Fuerza bruta'', ''ejecuciones.dat'' using 1:3 title ''Divide y venceras'', f(x), g(x)
 \end{lstlisting}
@@ -222,7 +222,7 @@ Obteniendo el gráfico:
 \end{center}
 
 \section{Conclusión}
-Como podemos ver en los resultados expuestos, el algoritmo de orden logarítmico de divide y vencerás es claramente mejor a el de orden lineal, lo cual muestra la superioridad de este estilo de algoritmo frente a la fuerza bruta.
+Como podemos ver en los resultados expuestos, el algoritmo de orden logarítmico de divide y vencerás es claramente mejor que el de orden lineal, lo cual muestra la superioridad de esta clase de algoritmos frente a la fuerza bruta.
 
 
 \end{document}
