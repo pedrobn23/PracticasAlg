@@ -63,14 +63,12 @@ auto circularAdvance = [](auto& forwdIt, auto initValue, auto endValue, int n) {
 
 auto sumModulo = [](int a, int b, int n)
 {
-  circularAdvance(a, 0, n, b);
-  return a;
+  return (a+b)%n;
 };
 
 auto subModulo = [](int a, int b, int n)
 {
-  circularAdvance(a, n, 0, b);
-  return a;
+  return a>b ? (a-b)%n : n-(a-b)%n;
 };
 
 /*
@@ -123,19 +121,52 @@ int main(int argc, char** argv)
   }
 
   auto strings = listStrings(poly);
+  std::vector<std::pair<Point, Point>> sol;
 
-  // auto& minString = strings[0];
-  // double minDistance = std::numeric_limits<double>::max();
-  // for(auto& s : strings)
-  // {
-  //     if(euclideanDistance(s.first, s.second) < minDistance)
-  //     {
-  // 	minDistance = euclideanDistance(s.first, s.second);
-  // 	minString = s;
-  //     }
-  // }
+  /* DEBUG */
+  for(auto& s : strings)
+  {
+    std::cout << "Key: " << s.first << "  " << s.second.first << " <-> " << s.second.second << "  " << euclideanDistance(s.second.first, s.second.second) << std::endl;
+  }
 
-  // std::cout << "minDistance: " << minDistance << " minString: " << minString.first << '-' << minString.second << std::endl;
+  std::cout << std::endl;
+  /* DEBUG */
+
+  while(poly.size() > 3)
+  {
+    double minDistance = std::numeric_limits<double>::max();
+    auto minString = std::pair<Point, Point>();
+    int minKey;
+    std::cout << std::endl << std::endl;
+    for(auto& s : strings)
+    {
+        if(euclideanDistance(s.second.first, s.second.second) < minDistance)
+        {
+    	  minDistance = euclideanDistance(s.second.first, s.second.second);
+    	  minString = s.second;
+	  minKey = s.first;
+        }
+	
+	std::cout << "Key: " << s.first << "  " << s.second.first << " <-> " << s.second.second << "  " << euclideanDistance(s.second.first, s.second.second) << std::endl;
+    }
+
+    // Unnecesary, fix
+    int toEraseVertex = sumModulo(minString.first.id, 1, n_verts);
+    poly.erase(toEraseVertex);
+
+    std::cout << "Erased " << toEraseVertex << " " << subModulo(toEraseVertex, 1, n_verts) << std::endl;
+    
+    strings.erase(subModulo(toEraseVertex, 1, n_verts));
+    strings.erase(sumModulo(toEraseVertex, 1, n_verts));
+
+    sol.push_back(strings[minKey]);
+    strings.erase(minKey);
+  }
+
+  for(auto& s : sol)
+  {
+    std::cout << s.first << " <-> " << s.second << std::endl;
+  }
   
   return 0;
 }
