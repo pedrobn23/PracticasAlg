@@ -1,5 +1,8 @@
 #include <iostream>
 #include <vector>
+#include <map>
+#include <unordered_map>
+#include <tuple>
 #include <algorithm>
 #include <utility>
 #include <cmath>
@@ -8,12 +11,14 @@
 // Point in the 2 dimensional euclidean space,
 // to the extent allowed by floating point precision.
 struct Point {
+  int id;
   double x;
   double y;
 
+
   bool operator==(const Point& other)
   {
-    return x == other.x && y == other.y;
+    return id == other.id;
   }
 
   bool operator!=(const Point& other)
@@ -31,7 +36,7 @@ struct Point {
 
   friend std::ostream& operator<<(std::ostream& os, const Point& p)
   {
-    os << p.x << ',' << p.y;
+    os << p.id << '@' << p.x << ',' << p.y;
 
     return os;
   }
@@ -43,16 +48,29 @@ double euclideanDistance(Point x1, Point x2)
   return std::sqrt(std::pow(x1.x-x2.x, 2)+std::pow(x1.y-x2.y, 2));
 }
 
+
 /*
- * Advance a forward iterator in a container as in a circular list.
+ * Advance an element (an iterator or an integer) as in a circular list.
  */
-auto circularAdvance = [](auto& forwdIt, auto& cont, int n) {
+auto circularAdvance = [](auto& forwdIt, auto initValue, auto endValue, int n) {
   for(int i=0; i<n; i++)
   {
     forwdIt++;
-    if(forwdIt == cont.end())
-      forwdIt = cont.begin();
+    if(forwdIt == endValue)
+      forwdIt = initValue;
   }
+};
+
+auto sumModulo = [](int a, int b, int n)
+{
+  circularAdvance(a, 0, n, b);
+  return a;
+};
+
+auto subModulo = [](int a, int b, int n)
+{
+  circularAdvance(a, n, 0, b);
+  return a;
 };
 
 /*
@@ -64,27 +82,27 @@ auto circularAdvance = [](auto& forwdIt, auto& cont, int n) {
  * If it's even, then there are two cycles of strings, therefore you need to apply
  * the aforementioned process starting at the first and the second vertex.
  */
-std::vector<std::pair<Point, Point>> listStrings(std::vector<Point> poly)
+std::unordered_map<int, std::pair<Point, Point>> listStrings(std::map<int, Point> poly)
 {
 
-  std::vector<std::pair<Point, Point>> ret;
+  std::unordered_map<int, std::pair<Point, Point>> ret;
   
-  auto p = poly.begin();
-
   /*
    * This lambda function implements the actual traversal of strings
    * starting in a vertex.
    */
-auto listForVertex = [&ret,&poly](auto p, auto p0) {
+  auto listForVertex = [&ret,&poly](int p) {
+      int p0 = p;
       do {
 	auto prev = p;
-	circularAdvance(p, poly, 2);
-        ret.push_back( std::make_pair(*prev, *p) );
-      }while(*p != p0);
+	circularAdvance(p, 0, (int) poly.size(), 2);
+	
+        ret[sumModulo(prev, 1, poly.size())] = std::make_pair(poly[prev], poly[p]);
+      }while(p != p0);
   };
 
-  listForVertex(p, poly[0]);
-  if(!(poly.size() % 2)) listForVertex(++p, poly[1]);
+  listForVertex(0);
+  if(!(poly.size() % 2)) listForVertex(1);
 
   return ret;
 }
@@ -94,24 +112,30 @@ int main(int argc, char** argv)
   int n_verts;
   std::cin >> n_verts;
 
-  std::vector<Point> poly(n_verts);
-  for(auto& p : poly)
+  std::map<int, Point> poly;
+  for(int i=0; i<n_verts; i++)
+  {
+    Point p;
     std::cin >> p;
+
+    p.id = i;
+    poly[i] = p;
+  }
 
   auto strings = listStrings(poly);
 
-  auto& minString = strings[0];
-  double minDistance = std::numeric_limits<double>::max();
-  for(auto& s : strings)
-  {
-      if(euclideanDistance(s.first, s.second) < minDistance)
-      {
-	minDistance = euclideanDistance(s.first, s.second);
-	minString = s;
-      }
-  }
+  // auto& minString = strings[0];
+  // double minDistance = std::numeric_limits<double>::max();
+  // for(auto& s : strings)
+  // {
+  //     if(euclideanDistance(s.first, s.second) < minDistance)
+  //     {
+  // 	minDistance = euclideanDistance(s.first, s.second);
+  // 	minString = s;
+  //     }
+  // }
 
-  std::cout << "minDistance: " << minDistance << " minString: " << minString.first << '-' << minString.second << std::endl;
+  // std::cout << "minDistance: " << minDistance << " minString: " << minString.first << '-' << minString.second << std::endl;
   
   return 0;
 }
