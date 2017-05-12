@@ -165,6 +165,8 @@ int main(int argc, char** argv)
     strings.erase(minKey);
   }
 
+
+  //Impresión rapidita.
   for(auto& s : sol)
   {
     std::cout << s.first << " <-> " << s.second << std::endl;
