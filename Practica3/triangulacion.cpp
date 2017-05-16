@@ -89,6 +89,8 @@ std::unordered_map<int, std::pair<Point, Point>> listStrings(std::map<int, Point
    * This lambda function implements the actual traversal of strings
    * starting in a vertex.
    */
+
+  //Esta función la hago aquí porque solo la uso aquí
   auto listForVertex = [&ret,&poly](int p) {
       int p0 = p;
       do {
@@ -97,7 +99,7 @@ std::unordered_map<int, std::pair<Point, Point>> listStrings(std::map<int, Point
 	
         ret[sumModulo(prev, 1, poly.size())] = std::make_pair(poly[prev], poly[p]);
       }while(p != p0);
-  };
+  }; 
 
   listForVertex(0);
   if(!(poly.size() % 2)) listForVertex(1);
