@@ -85,8 +85,6 @@ int main(int argc, char** argv)
 
   std::vector<std::pair<Point, Point>> sol;
 
-  // FIXME: provisional condition, apply base case
-  // after this loop.
   while(points.size() > 3)
   {
     double min_distance = std::numeric_limits<double>::max();
@@ -110,6 +108,7 @@ int main(int argc, char** argv)
 	  min_string = std::make_pair(*prev, *p);
 	  it_min = circular_advance(prev, points.begin(), points.end(), 1);
 	}
+
       }while(p != p0);
     };
 
