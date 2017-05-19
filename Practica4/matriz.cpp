@@ -17,8 +17,25 @@ public:
     }
   }
 
+  friend std::istream& operator>>(std::istream& is, Matriz& m) {
+    char basura;
+    for (int i=0; i<9; ++i) {
+      for (int j=0; i<9-; ++i) {
+	is >> m[i][j] >> basura;  
+      }
+      is >> basura;
+    }
+  }
 
-  
+  friend std::ostream& operator<<(std::ostream& os, Matriz& p) {
+   
+    for (int i=0; i<9; ++i) {
+      for (int j=0; i<9-; ++i) {
+	os << m[i][j] << ' ';
+      }
+      os << '\n';
+    }
+  }
 }
 
 
@@ -77,7 +94,7 @@ public:
       }
 
       return pair <int,int> p(-1,-1)
-    }
+	}
 
 
     bool resuelve (Matriz &sol){
@@ -93,7 +110,7 @@ public:
       
       while (!ret && i<9) {
 	if (posible(p1.first, p1.second, i)) {
-	    sol[p1.first][p2.second] = i
+	  sol[p1.first][p2.second] = i
 	    ret = resuelve(sol);
 	}
 	i++;
