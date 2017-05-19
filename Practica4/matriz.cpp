@@ -12,7 +12,7 @@ using namespace std;
 class Matrix {
 private:
   const int Tam = 9;
-   int** m;
+  int** m;
 
 public:
   Matrix () {
@@ -46,14 +46,24 @@ public:
     }
   }
 
-  friend std::ostream& operator<<(std::ostream& os, const Matrix& p) {
-   
+  friend std::ostream& operator<<(std::ostream& os, Matrix& e) {
+    int value;
     for (int i=0; i<9; ++i) {
       for (int j=0; i<9; ++i) {
-	os << m.get(i,j) << ' ';
+	//esto es una gitanada pero tenemos muchas cosas que hacer y poco tiempo
+	value=e.get(i,j);
+	os <<  value << ' ';
       }
       os << '\n';
     }
+  }
+
+  ~Matrix () {
+    for (int i=0; i<9; ++i) {
+      delete[] m[i];
+    }
+
+    delete[] m;
   }
 };
 
@@ -90,15 +100,17 @@ public:
       }
     }
 
-   
+
+
+    
     //comprobar cuadrado
-    pair <int,int> pos = cuadra(fil,col) 
-      for (int i=0; i<3; ++i) {
-	for (int j=0; j<3; ++j) {
-	  if(m.get(pos.first+i, pos.second+j))
-	    return false;
-	}
+    pair <int,int> pos = cuadra(fil,col) ;
+    for (int i=0; i<3; ++i) {
+      for (int j=0; j<3; ++j) {
+	if(m.get(pos.first+i, pos.second+j))
+	  return false;
       }
+    }
 
     return true;
   }
@@ -141,3 +153,4 @@ public:
     
 };
     
+int main () {}
