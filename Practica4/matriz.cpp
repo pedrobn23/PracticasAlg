@@ -46,7 +46,7 @@ public:
     }
   }
 
-  friend std::ostream& operator<<(std::ostream& os, Matrix& p) {
+  friend std::ostream& operator<<(std::ostream& os, const Matrix& p) {
    
     for (int i=0; i<9; ++i) {
       for (int j=0; i<9; ++i) {
