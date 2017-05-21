@@ -15,7 +15,7 @@ const int COL=9;
 
 class Matrix {
 private:
-  const bool Tam = 9;
+  const int Tam = 9;
   bool** m;
 
 public:
@@ -202,4 +202,6 @@ int main () {
   int* vec = new int[16];
 
   resolver (pieza, sol, vec);
+
+	delete[] vec; //Se creaba pero nunca se eliminaba
 }
