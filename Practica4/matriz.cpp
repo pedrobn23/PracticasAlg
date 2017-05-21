@@ -5,7 +5,7 @@
 #include <complex>
 #include <tuple>
 #include <iostream>
-
+#include "pieza.h"
 
 using namespace std;
 
@@ -88,7 +88,7 @@ public:
     for (int i=0; i<FIL; ++i)
       for (int j=0; j<COL; ++j)
 	this->set(i,j,m.get(i,j));
-	  }
+  }
 };
 
 
@@ -196,3 +196,10 @@ bool resolver (bool**** pieza, Matrix &sol, int* res){
   return ret;
 }
 
+
+int main () {
+  Matrix sol;
+  int* vec = new int[16];
+
+  resolver (pieza, sol, vec);
+}
