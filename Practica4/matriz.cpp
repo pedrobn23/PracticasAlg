@@ -15,15 +15,14 @@ const int COL=9;
 
 class Matrix {
 private:
-  const int Tam = 9;
   bool** m;
 
 public:
   Matrix () {
-    m = new bool*[9];
-    for (int i=0; i<9; ++i) {
-      m[i] = new bool[9];
-      for (int j=0; j < 9; ++j) {
+    m = new bool*[FIL];
+    for (int i=0; i<FIL; ++i) {
+      m[i] = new bool[COL];
+      for (int j=0; j < COL; ++j) {
 	m[i][j] = -1;
       }
     }
@@ -64,7 +63,7 @@ public:
   }
 
   ~Matrix () {
-    for (int i=0; i<9; ++i) {
+    for (int i=0; i<FIL; ++i) {
       delete[] m[i];
     }
 
@@ -93,7 +92,7 @@ public:
 
 
 
-int ocupadcha (bool** pieza) {
+int ocupadcha (bool pieza[5][5]) {
   int index = 0, mret = 0;
   for (int j=0; j<5; ++j) {
     for (int i=0; i<5; ++i) {
@@ -109,7 +108,7 @@ int ocupadcha (bool** pieza) {
 
 
 
-int ocupabajo (bool** pieza) {
+int ocupabajo (bool pieza[5][5]) {
   int index = 0, mret = 0;
   for (int i=0; i<5; ++i) {
     for (int j=0; j<5; ++j) {
@@ -124,7 +123,7 @@ int ocupabajo (bool** pieza) {
 }
 
 
-bool posible (const Matrix &sol, bool** pieza, pair<int,int> p1) {
+bool posible (const Matrix &sol, bool pieza[5][5], pair<int,int> p1) {
   if (FIL - p1.first <= ocupadcha(pieza))
     return false;
 
@@ -141,7 +140,7 @@ bool posible (const Matrix &sol, bool** pieza, pair<int,int> p1) {
   return true;
 }
 
-bool colocar  (Matrix &sol, bool** pieza, pair<int,int> p1) {
+bool colocar  (Matrix &sol, bool pieza[5][5], pair<int,int> p1) {
   for (int i=p1.first; i<FIL; ++i) {
     for (int j=p1.second; i<COL; ++j) {
       sol.set(i,j,1);
@@ -157,7 +156,7 @@ int prim (int *v) {
 
 
 //res debe inicializarse a -1s
-bool resolver (bool**** pieza, Matrix &sol, int* res){
+bool resolver (bool pieza[8][4][5][5] , Matrix &sol, int* res){
   pair <int,int> p1 = sol.primeraLibre();
   bool ret = false;
   Matrix aux;
@@ -203,5 +202,7 @@ int main () {
 
   resolver (pieza, sol, vec);
 
-	delete[] vec; //Se creaba pero nunca se eliminaba
+  for (int i=0; i<16; ++i)
+    cout << vec[i] << " ";
+  delete[] vec; //Se creaba pero nunca se eliminaba
 }
