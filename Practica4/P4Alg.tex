@@ -126,21 +126,35 @@ Algorítmica} % Subtitle
 
 
 \section{Problema}
-Un Sudoku es un pasatiempo matemático que consiste en rellenar con números del 1 al 9  una  tabla  de  $9\times9$  elementos,  dividida  en  subcuadrículas  de  $3\times 3$,  con  casillas  ya 
-rellenadas previamente. Las normas del pasatiempo son:
-No  puede  haber  dos  casillas  en
-la  misma  fila  con  el  mismo 
-número.
-No puede haber dos casillas en la misma columna con el mismo 
-número.
-No puede haber dos casillas, en la misma subcuadrícula de $3\times 3$, 
-con el mismo número.\\
+ Referencia: El puzzle “\textbf{La Maleta de Luke}” (El Profesor Layton y la Caja de
+Pandora, Nintendo DS).
 
-La siguiente figura muestra un ejemplo de Sudoku sin resolver:
+
+Diversos videojuegos de la categoría puzzle ofrecen rompecabezas que pueden
+ser estudiados como un problema de exploración en grafos. En particular, el puzzle “La maleta de Luke” presentado en El profesor Layton y la Caja de Pandora para Nintendo DS, supone que hay una maleta y diversos objetos que tenemos que introducir en ella
+sin que se solapen, cada uno de unas dimensiones determinadas.
+Estos problemas se pueden discretizar, de modo que en nuestro caso dividiremos
+la maleta en un rectángulo de 6 casillas de alto por 9 de ancho, y cada objeto también lo
+discretizaremos con estas mismas dimensiones:\\
+\begin{center}
+	\includegraphics[scale=0.35]{piezas.png}
+\end{center}
+
+Cada pieza, a la hora de colocarla en una posición de la maleta, puede
+rotarse 0º, 90º, 180º o 270º para alcanzar la solución. De este modo, el
+puzzle se resuelve colocando las piezas según la siguiente figura:
+\begin{center}
+	\includegraphics[scale=0.35]{solucion.png}
+\end{center}
+
+
+Se pide diseñar e implementar un algoritmo de exploración en grafos
+(BackTracking o Branch\&Bound) que solucione este problema con el tamaño de maleta
+y piezas descritas en este apartado.
 
 \section{Solución}
 
-\subsection{El algoritmo obvio}
+
 
 
 \subsubsection{La complejidad del algoritmo}
@@ -154,4 +168,41 @@ La siguiente figura muestra un ejemplo de Sudoku sin resolver:
 
 
 
+
+
+Se debe 
+incluir un análisis del problema
+.
+2.
+Escoger  una  técnica  (BackTracking  o  Branch\&Bound)  y  justificar  s
+u  elección 
+frente a la otra metodología no seleccionada.
+3.
+Diseño  de  la  solución,  describiendo  cada  una  de  las  componentes  de  la  misma 
+relacionándola   con   las   componentes   de   un   algoritmo 
+BackTracking   o 
+Branch\&Bound, según la técnica escogida
+.
+4.
+Esqueleto  del  al
+goritmo  (pseudocódigo)  que  soluciona  el  problema,  explicando 
+cómo  se  ha  incorporado  cada  una  de  las  componentes 
+de  diseño  de  la  técnica 
+(BackTracking o Branch\&Bound, según se aplique)
+.
+5.
+Explicación   del   funcionamiento   del   algoritmo,   sobre   un   caso   de   ejemplo 
+pequeño propuesto por los estudiantes.
+
+ 
+6.
+Enunciado  de  un  problema  o  caso  real  donde  se  pueda  utilizar 
+la  técnica 
+seleccionada
+para solucionarlo (distinto de los comentados en clase).
+7.
+Cálculo del orden de eficiencia teórico del algoritmo.
+8.
+Instrucciones sobre 
+cómo compilar y ejecutar el código de l
 \end{document}
