@@ -23,7 +23,7 @@ public:
     for (int i=0; i<FIL; ++i) {
       m[i] = new bool[COL];
       for (int j=0; j < COL; ++j) {
-	m[i][j] = -1;
+	m[i][j] = 0;
       }
     }
   }
@@ -158,6 +158,7 @@ int prim (int *v) {
 //res debe inicializarse a -1s
 bool resolver (bool pieza[8][4][5][5] , Matrix &sol, int* res){
   pair <int,int> p1 = sol.primeraLibre();
+  cout << p1.first << " " << p1.second << "\n";
   bool ret = false;
   Matrix aux;
   int* raux = new int[16];
@@ -206,3 +207,4 @@ int main () {
     cout << vec[i] << " ";
   delete[] vec; //Se creaba pero nunca se eliminaba
 }
+
