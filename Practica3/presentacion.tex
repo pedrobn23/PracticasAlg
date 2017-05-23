@@ -179,7 +179,7 @@ Por la \textbf{triangulación de un polígono plano} entenderemos la división d
 	\item Eliminar el nodo aislado por dicha cuerda.
 	\item Aplicar el algoritmo al polígono resultante.
 	
-	\item El caso base se cumple cuando el poligono tiene 3 nodos.
+	\item El caso base se cumple cuando el poligono tiene 4 nodos.
 \end{itemize}
 
 \end{frame}	
@@ -201,6 +201,51 @@ auto circular_advance = [](auto& forwdIt, auto initValue, auto endValue, int n) 
  
  Avanza un elemento (iterator or integer) como en una lista circular de n en n.
  
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Find Min String}
+\begin{lstlisting}[basicstyle= \tiny,]
+    auto find_min_string = [&min_distance, &it_min, &min_string, &points](auto initial_point_it) {
+	    auto p0 = initial_point_it;
+	    auto p = p0;
+    
+	    do {
+		   auto prev = p;
+    
+		   circular_advance(p, points.begin(), points.end(), 2);
+		   if(min_distance > euclidean_distance(*prev, *p))
+		   {
+		      min_distance = euclidean_distance(*prev, *p);
+              min_string = std::make_pair(*prev, *p);
+              it_min = circular_advance(prev, points.begin(), points.end(), 1);
+            }
+    
+        }while(p != p0);
+    };
+\end{lstlisting}
+	Busca la cuerda de mínima longitud recorriendo los nodos hasta volver al nodo inicial.
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Algoritmo}
+	\begin{lstlisting}
+	while(points.size() > 3)
+	{
+		auto it = points.begin();
+		// Unconditionally find minimum length string starting
+		// at the first element
+		find_min_string(it);
+	
+		// If the polygon's number of edges is even, we need to
+		// do the same starting at the second one
+		if(!(points.size()%2)) find_min_string(++it);
+	
+		sol.push_back(min_string);
+		points.erase(it_min);
+	}
+	\end{lstlisting}
+	
 \end{frame}
 
 \end{document}
