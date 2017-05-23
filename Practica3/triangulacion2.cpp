@@ -112,13 +112,13 @@ int main(int argc, char** argv)
       }while(p != p0);
     };
 
+	auto it = points.begin();
     // Unconditionally find minimum length string starting
     // at the first element
-    find_min_string(points.begin());
+    find_min_string(it);
 
     // If the polygon's number of edges is even, we need to
     // do the same starting at the second one
-    auto it = points.begin();
     if(!(points.size()%2)) find_min_string(++it);
 
     sol.push_back(min_string);
