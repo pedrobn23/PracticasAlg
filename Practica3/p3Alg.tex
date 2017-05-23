@@ -1,0 +1,223 @@
+
+
+% microtype: Tipografía.
+% mathpazo: Usa la fuente Palatino.
+\documentclass[a4paper, 11pt]{article}
+\usepackage[protrusion=true,expansion=true]{microtype}
+\usepackage{mathpazo}
+\usepackage{booktabs}
+\usepackage{multicol}
+\usepackage{multirow}
+
+% Indentación de párrafos para Palatino
+\setlength{\parindent}{0pt}
+  \parskip=8pt
+\linespread{1.05} % Change line spacing here, Palatino benefits from a slight increase by default
+
+
+%%% Castellano.
+% noquoting: Permite uso de comillas no españolas.
+% lcroman: Permite la enumeración con numerales romanos en minúscula.
+% fontenc: Usa la fuente completa para que pueda copiarse correctamente del pdf.
+\usepackage[spanish,es-noquoting,es-lcroman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\selectlanguage{spanish}
+
+
+%%% Gráficos
+\usepackage{graphicx} % Required for including pictures
+\usepackage{wrapfig} % Allows in-line images
+\usepackage[usenames,dvipsnames]{color} % Coloring code
+
+
+%%% Matemáticas
+\usepackage{amsmath}
+\usepackage[hidelinks]{hyperref}
+%%% Código
+
+
+\usepackage{listings}
+\usepackage{graphicx}
+
+%% Listing settings
+
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+
+
+%%% Bibliografía
+\makeatletter
+\renewcommand\@biblabel[1]{\textbf{#1.}} % Change the square brackets for each bibliography item from '[1]' to '1.'
+\renewcommand{\@listI}{\itemsep=0pt} % Reduce the space between items in the itemize and enumerate environments and the bibliography
+
+
+
+%----------------------------------------------------------------------------------------
+%	TÍTULO
+%----------------------------------------------------------------------------------------
+% Configuraciones para el título.
+% El título no debe editarse aquí.
+\renewcommand{\maketitle}{
+  \begin{flushright} % Right align
+  
+  {\LARGE\@title} % Increase the font size of the title
+  
+  \vspace{50pt} % Some vertical space between the title and author name
+  
+  {\large\@author} % Author name
+  \\\@date % Date
+  \vspace{40pt} % Some vertical space between the author block and abstract
+  \end{flushright}
+}
+
+%% Título
+\title{\textbf{Memoria de la práctica 3}\\ % Title
+Algorítmica} % Subtitle
+
+\author{\textsc{Fco. Javier Sáez Maldonado}\\ % Author
+\textsc{Laura Gómez Garrido}\\
+\textsc{Luis Antonio Ortega Andrés}\\
+\textsc{Pedro Bonilla Nadal}\\
+\textsc{Daniel Pozo Escalona}\vspace{2cm}
+\\{\textit{Universidad de Granada}}} % Institution
+
+\date{\today} % Date
+
+
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENTO
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Print the title section
+
+
+%% Índice
+{\parskip=2pt
+  \tableofcontents
+}
+\pagebreak
+
+%%% Inicio del documento
+
+
+\section{Introducción}
+
+Un polígono $P$ en el plano es un conjunto de $n$ puntos $(x_i, y_i)$ llamados vértices, y $n$ segmentos de rectas ${α1 , α2 , . . . , αn }$ llamados lados, verificando que:
+
+\begin{itemize}
+	\item Los puntos extremos de los lados son dos vértices distintos del polígono. 
+	\item Cualquier vértice es el extremo de exactamente dos lados (distintos).
+\end{itemize}
+
+Un polígono del plano se dice \textbf{convexo} si, para cada dos puntos cualesquiera del interior del polígono, el segmento que los une está contenido en el mismo.\\
+ Por \textbf{triangulación} de un polígono plano entenderemos la división de éste en un conjunto de triángulos, con la restricción de que cada lado de un triángulo se reparta entre dos triángulos adyacentes (obviamente, sólo pertenece a uno si está en la frontera del polígono).
+
+Diremos que una triangulación de un polígono convexo es \textbf{mínima} si la suma de los perímetros de los triángulos que la componen es mínima respecto a cualquier otra triangulación.
+
+\section{Problema}
+
+Se pide diseñar e implementar un algoritmo greedy que solucione el problema de encontrar la triangulación mínima de un polígono convexo. Como salida, se deberá proporcionar el conjunto de aristas que forman la triangulación junto con la suma de los perímetros de los triángulos.
+
+\section{Solución}
+
+\subsection{Algoritmo Greedy}
+El algoritmo realizado se vale de dos funciones principales, \textit{circular\_advance} y \textit{find\_min\_string}.
+
+\subsubsection{Circular advance}
+\begin{lstlisting}
+
+auto circular_advance = [](auto& forwdIt, auto initValue, auto endValue, int n) {
+	for(int i=0; i<n; i++)
+	{
+		forwdIt++;
+		if(forwdIt == endValue)
+		forwdIt = initValue;
+	}
+
+	return forwdIt;
+};
+\end{lstlisting}
+
+TODO: Explicar codigo.
+
+La eficiencia teórica de esta función es $O(n)$
+
+\subsubsection{Find Min String}
+\begin{lstlisting}
+	
+auto find_min_string = [&min_distance, &it_min, &min_string, &points](auto initial_point_it) {
+	auto p0 = initial_point_it;
+	auto p = p0;
+	
+	do {
+		auto prev = p;
+	
+		circular_advance(p, points.begin(), points.end(), 2);
+		if(min_distance > euclidean_distance(*prev, *p))
+		{
+			min_distance = euclidean_distance(*prev, *p);
+			min_string = std::make_pair(*prev, *p);
+			it_min = circular_advance(prev, points.begin(), points.end(), 1);
+		}
+	
+	}while(p != p0);
+};
+\end{lstlisting}
+
+La eficiencia teórica de la función es $O(n^2)$.
+\subsubsection{NOSE QUE TITULO PONER LMAO}
+
+	\begin{lstlisting}
+	while(points.size() > 3)
+	{
+	auto it = points.begin();
+	// Unconditionally find minimum length string starting
+	// at the first element
+	find_min_string(it);
+	
+	// If the polygon's number of edges is even, we need to
+	// do the same starting at the second one
+	if(!(points.size()%2)) find_min_string(++it);
+	
+	sol.push_back(min_string);
+	points.erase(it_min);
+	}
+	\end{lstlisting}
+	
+	Dado un polígono de $n$ nodos, $n$ puede ser par o no serlo, en el caso de que no sea par, la función \textit{find\_min\_string} recorrera todos los nodos sin problemas. Sin embargo, en el caso de que sea par, la función solo recorrera la mitad de los nodos.
+	Por ello, se vuelve a llamar a la función para recorrer los nodos faltantes.
+
+\subsubsection{La complejidad del algoritmo}
+Es un algoritmo de complejidad $O(n^2)$, dado que para un polígono de $n$ nodos, en cada iteración del bucle while ($n$ iteraciones) realiza la función \textit{find\_min\_string} la cual realiza $n$ iteraciones en las que en cada una de ellas llama a \textit{circular\_advance} con $2$ como parámetro ($O(2)$).
+
+
+\section{Conclusión}
+
+
+
+\end{document}
