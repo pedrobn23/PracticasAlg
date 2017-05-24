@@ -5,7 +5,7 @@
 #include <complex>
 #include <tuple>
 #include <iostream>
-#include "pieza.h"
+#include "piezamod.h"
 
 using namespace std;
 
