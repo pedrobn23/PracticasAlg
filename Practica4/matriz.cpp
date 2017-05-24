@@ -5,6 +5,7 @@
 #include <tuple>
 #include <iostream>
 #include "piezamod.h"
+#include <cassert>
 
 using namespace std;
 
@@ -35,11 +36,15 @@ public:
 
   //devuelve la posicion i,j
   inline int get (int i, int j) const {
+    assert (i<FIL && j<COL);
+	      
     return m[i][j];
   }
 
   //establece la posicion
   inline void set (int i, int j, int value) {
+    assert (i<FIL && j<COL && value >= 0);
+    
     m[i][j] = value;
   }
 
@@ -200,8 +205,6 @@ int main () {
   cout << "Primera pos: " << tab.get(0,0);
 
   tab.set(0,0,1);
-  tab.set(0,3,1);
-  tab.set(1,1,1);
   cout << "\nColocamos un 1 en la primera casilla\n" << tab;
   cout << "\nPrimera Libre: " << tab.primeraLibre().first << "," << tab.primeraLibre().second;
 
@@ -212,5 +215,7 @@ int main () {
   cout << " y hacia abajo ocupa: " << ocupabajo(pieza[1][0]);
   cout << "\n¿Es posible? " << posible(tab,  pieza[1][0], tab.primeraLibre());
   cout << "\n\nMe gusta que los planes salgan bien";
-  cout << ""; 
+  cout << "\nLLamen a los ingenieros, hay que colocar la pieza: ";
+
+  colocar(tab, pieza[0][1], tab.)
 }
