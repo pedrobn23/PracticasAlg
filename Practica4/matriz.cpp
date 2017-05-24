@@ -176,7 +176,7 @@ bool resolver (bool pieza[8][4][5][5] , Matrix &tab, pair<int,int>* coordenadas)
 
   if (p1.first == -1 || p1.second == -1) {
     delete[] copiaVector;
-    resolucionPosibleurn true;
+    return true;
   }
 
 
@@ -190,8 +190,7 @@ bool resolver (bool pieza[8][4][5][5] , Matrix &tab, pair<int,int>* coordenadas)
 
 	colocar(tab, pieza[i][j], p1);
 	int posicion = primeraPosicionLibre(coordenadas);
-	coordenadas [posicion++] = p1.first;
-	coordenadas [posicion] = p1.second;
+	coordenadas [posicion] = p1;
 	resolucionPosible = resolver(pieza, tab, coordenadas);
       }
 
