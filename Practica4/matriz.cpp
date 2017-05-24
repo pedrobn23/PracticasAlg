@@ -57,6 +57,7 @@ public:
   //   }
   // }
 
+  //Sobrecarga del operador de escritura
   friend std::ostream& operator<<(std::ostream& os, Matrix& e) {
 
     int value;
@@ -80,7 +81,7 @@ public:
   }
 
 
-  //Esta función nos devuelve el primer termino libre
+  //Esta función nos devuelve el primer termino libre (es decir, la primera posicion que valga 0)
   pair <int,int> primeraLibre () {
     for (int i=0; i<FIL; ++i) {
       for (int j=0; j<COL; ++j) {
