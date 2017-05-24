@@ -181,7 +181,6 @@ bool colocar  (Matrix &sol, int pieza[5][5], pair<int,int> p1) {
 //piezas a usar y la matriz donde se almacena la solucion
 bool resolver (int pieza[8][4][5][5] , Matrix &tab){
   pair <int,int> p1 = tab.primeraLibre();
-  cout << p1.first << " " << p1.second << "\n";
   bool resolucionPosible = false;
   Matrix copiaMatriz;
 
@@ -200,8 +199,6 @@ bool resolver (int pieza[8][4][5][5] , Matrix &tab){
 	resolucionPosible = resolver(pieza, tab);
      	if(!resolucionPosible)
 	  tab= copiaMatriz;
-
-	cout << tab;
       }
     }
   }
@@ -211,20 +208,5 @@ bool resolver (int pieza[8][4][5][5] , Matrix &tab){
 
 int main () {
   Matrix tab;
-  cout << "Primera pos: " << tab.get(0,0);
-
-  tab.set(0,0,1);
-  cout << "\nColocamos un 1 en la primera casilla\n" << tab;
-  cout << "\nPrimera Libre: " << tab.primeraLibre().first << "," << tab.primeraLibre().second;
-
-  // colocar(tab, pieza[0][0], tab.primeraLibre());
-  cout << "\n\nColocamos una pieza nueva" ;
-  cout << "\n¿Será posible? " ;
-  cout << "A la derecha ocupa: " << ocupadcha(pieza[1][0]);
-  cout << " y hacia abajo ocupa: " << ocupabajo(pieza[1][0]);
-  cout << "\n¿Es posible? " << posible(tab,  pieza[1][0], tab.primeraLibre());
-  cout << "\n\nMe gusta que los planes salgan bien";
-  cout << "\nLLamen a los ingenieros, hay que colocar la pieza: \n";
-
-  colocar(tab, pieza[0][1], tab.primeraLibre());
+  resolver(pieza, tab);
 }
