@@ -105,7 +105,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1
 
 %% Título y otros %%
 \title{Práctica 3}                                               % Título
-\subtitle{Greedy}                                  % Subtítulo
+\subtitle{Algoritmos \textit{greedy}}                                  % Subtítulo
 \author{Laura Gómez Garrido, Pedro Bonilla Nadal, Javier Sáez Maldonado, Daniel Pozo Escalona, Luis Ortega Andrés}
 
 \date{2º Doble Grado Informática y Matemáticas}                                                            % Fecha
@@ -149,43 +149,76 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1
 \end{frame}
 
 \section{Problema}
-\begin{frame}
+\begin{frame}{Problema}
 
-\textbf{\\Problema.\\}
-	Se pide diseñar e implementar un algoritmo greedy que solucione el problema de encontrar la triangulación mínima de un polígono convexo. Como salida, se deberá proporcionar el conjunto de aristas que forman la triangulación junto con el coste (perímetro de cada triángulo generado).
+	Se pide diseñar e implementar un algoritmo \textit{greedy} que solucione el problema de encontrar la triangulación mínima de un polígono convexo. Como salida, se deberá proporcionar el conjunto de aristas que forman la triangulación junto con su coste (suma de las longitudes de las cuerdas generadas).
 
 \end{frame}	
 
-\section{Poligono convexo}
-\begin{frame}
+\section{Conceptos}
+\begin{frame}{Conceptos}
 	
-	\textbf{\\Conceptos.\\}
-Un polígono del plano se dice \textbf{convexo} si, para cada dos puntos cualesquiera del interior del polígono, el segmento que los une está contenido en el mismo. \\
-Por la \textbf{triangulación de un polígono plano} entenderemos la división de éste en un conjunto de triángulos, con la restricción de que cada lado de un triángulo se reparta entre dos triángulos adyacentes (obviamente, sólo pertenece a uno si está en la frontera del polígono).
-	
-	TODO: EJEMPLO POLIGONO TRIANGULADO
+\begin{block}{Polígono convexo}
+Un polígono del plano se dice \textbf{convexo} si cada uno de sus vértices es un vértice de su envolvente convexa.
+\end{block}
+\pause
+\begin{block}{Triangulación}
+ Por \textbf{triangulación} de un polígono plano entenderemos la división de este en un conjunto de triángulos, con la restricción de que dos lados de dos triángulos distintos no se corten o lo hagan en un vértice del polígono.
+\end{block}
+\pause
+\begin{block}{Triangulación mínima}
+Una triangulación se dice \textbf{mínima} si es un elemento minimal del conjunto de triangulaciones posibles, con el preorden inducido por el orden en $\mathbb{R}$ de la suma de las longitudes de sus cuerdas.
+\end{block}
+
 \end{frame}	
-	
+
+\begin{frame}{Ejemplo de polígono triangulado}
+\begin{center}
+
+\begin{tikzpicture}[scale=2]
+\draw (1,1) -- (2,1);
+\draw (2,1) -- (3,2);
+\draw (3,2) -- (2,3);
+\draw (2,3) -- (1.5,3);
+\draw (1.5,3) -- (0.7,2);
+\draw (0.7,2) -- (1,1);
+
+\draw[color=blue] (1,1) -- (3,2);
+\draw[color=blue] (2,3) -- (0.7,2);
+\draw[color=blue] (3,2) -- (0.7,2);
+
+\end{tikzpicture}
+\end{center}
+
+\end{frame}
+
 \section{Solución}
 
-\subsection{Explicación Algoritmo}
+\subsection{Descripción del algoritmo}
 
-\begin{frame}
-	
-	\textbf{\\Explicación Algoritmo.\\}
-\begin{itemize}
-	\item Obtener todas las cuerdas (segmentos que unen nodos que se encuentran a 2 de distancia) del polígono.
-	\item Seleccionar la cuerda de menor longitud.
-	\item Eliminar el nodo aislado por dicha cuerda.
-	\item Aplicar el algoritmo al polígono resultante.
-	
-	\item El caso base se cumple cuando el poligono tiene 4 nodos.
-\end{itemize}
+\begin{frame}{Descripción del algoritmo}
+	La entrada del algoritmo es un conjunto de $n$ puntos del plano euclídeo, los vértices del polígono convexo que queremos triangular, ordenados. De esta forma, los lados del polígono quedan determinados por el orden, es decir, son: 
+\[\mathcal{L} = \{\alpha_i \vee \alpha_{i+1}\ :  i\in \mathbb{Z}_n\}\]
+
+Del mismo modo, las cuerdas son:
+\[\mathcal{C} = \{\alpha_i \vee \alpha_{i+2}\ : i\in \mathbb{Z}_n\}\]
+\end{frame}
+
+\begin{frame}{Descripción del algoritmo}
+
+\begin{enumerate}
+    \item Si el polígono es un triángulo, no se hace nada.
+	\item Encontrar la cuerda de longitud mínima.
+	\item Almacenar la cuerda en el conjunto solución.
+	\item Eliminar del conjunto de vértices el comprendido entre los dos vértices que une la cuerda.
+	\item Ejecutar el algoritmo desde el primer paso, siendo esta vez la entrada el conjunto de vértices resultante en el paso anterior.
+\end{enumerate}
 
 \end{frame}	
 
+\subsection{Implementación}
 \begin{frame}[fragile]
-	\frametitle{Circular Advance}
+	\frametitle{Avance circular de un iterador}
  \begin{lstlisting}
 auto circular_advance = [](auto& forwdIt, auto initValue, auto endValue, int n) {
 	for(int i=0; i<n; i++)
@@ -199,36 +232,51 @@ auto circular_advance = [](auto& forwdIt, auto initValue, auto endValue, int n) 
 };
  \end{lstlisting}
  
- Avanza un elemento (iterator or integer) como en una lista circular de n en n.
+Esta es una función auxiliar, cuyo propósito es implementar la aritmética de un anillo de restos sobre un contenedor con un iterador que soporte el operador de incremento (\texttt{++}).
  
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Find Min String}
+	\frametitle{Cuerda de longitud mínima}
+        \begin{adjustbox}{width=10cm}
+        
 \begin{lstlisting}[basicstyle= \tiny,]
-    auto find_min_string = [&min_distance, &it_min, &min_string, &points](auto initial_point_it) {
-	    auto p0 = initial_point_it;
-	    auto p = p0;
+auto find_min_string = [&min_distance, &it_min, &min_string, &points](auto initial_point_it) {
+    auto p0 = initial_point_it;
+    auto p = p0;
     
-	    do {
-		   auto prev = p;
-    
-		   circular_advance(p, points.begin(), points.end(), 2);
-		   if(min_distance > euclidean_distance(*prev, *p))
-		   {
-		      min_distance = euclidean_distance(*prev, *p);
-              min_string = std::make_pair(*prev, *p);
-              it_min = circular_advance(prev, points.begin(), points.end(), 1);
-            }
-    
-        }while(p != p0);
-    };
+    do {
+        auto prev = p;
+        
+        circular_advance(p, points.begin(), points.end(), 2);
+        if(min_distance > euclidean_distance(*prev, *p))
+        {
+            min_distance = euclidean_distance(*prev, *p);
+            min_string = std::make_pair(*prev, *p);
+            it_min = circular_advance(prev, points.begin(), points.end(), 1);
+        }
+      
+    }while(p != p0);
+};
 \end{lstlisting}
+\end{adjustbox}\hfill\\\hfill\\
 	Busca la cuerda de mínima longitud recorriendo los nodos hasta volver al nodo inicial.
 \end{frame}
 
+\begin{frame}
+Si identificamos los vértices $\alpha_1,\dots,\alpha_n$ del polígono con los elementos de $\mathbb{Z}_n$, y observamos:
+\begin{itemize}
+\item Si $n$ es par $\implies \mathbb{Z}_n/2\mathbb{Z}_n \simeq \mathbb{F}_2$
+\item Si $n$ es impar $\implies \mathbb{Z}_n/2\mathbb{Z}_n \simeq \mathbb{F}_1$
+\end{itemize}
+
+Podemos concluir que un polígono con un número par de vértices tiene dos ciclos de cuerdas, y uno con un número impar de vértices, uno solo.
+
+Por tanto, para comparar las longitudes de todas las cuerdas de un polígono, debe llamarse a la función anterior dos veces en el primer caso, y una en el segundo.
+\end{frame}
+
 \begin{frame}[fragile]
-	\frametitle{Algoritmo}
+	\frametitle{Bucle principal}
 	\begin{lstlisting}
 	while(points.size() > 3)
 	{
@@ -247,5 +295,20 @@ auto circular_advance = [](auto& forwdIt, auto initValue, auto endValue, int n) 
 	\end{lstlisting}
 	
 \end{frame}
+
+\subsection{La complejidad del algoritmo}
+Es un algoritmo de complejidad $O(n^2)$, dado que para un polígono de $n$ nodos, en cada iteración del bucle \texttt{while} ($n$ iteraciones) llama a la función \textit{find\_min\_string}, de complejidad $O(n)$, para después eliminar un vértice.
+
+\[
+T(n) = \sum_{i=3}^n ki = k\frac{n^2+n}{2} \in O(n^2)
+\]
+
+donde:
+\begin{itemize}
+\item $T(n)$ es el número de instrucciones que ejecuta el algoritmo para un polígono de $n$ vértices.
+\item $k$ es una constante de proporcionalidad aproximada entre el número de instrucciones que se ejecutan para encontrar la cuerda mínima entre $i$ e $i$. 
+	
+\end{itemize}
+
 
 \end{document}
