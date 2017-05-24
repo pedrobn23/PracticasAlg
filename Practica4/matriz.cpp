@@ -5,6 +5,7 @@
 #include <tuple>
 #include <iostream>
 #include "piezamod.h"
+#include <cassert>
 
 using namespace std;
 
@@ -35,11 +36,23 @@ public:
 
   //devuelve la posicion i,j
   inline int get (int i, int j) const {
+    assert (i<FIL && j<COL);
+	      
     return m[i][j];
   }
 
   //establece la posicion
   inline void set (int i, int j, int value) {
+    if (i>=FIL)
+      cout << "Pazo cenutrio, i vale: " << i << endl;
+    
+    if (j>=COL)
+      cout << "Pazo cenutrio, j vale: " << j << endl;
+    
+    assert (i<FIL);
+    assert (j<COL);
+    assert (value >= 0);
+    
     m[i][j] = value;
   }
 
@@ -141,26 +154,12 @@ bool posible (const Matrix &tab, int pieza[5][5], pair<int,int> p1) {
   if (COL - p1.second <= ocupabajo(pieza))
     return false;
 
-
   
-  //ajustamos los limites del bucle para que no se salga del tablero y solo considere las casillas donde la pieza pudiera ser colocada
-  int lim1 = FIL<p1.first+ocupadcha(pieza) ? FIL : p1.first+ocupadcha(pieza);
-  int lim2 = COL< p1.second+ocupabajo(pieza) ? COL : p1.second+ocupabajo(pieza);
-  char c;
-   
-  for (int i=p1.first; i<lim1; ++i) {
-    for (int j=p1.second; j<lim2; ++j) {
-
-      //esto solo funciona si en ambas hay un uno
-      //lol parece antiintuitivo, pero si, funciona así
-      if (pieza[j-p1.second][i-p1.first] && tab.get(j,i)) {
-	//	cout << "\n\n\nWARNING\n\n\n";
+  for (int i=0,k=p1.second; i<ocupadcha(pieza) && k<COL; ++i, ++k) {
+    for (int j=0,  h=p1.first;j<ocupabajo(pieza) && h<FIL; ++j, ++h) {
+      if (pieza[j][i] && tab.get(h,k)) {
 	return false;
       }
-
-      //por si acaso hay que volver a debugg gitano
-      // cout << "\n\nEn la posicion (" << j-p1.second << "," <<  i-p1.first  << ") Pieza vale " << pieza[j-p1.second][i-p1.first] << " y la matriz " <<  tab.get(i,j);
-      // cin >> c;
     }
   }
 
@@ -168,9 +167,10 @@ bool posible (const Matrix &tab, int pieza[5][5], pair<int,int> p1) {
 }
 
 bool colocar  (Matrix &sol, int pieza[5][5], pair<int,int> p1) {
-  for (int i=0; i<FIL; ++i) {
-    for (int j=0; j<COL; ++j) {
-      sol.set(i+p1.first, j+p1.second, pieza[i][j]);
+  assert(posible(sol, pieza, p1));
+  for (int i=0,k=p1.second; i<ocupadcha(pieza) && k<COL; ++i, ++k) {
+    for (int j=0,  h=p1.first;j<ocupabajo(pieza) && h<FIL; ++j, ++h) {
+      sol.set(h, k, pieza[j][i]);
     }
   }
 }
@@ -214,8 +214,6 @@ int main () {
   cout << "Primera pos: " << tab.get(0,0);
 
   tab.set(0,0,1);
-  tab.set(0,3,1);
-  tab.set(1,1,1);
   cout << "\nColocamos un 1 en la primera casilla\n" << tab;
   cout << "\nPrimera Libre: " << tab.primeraLibre().first << "," << tab.primeraLibre().second;
 
@@ -226,4 +224,7 @@ int main () {
   cout << " y hacia abajo ocupa: " << ocupabajo(pieza[1][0]);
   cout << "\n¿Es posible? " << posible(tab,  pieza[1][0], tab.primeraLibre());
   cout << "\n\nMe gusta que los planes salgan bien";
+  cout << "\nLLamen a los ingenieros, hay que colocar la pieza: \n";
+
+  colocar(tab, pieza[0][1], tab.primeraLibre());
 }
