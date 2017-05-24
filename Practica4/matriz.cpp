@@ -15,7 +15,7 @@ const int COL=9;
 
 /**
  *@class Matrix
- *@brief Clase que empaqueta el tablero que se usará para colocar las piezas 
+ *@brief Clase que empaqueta el tablero que se usará para colocar las piezas
  */
 
 class Matrix {
@@ -45,7 +45,7 @@ public:
   }
 
 
-  
+
   // friend std::istream& operator>>(std::istream& is, Matrix& m) {
   //   char basura;
   //   int value;
@@ -161,7 +161,7 @@ bool colocar  (Matrix &sol, int pieza[5][5], pair<int,int> p1) {
 
 
 //Esta funcion resuelve el problema por backtrack, hay que pasarle el vector de
-//piezas a usar y la matriz donde se almacena la solucion  
+//piezas a usar y la matriz donde se almacena la solucion
 bool resolver (int pieza[8][4][5][5] , Matrix &tab){
   pair <int,int> p1 = tab.primeraLibre();
   cout << p1.first << " " << p1.second << "\n";
@@ -183,7 +183,7 @@ bool resolver (int pieza[8][4][5][5] , Matrix &tab){
 			resolucionPosible = resolver(pieza, tab);
      		if(!resolucionPosible)
 				tab= copiaMatriz;
-      }  
+      }
     }
   }
 
@@ -191,13 +191,9 @@ bool resolver (int pieza[8][4][5][5] , Matrix &tab){
 }
 
 int main () {
-<<<<<<< HEAD
-  ;
-=======
    Matrix tab;
 	resolver(pieza,tab);
 	cout << tab;
->>>>>>> 46257be27bab7fdd08ed6e891e94282c4b3b12d6
 }
 
 /*int main () {
@@ -210,4 +206,3 @@ int main () {
     cout << vec[i] << " ";
   delete[] vec; //Se creaba pero nunca se eliminaba
 }*/
- 
