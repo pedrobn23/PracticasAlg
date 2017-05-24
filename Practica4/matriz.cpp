@@ -116,33 +116,31 @@ public:
 
 //supervisa cuantas posiciones a la derecha ocupa la pieza
 int ocupabajo (int pieza[5][5]) {
-  int index = 0, mret = 0;
+  int i = 0, max = 0;
   for (int j=0; j<5; ++j) {
-    for (int i=0; i<5; ++i) {
-      if (pieza[i][j])
-	index = i+1;
-    }
-    mret = mret>index ? mret : index;
-    index = 0;
+    for ( i=0; i<5; ++i) 
+      if (!pieza[i][j]) break;
+    
+    max = max>i+1 ? max : i+1;
+
   }
 
-  return mret;
+  return max;
 }
 
 
 //supervisa cuantas posiciones hacia abajo ocupa la pieza
 int ocupadcha (int pieza[5][5]) {
-  int index = 0, mret = 0;
+  int j = 0, max = 0;
   for (int i=0; i<5; ++i) {
-    for (int j=0; j<5; ++j) {
-      if (pieza[i][j])
-	index = j+1;
-    }
-    mret = mret>index ? mret : index;
-    index = 0;
+    for ( j= 0; j<5; ++j)
+      if (!pieza[i][j]) break;
+      
+    max = max >j+1 ? max : j+1;
+
   }
 
-  return mret;
+  return max;
 }
 
 
@@ -192,11 +190,11 @@ bool resolver (int pieza[8][4][5][5] , Matrix &tab, int rep){
     return true;
   }
 
-
+  cout << "viá recorré" << endl;
   for (int i=rep; i<8 && !resolucionPosible; ++i) {
     for (int j=0; j<4 && !resolucionPosible; ++j) {
       if (posible (tab, pieza[i][j], p1) ){
-
+	cout << "Iteracion" << i << endl;
 	copiaMatriz = tab;
 
 	colocar(tab, pieza[i][j], p1);
