@@ -232,14 +232,21 @@ La eficiencia teórica de esta función es $O(n)$.
 	}
 	\end{lstlisting}
 	
-	Dado un polígono de $n$ nodos, $n$ puede ser par o no serlo, en el caso de que no sea par, la función \textit{find\_min\_string} recorrera todos los nodos sin problemas. Sin embargo, en el caso de que sea par, la función solo recorrera la mitad de los nodos.
-	Por ello, se vuelve a llamar a la función para recorrer los nodos faltantes.
+Este bucle es una transcripción a código de la descripción del algoritmo.
 
 \subsubsection{La complejidad del algoritmo}
-Es un algoritmo de complejidad $O(n^2)$, dado que para un polígono de $n$ nodos, en cada iteración del bucle while ($n$ iteraciones) realiza la función \textit{find\_min\_string} la cual realiza $n$ iteraciones en las que en cada una de ellas llama a \textit{circular\_advance} con $2$ como parámetro ($O(2)$).
+Es un algoritmo de complejidad $O(n^2)$, dado que para un polígono de $n$ nodos, en cada iteración del bucle \texttt{while} ($n$ iteraciones) llama a la función \textit{find\_min\_string}, de complejidad $O(n)$, para después eliminar un vértice.
 
+\[
+T(n) = \sum_{i=3}^n ki = k\frac{n^2+n}{2} \in O(n^2)
+\]
 
-\section{Conclusión}
+donde:
+\begin{itemize}
+\item $T(n)$ es el número de instrucciones que ejecuta el algoritmo para un polígono de $n$ vértices.
+\item $k$ es una constante de proporcionalidad aproximada entre el número de instrucciones que se ejecutan para encontrar la cuerda mínima entre $i$ e $i$. 
+	
+\end{itemize}
 
 
 
