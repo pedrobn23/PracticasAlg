@@ -5,6 +5,7 @@
 #include <cassert>
 #include <stdlib.h>
 #include "piezamod.h"
+#include <stack>
 
 using namespace std;
 
@@ -103,24 +104,22 @@ int ocupadcha (int pieza[5][5]) {
 bool posible (const Matriz &tab, int pieza[5][5], pair<int,int> p1) {
   int derecha = ocupadcha(pieza),abajo = ocupabajo(pieza);
   
-  if ((FIL - p1.first <= derecha)|| (COL-p1.second <= abajo))
+  if ((FIL - p1.first <= derecha-1)|| (COL-p1.second <= abajo-1))
     return false;
 
   
   for (int i=0,k=p1.second; i<derecha && k<COL; ++i, ++k) {
     for (int j=0,  h=p1.first;j<abajo && h<FIL; ++j, ++h) {
       if (pieza[j][i] && tab.get(h,k)) {
-	cout << "No posible aqui" << endl;
 	return false;
       }
     }
   }
-  cout << "Posible aqui" << endl;
+
   return true;
 }
 
 bool colocar  (Matriz &sol, int pieza[5][5], pair<int,int> p1) {
-  assert(posible(sol, pieza, p1));
   for (int i=0,k=p1.second; i<ocupadcha(pieza) && k<COL; ++i, ++k) {
     for (int j=0,  h=p1.first;j<ocupabajo(pieza) && h<FIL; ++j, ++h) {
       sol.set(h, k, pieza[j][i]);
@@ -136,36 +135,30 @@ bool resolver (int pieza[8][4][5][5] , Matriz &tab, int rep){
   pair <int,int> p1 = tab.primeraLibre();
   bool resolucionPosible = false, pos=false;
   Matriz copiaMatriz;
-
-
   
   if (p1.first == -1 || p1.second == -1) {
     return true;
   }
 
-  cout << "Llamada recursiva con primera libre:"<< p1.first << p1.second << endl;
   for (int i=rep; i<8 && !resolucionPosible; ++i) {
     for (int j=0; j<4 && !resolucionPosible; ++j) {
       if (posible (tab, pieza[i][j], p1) ){
-	cout << "Pieza " << i+1 << " Rotacion" << j +1 <<endl;
-
 	copiaMatriz = tab;
-
 	colocar(tab, pieza[i][j], p1);
-		cout << tab << endl;
+	cout << tab << endl;
 	resolucionPosible = resolver(pieza, tab, ++rep);
      	if(!resolucionPosible)
 	  tab= copiaMatriz;
       }
 
-      char c;
-      cout << "Cambio de rotación:\n" << tab <<  endl;
     }
-    cout << "Paso de pieza \n"<< endl;
   }
 
   return resolucionPosible;
 }
+
+
+
 
 int main () {
   Matriz tab;
