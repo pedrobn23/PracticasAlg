@@ -164,31 +164,26 @@ bool resolver (int pieza[8][4][5][5] , Matrix &tab){
   cout << p1.first << " " << p1.second << "\n";
   bool resolucionPosible = false;
   Matrix copiaMatriz;
-  bool posible;
 
   if (p1.first == -1 || p1.second == -1) {
-    delete[] copiaVector;
     return true;
   }
 
 
   for (int i=0; i<8 && !resolucionPosible; ++i) {
     for (int j=0; i<4 && !resolucionPosible; ++j) {
-      if (posible = posible (tab, pieza[i][j], p1) ){
+      if (posible (tab, pieza[i][j], p1) ){
 
-	copiaMatriz = tab;
+			copiaMatriz = tab;
 
-	colocar(tab, pieza[i][j], p1);
-	resolucionPosible = resolver(pieza, tab);
-      }
-
-      if(!resolucionPosible)
-	tab= copiaMatriz;
-      
+			colocar(tab, pieza[i][j], p1);
+			resolucionPosible = resolver(pieza, tab);
+     		if(!resolucionPosible)
+				tab= copiaMatriz;
+      }  
     }
   }
 
-  delete[] copiaVector;
   return resolucionPosible;
 }
 
