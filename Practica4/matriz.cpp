@@ -175,7 +175,7 @@ bool resolver (bool pieza[8][4][5][5] , Matrix &sol, int* res){
     for (int j=0; i<4 && !ret; ++j) {
       if (pos = posible (sol, pieza[i][j], p1) ){
 
-	aux = sol;
+	copiaMatriz = sol;
 	for (int k=0; k<16; ++k)
 	  raux[k] = res[k];
 
@@ -186,8 +186,8 @@ bool resolver (bool pieza[8][4][5][5] , Matrix &sol, int* res){
 	ret = resolver(pieza, sol, res);
       }
 
-      if(!ret && !pos){
-	sol = aux;
+      if(!ret){
+	sol = copiaMatriz;
 	for (int k=0; k<16; ++k)
 	  res[k] = raux[k];
       }
