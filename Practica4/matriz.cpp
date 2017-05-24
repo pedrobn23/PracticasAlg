@@ -141,29 +141,12 @@ bool posible (const Matrix &tab, int pieza[5][5], pair<int,int> p1) {
   if (COL - p1.second <= ocupabajo(pieza))
     return false;
 
-
   
-  //ajustamos los limites del bucle para que no se salga del tablero y solo considere las casillas donde la pieza pudiera ser colocada
-  int lim1 = FIL<p1.first+ocupadcha(pieza) ? FIL : p1.first+ocupadcha(pieza);
-  // int lim2 = COL< p1.second+ocupabajo(pieza) ? COL : p1.second+ocupabajo(pieza);
-  char c;
-   
   for (int i=0,k=p1.second; i<ocupadcha(pieza) && k<COL; ++i, ++k) {
     for (int j=0,  h=p1.first;j<ocupabajo(pieza) && h<FIL; ++j, ++h) {
-
-      //el porblema esta en que la matriz avanza hacia abajo y el vector hacia la dcha
-      //esto solo funciona si en ambas hay un uno
-      //lol parece antiintuitivo, pero si, funciona así
-      cout << "\n\nEn la posicion (" << j << "," <<  i;
-      cout  << ") Pieza vale " << pieza[j][i] << " y en la posicion (" ;
-      cout << h << "," << k << ") la matriz vale: " <<  tab.get(h,k);
-
       if (pieza[j][i] && tab.get(h,k)) {
 	return false;
       }
-
-      //por si acaso hay que volver a debugg gitano
-
     }
   }
 
