@@ -167,9 +167,10 @@ bool posible (const Matrix &tab, int pieza[5][5], pair<int,int> p1) {
 }
 
 bool colocar  (Matrix &sol, int pieza[5][5], pair<int,int> p1) {
-  for (int i=0; i<FIL; ++i) {
-    for (int j=0; j<COL; ++j) {
-      sol.set(j+p1.second, i+p1.first, pieza[j][i]);
+  assert(sol, pieza, p1);
+  for (int i=0,k=p1.second; i<ocupadcha(pieza) && k<COL; ++i, ++k) {
+    for (int j=0,  h=p1.first;j<ocupabajo(pieza) && h<FIL; ++j, ++h) {
+      sol.set(h, k, pieza[j][i]);
     }
   }
 }
