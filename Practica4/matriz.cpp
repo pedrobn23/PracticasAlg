@@ -13,6 +13,7 @@ using namespace std;
 const int FIL=6;
 const int COL=9;
 
+//
 class Matrix {
 private:
   bool** m;
@@ -35,7 +36,7 @@ public:
   inline void set (int i, int j, bool value) {
     m[i][j] = value;
   }
-  
+
 
   friend std::istream& operator>>(std::istream& is, Matrix& m) {
     char basura;
@@ -70,7 +71,7 @@ public:
     delete[] m;
   }
 
-  
+
   //Esta función nos devuelve el primer termino libre
   pair <int,int> primeraLibre () {
     for (int i=0; i<FIL; ++i) {
@@ -141,9 +142,9 @@ bool posible (const Matrix &sol, bool pieza[5][5], pair<int,int> p1) {
 }
 
 bool colocar  (Matrix &sol, bool pieza[5][5], pair<int,int> p1) {
-  for (int i=p1.first; i<FIL; ++i) {
-    for (int j=p1.second; i<COL; ++j) {
-      sol.set(i,j,1);
+  for (int i=0; i<FIL; ++i) {
+    for (int j=0; i<COL; ++j) {
+      sol.set(i+p1.first, j+p1.second, pieza[i][j]);
     }
   }
 }
@@ -169,7 +170,7 @@ bool resolver (bool pieza[8][4][5][5] , Matrix &sol, int* res){
     return true;
   }
 
-    
+
   for (int i=0; i<8 && !ret; ++i) {
     for (int j=0; i<4 && !ret; ++j) {
       if (pos = posible (sol, pieza[i][j], p1) ){
@@ -196,8 +197,11 @@ bool resolver (bool pieza[8][4][5][5] , Matrix &sol, int* res){
   return ret;
 }
 
-
 int main () {
+    ;
+}
+
+/*int main () {
   Matrix sol;
   int* vec = new int[16];
 
@@ -206,5 +210,4 @@ int main () {
   for (int i=0; i<16; ++i)
     cout << vec[i] << " ";
   delete[] vec; //Se creaba pero nunca se eliminaba
-}
-
+}*/
