@@ -13,7 +13,7 @@ using namespace std;
 const int FIL=6;
 const int COL=9;
 
-//
+//Esta clase la usaremos para empaquetar el tablero donde hemos de 
 class Matrix {
 private:
   bool** m;
@@ -149,7 +149,7 @@ bool colocar  (Matrix &sol, bool pieza[5][5], pair<int,int> p1) {
   }
 }
 
-int prim (int *v) {
+int primeraPosicionLibre (int *v) {
   for (int i=0; i<16; ++i)
     if(v[i] != -1)
       return i;
@@ -180,8 +180,9 @@ bool resolver (bool pieza[8][4][5][5] , Matrix &sol, int* res){
 	  raux[k] = res[k];
 
 	colocar(sol, pieza[i][j], p1);
-	res [prim(res)] = p1.first;
-	res [prim(res)] = p1.second;
+	int posicion = primeraPosicionLibre(res);
+	res [posicion++] = p1.first;
+	res [posicion] = p1.second;
 	ret = resolver(pieza, sol, res);
       }
 

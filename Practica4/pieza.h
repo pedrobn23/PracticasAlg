@@ -1,4 +1,4 @@
-bool pieza[8][4][5][5]=
+int pieza[8][4][5][5]=
   {
     //primera pieza
     {
