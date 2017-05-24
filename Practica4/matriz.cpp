@@ -101,7 +101,7 @@ public:
 };
 
 
-
+//supervisa cuantas posiciones a la derecha ocupa la pieza
 int ocupadcha (int pieza[5][5]) {
   int index = 0, mret = 0;
   for (int j=0; j<5; ++j) {
@@ -117,7 +117,7 @@ int ocupadcha (int pieza[5][5]) {
 }
 
 
-
+//supervisa cuantas posiciones hacia abajo ocupa la pieza
 int ocupabajo (int pieza[5][5]) {
   int index = 0, mret = 0;
   for (int i=0; i<5; ++i) {
