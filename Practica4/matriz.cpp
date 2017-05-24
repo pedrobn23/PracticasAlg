@@ -71,7 +71,7 @@ public:
   //   }
   // }
 
-  //Destructor de la matriz, es necesa
+  //Destructor de la matriz, es necesario por usar memoria dinamica
   ~Matrix () {
     for (int i=0; i<FIL; ++i) {
       delete[] m[i];
