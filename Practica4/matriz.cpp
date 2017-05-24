@@ -139,8 +139,12 @@ bool posible (const Matrix &sol, int pieza[5][5], pair<int,int> p1) {
   if (COL - p1.second <= ocupabajo(pieza))
     return false;
 
-  for (int i=p1.first; i<FIL; ++i) {
-    for (int j=p1.second; i<COL; ++j) {
+  //ajustamos los limites del bucle para que no se salga del tablero y solo considere las casillas donde la pieza pudiera ser colocada
+  int lim1 = FIL<p1.first+5 ? FIL : p1.first+5;//p1.first+p1.ocupadch
+  int lim2 = COL<p1.second+5 ? COL : p1.second+5;//p1.second+p1.ocupabajo
+  
+  for (int i=p1.first; i<lim1; ++i) {
+    for (int j=p1.second; i<lim2; ++j) {
       if (pieza[i-p1.first][j-p1.second] && sol.get(i,j))
 	return false;
     }
