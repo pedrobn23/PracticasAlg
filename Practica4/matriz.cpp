@@ -43,6 +43,12 @@ public:
 
   //establece la posicion
   inline void set (int i, int j, int value) {
+    if (i>=FIL)
+      cout << "Pazo cenutrio, i vale: " << i << endl;
+    
+    if (j>=COL)
+      cout << "Pazo cenutrio, j vale: " << j << endl;
+    
     assert (i<FIL);
     assert (j<COL);
     assert (value >= 0);
@@ -217,7 +223,7 @@ int main () {
   cout << " y hacia abajo ocupa: " << ocupabajo(pieza[1][0]);
   cout << "\n¿Es posible? " << posible(tab,  pieza[1][0], tab.primeraLibre());
   cout << "\n\nMe gusta que los planes salgan bien";
-  cout << "\nLLamen a los ingenieros, hay que colocar la pieza: ";
+  cout << "\nLLamen a los ingenieros, hay que colocar la pieza: \n";
 
   colocar(tab, pieza[0][1], tab.primeraLibre());
 }
