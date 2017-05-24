@@ -134,20 +134,24 @@ int ocupadcha (int pieza[5][5]) {
 }
 
 
-bool posible (const Matrix &sol, int pieza[5][5], pair<int,int> p1) {
+bool posible (const Matrix &tab, int pieza[5][5], pair<int,int> p1) {
   if (FIL - p1.first <= ocupadcha(pieza))
     return false;
 
   if (COL - p1.second <= ocupabajo(pieza))
     return false;
 
-  //ajustamos los limites del bucle para que no se salga del tablero y solo considere las casillas donde la pieza pudiera ser colocada
-  int lim1 = FIL<p1.first+5 ? FIL : p1.first+5;//p1.first+p1.ocupadch
-  int lim2 = COL<p1.second+5 ? COL : p1.second+5;//p1.second+p1.ocupabajo
 
+  
+  //ajustamos los limites del bucle para que no se salga del tablero y solo considere las casillas donde la pieza pudiera ser colocada
+  int lim1 = FIL<p1.first+5 ? FIL : p1.first+ocupadcha(pieza);
+  int lim2 = COL<p1.second+5 ? COL : p1.second+ocupabajo(pieza);
+
+   
   for (int i=p1.first; i<lim1; ++i) {
-    for (int j=p1.second; i<lim2; ++j) {
-      if (pieza[i-p1.first][j-p1.second] && sol.get(i,j))
+    for (int j=p1.second; j<lim2; ++j) {
+      //esto solo funciona si en ambas hay un uno
+      if (pieza[i-p1.first][j-p1.second] && tab.get(i,j))
 	return false;
     }
   }
@@ -201,7 +205,7 @@ int main () {
   Matrix tab;
   cout << "Primera pos: " << tab.get(0,0);
 
-  tab.set(0,0,1);
+  //  tab.set(0,0,1);
   cout << "\nColocamos un 1 en la primera casilla\n" << tab;
   cout << "\nPrimera Libre: " << tab.primeraLibre().first << "," << tab.primeraLibre().second;
 
@@ -210,5 +214,5 @@ int main () {
   cout << "\n¿Será posible? " ;
   cout << "A la derecha ocupa: " << ocupadcha(pieza[1][0]);
   cout << " y hacia abajo ocupa: " << ocupabajo(pieza[1][0]);
-  posible(tab,  pieza[1][0], tab.primeraLibre());
+  cout << "\n¿Es posible?" << posible(tab,  pieza[1][0], tab.primeraLibre());
 }
