@@ -215,4 +215,5 @@ int main () {
   cout << "A la derecha ocupa: " << ocupadcha(pieza[1][0]);
   cout << " y hacia abajo ocupa: " << ocupabajo(pieza[1][0]);
   cout << "\n¿Es posible?" << posible(tab,  pieza[1][0], tab.primeraLibre());
+  cout << "Me gusta que los planes salgan bien";
 }
