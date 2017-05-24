@@ -159,8 +159,8 @@ bool posible (const Matrix &tab, int pieza[5][5], pair<int,int> p1) {
       }
 
       //por si acaso hay que volver a debugg gitano
-      // cout << "\n\nEn la posicion (" << j-p1.second << "," <<  i-p1.first  << ") Pieza vale " << pieza[j-p1.second][i-p1.first] << " y la matriz " <<  tab.get(i,j);
-      // cin >> c;
+       cout << "\n\nEn la posicion (" << j-p1.second << "," <<  i-p1.first  << ") Pieza vale " << pieza[j-p1.second][i-p1.first] << " y la matriz " <<  tab.get(i,j);
+       cin >> c;
     }
   }
 
@@ -226,4 +226,5 @@ int main () {
   cout << " y hacia abajo ocupa: " << ocupabajo(pieza[1][0]);
   cout << "\n¿Es posible? " << posible(tab,  pieza[1][0], tab.primeraLibre());
   cout << "\n\nMe gusta que los planes salgan bien";
+  cout << ""; 
 }
