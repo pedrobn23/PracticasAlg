@@ -61,8 +61,9 @@ public:
   friend std::ostream& operator<<(std::ostream& os, Matrix& e) {
 
     int value;
+	os << "\nImpresion del tablero:\n";
     for (int i=0; i<FIL; ++i) {
-      for (int j=0; i<COL; ++i) {
+      for (int j=0; j<COL; ++j) {
   	//esto es una gitanada pero tenemos muchas cosas que hacer y poco tiempo
   	value=e.get(i,j);
   	os <<  value << ' ';
