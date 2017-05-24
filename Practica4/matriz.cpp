@@ -49,7 +49,7 @@ public:
   //   char basura;
   //   int value;
   //   for (int i=0; i<FIL; ++i) {
-  //     for (int j=0; i<COL; ++i) {
+  //     for (int j=0; j<COL; ++i) {
   // 	is >> value >> basura;
   // 	m.set(i,j,value);
   //     }
@@ -169,7 +169,7 @@ bool posible (const Matrix &tab, int pieza[5][5], pair<int,int> p1) {
 
 bool colocar  (Matrix &sol, int pieza[5][5], pair<int,int> p1) {
   for (int i=0; i<FIL; ++i) {
-    for (int j=0; i<COL; ++j) {
+    for (int j=0; j<COL; ++j) {
       sol.set(i+p1.first, j+p1.second, pieza[i][j]);
     }
   }
@@ -191,7 +191,7 @@ bool resolver (int pieza[8][4][5][5] , Matrix &tab){
 
 
   for (int i=0; i<8 && !resolucionPosible; ++i) {
-    for (int j=0; i<4 && !resolucionPosible; ++j) {
+    for (int j=0; j<4 && !resolucionPosible; ++j) {
       if (posible (tab, pieza[i][j], p1) ){
 
 	copiaMatriz = tab;
