@@ -103,7 +103,7 @@ public:
 
 
 //supervisa cuantas posiciones a la derecha ocupa la pieza
-int ocupadcha (int pieza[5][5]) {
+int ocupabajo (int pieza[5][5]) {
   int index = 0, mret = 0;
   for (int j=0; j<5; ++j) {
     for (int i=0; i<5; ++i) {
@@ -119,7 +119,7 @@ int ocupadcha (int pieza[5][5]) {
 
 
 //supervisa cuantas posiciones hacia abajo ocupa la pieza
-int ocupabajo (int pieza[5][5]) {
+int ocupadcha (int pieza[5][5]) {
   int index = 0, mret = 0;
   for (int i=0; i<5; ++i) {
     for (int j=0; j<5; ++j) {
@@ -144,7 +144,7 @@ bool posible (const Matrix &sol, int pieza[5][5], pair<int,int> p1) {
   //ajustamos los limites del bucle para que no se salga del tablero y solo considere las casillas donde la pieza pudiera ser colocada
   int lim1 = FIL<p1.first+5 ? FIL : p1.first+5;//p1.first+p1.ocupadch
   int lim2 = COL<p1.second+5 ? COL : p1.second+5;//p1.second+p1.ocupabajo
-  
+
   for (int i=p1.first; i<lim1; ++i) {
     for (int j=p1.second; i<lim2; ++j) {
       if (pieza[i-p1.first][j-p1.second] && sol.get(i,j))
@@ -182,12 +182,12 @@ bool resolver (int pieza[8][4][5][5] , Matrix &tab){
     for (int j=0; i<4 && !resolucionPosible; ++j) {
       if (posible (tab, pieza[i][j], p1) ){
 
-			copiaMatriz = tab;
+	    copiaMatriz = tab;
 
-			colocar(tab, pieza[i][j], p1);
-			resolucionPosible = resolver(pieza, tab);
-     		if(!resolucionPosible)
-				tab= copiaMatriz;
+		colocar(tab, pieza[i][j], p1);
+		resolucionPosible = resolver(pieza, tab);
+     	if(!resolucionPosible)
+			tab= copiaMatriz;
 
 		cout << tab;
       }
@@ -198,18 +198,17 @@ bool resolver (int pieza[8][4][5][5] , Matrix &tab){
 }
 
 int main () {
-   Matrix tab;
-	resolver(pieza,tab);
-	cout << tab;
-}
-
-/*int main () {
   Matrix tab;
-  int* vec = new int[16];
+  cout << "Primera pos: " << tab.get(0,0);
 
-  resolver (pieza, tab, vec);
+  tab.set(0,0,1);
+  cout << "\nColocamos un 1 en la primera casilla\n" << tab;
+  cout << "\nPrimera Libre: " << tab.primeraLibre().first << "," << tab.primeraLibre().second;
 
-  for (int i=0; i<16; ++i)
-    cout << vec[i] << " ";
-  delete[] vec; //Se creaba pero nunca se eliminaba
-}*/
+  // colocar(tab, pieza[0][0], tab.primeraLibre());
+  cout << "\n\nColocamos una pieza nueva" ;
+  cout << "\n¿Será posible? " ;
+  cout << "A la derecha ocupa: " << ocupadcha(pieza[1][0]);
+  cout << " y hacia abajo ocupa: " << ocupabajo(pieza[1][0]);
+  posible(tab,  pieza[1][0], tab.primeraLibre());
+    }
