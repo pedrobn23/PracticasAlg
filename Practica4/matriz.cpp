@@ -158,53 +158,53 @@ bool colocar  (Matrix &sol, bool pieza[5][5], pair<int,int> p1) {
   }
 }
 
-int primeraPosicionLibre (int *v) {
-  for (int i=0; i<16; ++i)
-    if(v[i] != -1)
+int primeraPosicionLibre (pair<int,int>* v) {
+  for (int i=0; i<8; ++i)
+    if(v[i].first == -1 && v[i].second==-1 )
       return i;
 }
 
 
-//res debe inicializarse a -1s
-bool resolver (bool pieza[8][4][5][5] , Matrix &sol, int* res){
-  pair <int,int> p1 = sol.primeraLibre();
+
+bool resolver (bool pieza[8][4][5][5] , Matrix &tab, pair<int,int>* coordenadas){
+  pair <int,int> p1 = tab.primeraLibre();
   cout << p1.first << " " << p1.second << "\n";
-  bool ret = false;
-  Matrix aux;
-  int* raux = new int[16];
+  bool resolucionPosible = false;
+  Matrix copiaMatriz;
+  int* copiaVector = new pair<int,int>[8];
   bool pos;
 
   if (p1.first == -1 || p1.second == -1) {
-    delete[] raux;
-    return true;
+    delete[] copiaVector;
+    resolucionPosibleurn true;
   }
 
 
-  for (int i=0; i<8 && !ret; ++i) {
-    for (int j=0; i<4 && !ret; ++j) {
-      if (pos = posible (sol, pieza[i][j], p1) ){
+  for (int i=0; i<8 && !resolucionPosible; ++i) {
+    for (int j=0; i<4 && !resolucionPosible; ++j) {
+      if (pos = posible (tab, pieza[i][j], p1) ){
 
-	copiaMatriz = sol;
+	copiaMatriz = tab;
 	for (int k=0; k<16; ++k)
-	  raux[k] = res[k];
+	  copiaVector[k] = coordenadas[k];
 
-	colocar(sol, pieza[i][j], p1);
-	int posicion = primeraPosicionLibre(res);
-	res [posicion++] = p1.first;
-	res [posicion] = p1.second;
-	ret = resolver(pieza, sol, res);
+	colocar(tab, pieza[i][j], p1);
+	int posicion = primeraPosicionLibre(coordenadas);
+	coordenadas [posicion++] = p1.first;
+	coordenadas [posicion] = p1.second;
+	resolucionPosible = resolver(pieza, tab, coordenadas);
       }
 
-      if(!ret){
-	sol = copiaMatriz;
+      if(!resolucionPosible){
+	tab= copiaMatriz;
 	for (int k=0; k<16; ++k)
-	  res[k] = raux[k];
+	  coordenadas[k] = copiaVector[k];
       }
     }
   }
 
-  delete[] raux;
-  return ret;
+  delete[] copiaVector;
+  return resolucionPosible;
 }
 
 int main () {
@@ -212,10 +212,10 @@ int main () {
 }
 
 /*int main () {
-  Matrix sol;
+  Matrix tab;
   int* vec = new int[16];
 
-  resolver (pieza, sol, vec);
+  resolver (pieza, tab, vec);
 
   for (int i=0; i<16; ++i)
     cout << vec[i] << " ";
