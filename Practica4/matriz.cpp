@@ -196,7 +196,7 @@ bool resolver (int pieza[8][4][5][5] , Matrix &tab){
 }
 
 int main () {
-    ;
+  ;
 }
 
 /*int main () {
