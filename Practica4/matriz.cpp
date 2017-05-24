@@ -159,6 +159,9 @@ bool colocar  (Matrix &sol, int pieza[5][5], pair<int,int> p1) {
 }
 
 
+
+//Esta funcion resuelve el problema por backtrack, hay que pasarle el vector de
+//piezas a usar y la matriz donde se almacena la solucion  
 bool resolver (int pieza[8][4][5][5] , Matrix &tab){
   pair <int,int> p1 = tab.primeraLibre();
   cout << p1.first << " " << p1.second << "\n";
