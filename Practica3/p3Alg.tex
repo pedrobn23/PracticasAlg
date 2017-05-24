@@ -127,23 +127,26 @@ Algorítmica} % Subtitle
 
 \section{Introducción}
 
-Un polígono $P$ en el plano es un conjunto de $n$ puntos $(x_i, y_i)$ llamados vértices, y $n$ segmentos de rectas ${α1 , α2 , . . . , αn }$ llamados lados, verificando que:
+Un polígono $P$ en el plano euclídeo es un conjunto de $n$ puntos $(x_i, y_i) \in \mathbb{R}^2,\ i=1,\dots,n$ llamados vértices, y $n$ segmentos de rectas ${\alpha_1 , \alpha_2 ,\dots, \alpha_n }$ llamados lados, que verifican que:
 
 \begin{itemize}
 	\item Los puntos extremos de los lados son dos vértices distintos del polígono. 
 	\item Cualquier vértice es el extremo de exactamente dos lados (distintos).
 \end{itemize}
 
-Un polígono del plano se dice \textbf{convexo} si, para cada dos puntos cualesquiera del interior del polígono, el segmento que los une está contenido en el mismo.\\
- Por \textbf{triangulación} de un polígono plano entenderemos la división de éste en un conjunto de triángulos, con la restricción de que cada lado de un triángulo se reparta entre dos triángulos adyacentes (obviamente, sólo pertenece a uno si está en la frontera del polígono).
+Un polígono del plano se dice \textbf{convexo} si cada uno de sus vértices es un vértice de su envolvente convexa.
 
-Diremos que una triangulación de un polígono convexo es \textbf{mínima} si la suma de los perímetros de los triángulos que la componen es mínima respecto a cualquier otra triangulación.
+ Por \textbf{triangulación} de un polígono plano entenderemos la división de este en un conjunto de triángulos, con la restricción de que dos lados de dos triángulos distintos no se corten o lo hagan en un vértice del polígono.
+
+Diremos que una triangulación de un polígono convexo es \textbf{mínima} si la suma de los perímetros de los triángulos que la componen es mínima respecto de cualquier otra triangulación.
 
 \section{Problema}
 
-Se pide diseñar e implementar un algoritmo greedy que solucione el problema de encontrar la triangulación mínima de un polígono convexo. Como salida, se deberá proporcionar el conjunto de aristas que forman la triangulación junto con la suma de los perímetros de los triángulos.
+Se pide diseñar e implementar un algoritmo \textit{greedy} que solucione el problema de encontrar la triangulación mínima de un polígono convexo. Como salida, se deberá proporcionar el conjunto de aristas que forman la triangulación junto con la suma de los perímetros de los triángulos.
 
 \section{Solución}
+
+\subsection{Descripción del algoritmo}
 
 \subsection{Algoritmo Greedy}
 El algoritmo realizado se vale de dos funciones principales, \textit{circular\_advance} y \textit{find\_min\_string}.
