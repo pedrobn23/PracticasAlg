@@ -188,7 +188,9 @@ bool resolver (int pieza[8][4][5][5] , Matrix &tab){
 }
 
 int main () {
-    ;
+   Matrix tab;
+	resolver(pieza,tab);
+	cout << tab;
 }
 
 /*int main () {
