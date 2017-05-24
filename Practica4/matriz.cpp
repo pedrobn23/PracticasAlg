@@ -20,14 +20,14 @@ const int COL=9;
 
 class Matrix {
 private:
-  bool** m;
+  int** m;
 
 public:
   //constructor por defecto, inicializa la matriz a 0
   Matrix () {
-    m = new bool*[FIL];
+    m = new int*[FIL];
     for (int i=0; i<FIL; ++i) {
-      m[i] = new bool[COL];
+      m[i] = new int[COL];
       for (int j=0; j < COL; ++j) {
 	m[i][j] = 0;
       }
@@ -35,12 +35,12 @@ public:
   }
 
   //devuelve la posicion i,j
-  inline bool get (int i, int j) const {
+  inline int get (int i, int j) const {
     return m[i][j];
   }
 
   //establece la posicion
-  inline void set (int i, int j, bool value) {
+  inline void set (int i, int j, int value) {
     m[i][j] = value;
   }
 
@@ -58,18 +58,18 @@ public:
   //   }
   // }
 
-  // friend std::ostream& operator<<(std::ostream& os, Matrix& e) {
+  friend std::ostream& operator<<(std::ostream& os, Matrix& e) {
 
-  //   int value;
-  //   for (int i=0; i<FIL; ++i) {
-  //     for (int j=0; i<COL; ++i) {
-  // 	//esto es una gitanada pero tenemos muchas cosas que hacer y poco tiempo
-  // 	value=e.get(i,j);
-  // 	os <<  value << ' ';
-  //     }
-  //     os << '\n';
-  //   }
-  // }
+    int value;
+    for (int i=0; i<FIL; ++i) {
+      for (int j=0; i<COL; ++i) {
+  	//esto es una gitanada pero tenemos muchas cosas que hacer y poco tiempo
+  	value=e.get(i,j);
+  	os <<  value << ' ';
+      }
+      os << '\n';
+    }
+  }
 
   //Destructor de la matriz, es necesario por usar memoria dinamica
   ~Matrix () {
@@ -102,7 +102,7 @@ public:
 
 
 
-int ocupadcha (bool pieza[5][5]) {
+int ocupadcha (int pieza[5][5]) {
   int index = 0, mret = 0;
   for (int j=0; j<5; ++j) {
     for (int i=0; i<5; ++i) {
@@ -118,7 +118,7 @@ int ocupadcha (bool pieza[5][5]) {
 
 
 
-int ocupabajo (bool pieza[5][5]) {
+int ocupabajo (int pieza[5][5]) {
   int index = 0, mret = 0;
   for (int i=0; i<5; ++i) {
     for (int j=0; j<5; ++j) {
@@ -133,7 +133,7 @@ int ocupabajo (bool pieza[5][5]) {
 }
 
 
-bool posible (const Matrix &sol, bool pieza[5][5], pair<int,int> p1) {
+bool posible (const Matrix &sol, int pieza[5][5], pair<int,int> p1) {
   if (FIL - p1.first <= ocupadcha(pieza))
     return false;
 
@@ -150,7 +150,7 @@ bool posible (const Matrix &sol, bool pieza[5][5], pair<int,int> p1) {
   return true;
 }
 
-bool colocar  (Matrix &sol, bool pieza[5][5], pair<int,int> p1) {
+bool colocar  (Matrix &sol, int pieza[5][5], pair<int,int> p1) {
   for (int i=0; i<FIL; ++i) {
     for (int j=0; i<COL; ++j) {
       sol.set(i+p1.first, j+p1.second, pieza[i][j]);
@@ -158,21 +158,13 @@ bool colocar  (Matrix &sol, bool pieza[5][5], pair<int,int> p1) {
   }
 }
 
-int primeraPosicionLibre (pair<int,int>* v) {
-  for (int i=0; i<8; ++i)
-    if(v[i].first == -1 && v[i].second==-1 )
-      return i;
-}
 
-
-
-bool resolver (bool pieza[8][4][5][5] , Matrix &tab, pair<int,int>* coordenadas){
+bool resolver (int pieza[8][4][5][5] , Matrix &tab){
   pair <int,int> p1 = tab.primeraLibre();
   cout << p1.first << " " << p1.second << "\n";
   bool resolucionPosible = false;
   Matrix copiaMatriz;
-  int* copiaVector = new pair<int,int>[8];
-  bool pos;
+  bool posible;
 
   if (p1.first == -1 || p1.second == -1) {
     delete[] copiaVector;
@@ -182,23 +174,17 @@ bool resolver (bool pieza[8][4][5][5] , Matrix &tab, pair<int,int>* coordenadas)
 
   for (int i=0; i<8 && !resolucionPosible; ++i) {
     for (int j=0; i<4 && !resolucionPosible; ++j) {
-      if (pos = posible (tab, pieza[i][j], p1) ){
+      if (posible = posible (tab, pieza[i][j], p1) ){
 
 	copiaMatriz = tab;
-	for (int k=0; k<16; ++k)
-	  copiaVector[k] = coordenadas[k];
 
 	colocar(tab, pieza[i][j], p1);
-	int posicion = primeraPosicionLibre(coordenadas);
-	coordenadas [posicion] = p1;
-	resolucionPosible = resolver(pieza, tab, coordenadas);
+	resolucionPosible = resolver(pieza, tab);
       }
 
-      if(!resolucionPosible){
+      if(!resolucionPosible)
 	tab= copiaMatriz;
-	for (int k=0; k<16; ++k)
-	  coordenadas[k] = copiaVector[k];
-      }
+      
     }
   }
 
