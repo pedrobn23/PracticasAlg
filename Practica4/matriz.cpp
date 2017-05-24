@@ -170,7 +170,7 @@ bool posible (const Matrix &tab, int pieza[5][5], pair<int,int> p1) {
 bool colocar  (Matrix &sol, int pieza[5][5], pair<int,int> p1) {
   for (int i=0; i<FIL; ++i) {
     for (int j=0; j<COL; ++j) {
-      sol.set(i+p1.first, j+p1.second, pieza[i][j]);
+      sol.set(j+p1.second, i+p1.first, pieza[j][i]);
     }
   }
 }
