@@ -1,11 +1,10 @@
-#include <vector>
 #include <utility>
 #include <string>
-#include <complex>
 #include <tuple>
 #include <iostream>
-#include "piezamod.h"
 #include <cassert>
+#include <stdlib.h>
+#include "piezamod.h"
 
 using namespace std;
 
@@ -179,27 +178,35 @@ bool colocar  (Matrix &sol, int pieza[5][5], pair<int,int> p1) {
 
 //Esta funcion resuelve el problema por backtrack, hay que pasarle el vector de
 //piezas a usar y la matriz donde se almacena la solucion
-bool resolver (int pieza[8][4][5][5] , Matrix &tab){
+bool resolver (int pieza[8][4][5][5] , Matrix &tab, int rep){
   pair <int,int> p1 = tab.primeraLibre();
-  bool resolucionPosible = false;
+  bool resolucionPosible = false, pos=false;
   Matrix copiaMatriz;
 
+
+      char c;
+      cout << "\n\ncout del inicio de resolver:\n" << tab <<  endl;
+
+  
   if (p1.first == -1 || p1.second == -1) {
     return true;
   }
 
 
-  for (int i=0; i<8 && !resolucionPosible; ++i) {
+  for (int i=rep; i<8 && !resolucionPosible; ++i) {
     for (int j=0; j<4 && !resolucionPosible; ++j) {
       if (posible (tab, pieza[i][j], p1) ){
 
 	copiaMatriz = tab;
 
 	colocar(tab, pieza[i][j], p1);
-	resolucionPosible = resolver(pieza, tab);
+	resolucionPosible = resolver(pieza, tab, ++rep);
      	if(!resolucionPosible)
 	  tab= copiaMatriz;
       }
+
+      char c;
+      cout << "\ncout de dentro de resolver: " << tab <<  endl;
     }
   }
 
@@ -208,5 +215,5 @@ bool resolver (int pieza[8][4][5][5] , Matrix &tab){
 
 int main () {
   Matrix tab;
-  resolver(pieza, tab);
+  resolver(pieza, tab, 0);
 }
