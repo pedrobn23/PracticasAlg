@@ -187,6 +187,8 @@ bool resolver (int pieza[8][4][5][5] , Matrix &tab){
 			resolucionPosible = resolver(pieza, tab);
      		if(!resolucionPosible)
 				tab= copiaMatriz;
+
+		cout << tam;
       }
     }
   }
