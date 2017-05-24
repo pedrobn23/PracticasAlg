@@ -43,7 +43,9 @@ public:
 
   //establece la posicion
   inline void set (int i, int j, int value) {
-    assert (i<FIL && j<COL && value >= 0);
+    assert (i<FIL);
+    assert (j<COL);
+    assert (value >= 0);
     
     m[i][j] = value;
   }
@@ -217,5 +219,5 @@ int main () {
   cout << "\n\nMe gusta que los planes salgan bien";
   cout << "\nLLamen a los ingenieros, hay que colocar la pieza: ";
 
-  colocar(tab, pieza[0][1], tab.)
+  colocar(tab, pieza[0][1], tab.primeraLibre());
 }
