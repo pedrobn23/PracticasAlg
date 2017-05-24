@@ -13,12 +13,17 @@ using namespace std;
 const int FIL=6;
 const int COL=9;
 
-//Esta clase la usaremos para empaquetar el tablero donde hemos de 
+/**
+ *@class Matrix
+ *@brief Clase que empaqueta el tablero que se usará para colocar las piezas 
+ */
+
 class Matrix {
 private:
   bool** m;
 
 public:
+  //constructor por defecto, inicializa la matriz a 0
   Matrix () {
     m = new bool*[FIL];
     for (int i=0; i<FIL; ++i) {
@@ -29,40 +34,44 @@ public:
     }
   }
 
+  //devuelve la posicion i,j
   inline bool get (int i, int j) const {
     return m[i][j];
   }
 
+  //establece la posicion
   inline void set (int i, int j, bool value) {
     m[i][j] = value;
   }
 
 
-  friend std::istream& operator>>(std::istream& is, Matrix& m) {
-    char basura;
-    int value;
-    for (int i=0; i<FIL; ++i) {
-      for (int j=0; i<COL; ++i) {
-	is >> value >> basura;
-	m.set(i,j,value);
-      }
-      is >> basura;
-    }
-  }
+  
+  // friend std::istream& operator>>(std::istream& is, Matrix& m) {
+  //   char basura;
+  //   int value;
+  //   for (int i=0; i<FIL; ++i) {
+  //     for (int j=0; i<COL; ++i) {
+  // 	is >> value >> basura;
+  // 	m.set(i,j,value);
+  //     }
+  //     is >> basura;
+  //   }
+  // }
 
-  friend std::ostream& operator<<(std::ostream& os, Matrix& e) {
+  // friend std::ostream& operator<<(std::ostream& os, Matrix& e) {
 
-    int value;
-    for (int i=0; i<FIL; ++i) {
-      for (int j=0; i<COL; ++i) {
-	//esto es una gitanada pero tenemos muchas cosas que hacer y poco tiempo
-	value=e.get(i,j);
-	os <<  value << ' ';
-      }
-      os << '\n';
-    }
-  }
+  //   int value;
+  //   for (int i=0; i<FIL; ++i) {
+  //     for (int j=0; i<COL; ++i) {
+  // 	//esto es una gitanada pero tenemos muchas cosas que hacer y poco tiempo
+  // 	value=e.get(i,j);
+  // 	os <<  value << ' ';
+  //     }
+  //     os << '\n';
+  //   }
+  // }
 
+  //Destructor de la matriz, es necesa
   ~Matrix () {
     for (int i=0; i<FIL; ++i) {
       delete[] m[i];
@@ -212,3 +221,4 @@ int main () {
     cout << vec[i] << " ";
   delete[] vec; //Se creaba pero nunca se eliminaba
 }*/
+ 
