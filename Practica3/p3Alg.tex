@@ -147,11 +147,29 @@ Se pide diseñar e implementar un algoritmo \textit{greedy} que solucione el pro
 \section{Solución}
 
 \subsection{Descripción del algoritmo}
+La entrada del algoritmo es un conjunto de $n$ puntos del plano euclídeo, los vértices del polígono convexo que queremos triangular, ordenados. De esta forma, los lados del polígono quedan determinados por el orden, es decir, son: 
+\[\alpha_i \vee \alpha_{i+1} \forall i\in \mathbb{Z}_n\]
 
-\subsection{Algoritmo Greedy}
-El algoritmo realizado se vale de dos funciones principales, \textit{circular\_advance} y \textit{find\_min\_string}.
+Del mismo modo, las cuerdas son:
+\[\alpha_i \vee \alpha_{i+2} \forall i\in \mathbb{Z}_n\]
 
-\subsubsection{Circular advance}
+Los pasos del algoritmo:
+
+\begin{enumerate}
+    \item Si el polígono es un triángulo, no se hace nada.
+	\item Encontrar la cuerda de longitud mínima.
+	\item Almacenar la cuerda en el conjunto solución.
+	\item Eliminar del conjunto de vértices el comprendido entre los dos vértices que une la cuerda.
+	\item Ejecutar el algoritmo desde el primer paso, siendo esta vez la entrada el conjunto de vértices resultante en el paso anterior.
+\end{enumerate}
+
+\subsection{Implementación}
+Para la implementación, hemos escogido el lenguaje de programación \texttt{C++}.
+
+\subsubsection{Estructuras de datos}
+Para almacenar los vértices del polígono, hemos escogido el contenedor \texttt{list} de la \textit{STL} de \texttt{C++}. Además, hemos definido una estructura para almacenar los puntos, con un par de coordenadas en punto flotante de doble precisión y un identificador numérico para la salida por pantalla.
+
+\subsubsection{Avance circular de un iterador}
 \begin{lstlisting}
 
 auto circular_advance = [](auto& forwdIt, auto initValue, auto endValue, int n) {
@@ -166,11 +184,11 @@ auto circular_advance = [](auto& forwdIt, auto initValue, auto endValue, int n) 
 };
 \end{lstlisting}
 
-TODO: Explicar codigo.
+Esta es una función auxiliar, cuyo propósito es implementar la aritmética de un anillo de restos sobre un contenedor con un iterador que soporte el operador de incremento (\texttt{++}).
 
-La eficiencia teórica de esta función es $O(n)$
+La eficiencia teórica de esta función es $O(n)$, sin embargo, siempre se llama con un argumento constante.
 
-\subsubsection{Find Min String}
+\subsubsection{Cuerda de longitud mínima}
 \begin{lstlisting}
 	
 auto find_min_string = [&min_distance, &it_min, &min_string, &points](auto initial_point_it) {
@@ -192,8 +210,10 @@ auto find_min_string = [&min_distance, &it_min, &min_string, &points](auto initi
 };
 \end{lstlisting}
 
-La eficiencia teórica de la función es $O(n^2)$.
-\subsubsection{NOSE QUE TITULO PONER LMAO}
+Esta función acumula la longitud de la cuerda mínima, empezando en un vértice y recorriendo las cuerdas hasta volver al primero. Si el número de vértices del polígono es impar, solo tiene un ciclo de cuerdas, en cambio tiene dos si es par ($\mathbb{Z}_n/2\mathbb{Z}_n \simeq \mathbb{F}_1$ si $n$ es impar, $\simeq \mathbb{F}_2$ si $n$ es par). Por tanto, en un polígono cuyo número de vértices sea par, ha de llamarse dos veces.
+
+La eficiencia teórica de esta función es $O(n)$.
+\subsubsection{Bucle principal}
 
 	\begin{lstlisting}
 	while(points.size() > 3)
