@@ -61,7 +61,7 @@ public:
   friend std::ostream& operator<<(std::ostream& os, Matrix& e) {
 
     int value;
-	os << "\nImpresion del tablero:\n";
+    os << "\nImpresion del tablero:\n";
     for (int i=0; i<FIL; ++i) {
       for (int j=0; j<COL; ++j) {
   	//esto es una gitanada pero tenemos muchas cosas que hacer y poco tiempo
@@ -182,14 +182,14 @@ bool resolver (int pieza[8][4][5][5] , Matrix &tab){
     for (int j=0; i<4 && !resolucionPosible; ++j) {
       if (posible (tab, pieza[i][j], p1) ){
 
-	    copiaMatriz = tab;
+	copiaMatriz = tab;
 
-		colocar(tab, pieza[i][j], p1);
-		resolucionPosible = resolver(pieza, tab);
+	colocar(tab, pieza[i][j], p1);
+	resolucionPosible = resolver(pieza, tab);
      	if(!resolucionPosible)
-			tab= copiaMatriz;
+	  tab= copiaMatriz;
 
-		cout << tab;
+	cout << tab;
       }
     }
   }
@@ -211,4 +211,4 @@ int main () {
   cout << "A la derecha ocupa: " << ocupadcha(pieza[1][0]);
   cout << " y hacia abajo ocupa: " << ocupabajo(pieza[1][0]);
   posible(tab,  pieza[1][0], tab.primeraLibre());
-    }
+}
