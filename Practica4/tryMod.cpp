@@ -185,7 +185,6 @@ bool resolver (int pieza[8][4][5][5] , Matriz &tab, int indice){
   if (tab.llena() )
     return true;
 
-  bool danimidani=false;
   //Iteramos sobre las rotaciones
   for (int i=0; i<4; ++i){
 
