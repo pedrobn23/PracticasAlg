@@ -8,6 +8,14 @@
 \usepackage{booktabs}
 \usepackage{multicol}
 \usepackage{multirow}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}	
+\usepackage{amsmath}
+
+\makeatletter
+\def\BState{\State\hskip-\ALG@thistlm}
+\makeatother
+
 
 % Indentación de párrafos para Palatino
 \setlength{\parindent}{0pt}
@@ -157,32 +165,51 @@ y piezas descritas en este apartado.
 
 
 
-\subsubsection{La complejidad del algoritmo}
+\subsection{Elección de la técnica}
+Nuestro problema ha sido resuelto mediante la utilización de la técnica de resolución de algoritmos: "Backtracking", ya que hemos intentado buscar todas las soluciones posibles que existen y devolver la primera que nos aparezca, sin establecer qué solución es más optima ni explorar todo el espacio de las soluciones como hace "Branch and bound", que era la otra alternativa que teníamos para resolver nuestro problema.
 
+\subsection{Diseño de la solución}
+Para nuestra solución,tenemos varios elementos
+\begin{itemize}
+	\item Representación: $T(x_1,\cdots,x_8)$ es un vector donde cada 
+componente representa una columna del tablero y cada valor de x es la fila en la que se colocará la esquina superior izquierda de una pieza.
+	\item Restricciones implícitas: $x_i$ tendrá valores entre $0$ y $5$, ya que la matriz es de $6$ filas.
+	\item Restricciones explícitas: Todas las piezas deben caber dentro de la  matriz sin solaparse y la matriz debe estar llena.
+	\item Representación del árbol implícito: En cada nivel $i$ del árbol estará la pieza
+	\item Función objetivo: Encontrar una tupla $T(x_1,\cdots, x_8)$ tal que cada posición represente una pieza y elemento de la tupla esté la posición de la esquina superior izquierda de la pieza donde esta está colocada.
+	\item Función de poda: Al hacer $T(x_1,\cdots,x_{k-1}) \cup x_k$ debe cumplir que la pieza $x_k$ encaje en la posición asignada.
+\end{itemize}
 
-\subsubsection{Eficiencia práctica}
+\section{El algoritmo}
 
-\subsubsection{Eficiencia híbrida}
+\subsection{Esqueleto del algoritmo}
+
+\begin{algorithm}
+\caption{Solución}\label{euclid}
+\begin{algorithmic}[1]
+\Procedure{MyProcedure}{}
+\State $\textit{stringlen} \gets \text{length of }\textit{string}$
+\State $i \gets \textit{patlen}$
+\BState \emph{top}:
+\If {$i > \textit{stringlen}$} \Return false
+\EndIf
+\State $j \gets \textit{patlen}$
+\BState \emph{loop}:
+\If {$\textit{string}(i) = \textit{path}(j)$}
+\State $j \gets j-1$.
+\State $i \gets i-1$.
+\State \textbf{goto} \emph{loop}.
+\State \textbf{close};
+\EndIf
+\State $i \gets i+\max(\textit{delta}_1(\textit{string}(i)),\textit{delta}_2(j))$.
+\State \textbf{goto} \emph{top}.
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
 
 \section{Conclusión}
 
 
-
-
-
-Se debe 
-incluir un análisis del problema
-.
-2.
-Escoger  una  técnica  (BackTracking  o  Branch\&Bound)  y  justificar  s
-u  elección 
-frente a la otra metodología no seleccionada.
-3.
-Diseño  de  la  solución,  describiendo  cada  una  de  las  componentes  de  la  misma 
-relacionándola   con   las   componentes   de   un   algoritmo 
-BackTracking   o 
-Branch\&Bound, según la técnica escogida
-.
 4.
 Esqueleto  del  al
 goritmo  (pseudocódigo)  que  soluciona  el  problema,  explicando 
