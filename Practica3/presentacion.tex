@@ -167,7 +167,7 @@ Un polígono del plano se dice \textbf{convexo} si cada uno de sus vértices es 
 \end{block}
 \pause
 \begin{block}{Triangulación mínima}
-Una triangulación se dice \textbf{mínima} si es un elemento minimal del conjunto de triangulaciones posibles, con el preorden inducido por el orden en $\mathbb{R}$ de la suma de las longitudes de sus cuerdas.
+Una triangulación se dice \textbf{mínima} si es un elemento minimal del conjunto de triangulaciones posibles, con el preorden inducido por el orden en $\mathbb{R}$ de la suma de las longitudes de sus diagonales.
 \end{block}
 
 \end{frame}	
@@ -297,6 +297,7 @@ Por tanto, para comparar las longitudes de todas las cuerdas de un polígono, de
 \end{frame}
 
 \subsection{La complejidad del algoritmo}
+\hfill\\
 Es un algoritmo de complejidad $O(n^2)$, dado que para un polígono de $n$ nodos, en cada iteración del bucle \texttt{while} ($n$ iteraciones) llama a la función \textit{find\_min\_string}, de complejidad $O(n)$, para después eliminar un vértice.
 
 \[
