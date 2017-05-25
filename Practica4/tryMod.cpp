@@ -38,19 +38,31 @@ public:
     m[i][j] = value;
   }
 
-
   
-  pair <int,int> primeraLibre () {
-    for (int i=0; i<FIL; ++i) {
-      for (int j=0; j<COL; ++j) {
-	if (!m[i][j])
-	  return pair <int,int> (i,j);
-      }
+bool llena () const{
+  for (int i=0; i<FIL; ++i) {
+    for (int j=0; j<COL; ++j) {
+      if (![i][j])
+	return false;
     }
-
-    return  pair<int,int> (-1,-1);
   }
 
+  return true;
+}
+
+  // la comento por la posibilidad de que sea innecesaria
+  //
+  // pair <int,int> primeraLibre () {
+  //   for (int i=0; i<FIL; ++i) {
+  //     for (int j=0; j<COL; ++j) {
+  // 	if (!m[i][j])
+  // 	  return pair <int,int> (i,j);
+  //     }
+  //   }
+
+  //   return  pair<int,int> (-1,-1);
+  // }
+ 
   
   Matriz& operator=(const Matriz &m) {
     for (int i=0; i<FIL; ++i)
@@ -120,12 +132,22 @@ bool cabe (const Matriz &tab, int pieza[5][5], pair<int,int> p1) {
   return true;
 }
 
-bool colocar  (Matriz &sol, int pieza[5][5], pair<int,int> p1) {
+
+//esta funcion es para poder cambiar la interfaz de la funcion
+bool cabe (const Matriz &tab, int pieza[5][5], int h, int j) {
+  return cabe (tab, pieza, pair<int,int> (h,j));
+}
+
+void colocar  (Matriz &sol, int pieza[5][5], pair<int,int> p1) {
   for (int i=0,k=p1.second; i<ocupadcha(pieza) && k<COL; ++i, ++k) {
     for (int j=0,  h=p1.first;j<ocupabajo(pieza) && h<FIL; ++j, ++h) {
       sol.set(h, k, pieza[j][i] | tab.get(h,k));
     }
   }
+}
+
+void colocar(Matriz &sol, int pieza[5][5], int h, int j) {
+  return colocar(sol, pieza, h, j);
 }
 
 
@@ -162,21 +184,39 @@ bool colocar  (Matriz &sol, int pieza[5][5], pair<int,int> p1) {
 
 //Voy a empezar resolver desde el principio, utilizando una cosa  cutrecilla
 
-bool resolver (int pieza[8][4][5][5] , Matriz &tab){
-  set<int> noUsados, usados;
-  bool acabado = false;
-
-  if (tab.primeraLibre() == pair<int,int>(-1,-1))
+bool resolver (const int& pieza[8][4][5][5] , Matriz &tab, set<int> unusedNumbers){
+  //si hemos conseguido llenar la matriz hemos ganado
+  if (tab.llena())
     return true;
-  
-  for (int i=1; i<9;++i){
-    s.insert(i);
-  }
 
-  while (!abado) {
-    
-  }
+  auto it = unusedNumbers.begin();
+  int cutradaParaModificar = *it;
   
+  //Iteramos sobre las rotaciones
+  for (int i=0; i<4; ++i){
+
+    //con estos dos bucles y el if cogemos todas las casillas libres
+    for (int j=0; j<FIL; ++j){
+      for (int k=0; k<COL; ++K){
+	if (!tab.get(j,k)){ //cuando valga 0
+
+	  if (!cabe(tab, pieza[*it][i]), j, k)
+	    continue;
+
+	  colocar (tab, pieza[cutradaParaModificar][j], j, k);
+	  unusedNumbers.erase(cutradaParaModificar);
+
+	  bool resuelto = resolver(pieza, tab, unusedNumbers);
+
+	  if(resuelto)
+	    return true;
+	  else
+	    unusedNumber.insert(cutradaParaModificar);
+	}
+      }
+    }
+
+    return false;
 }
 
 
