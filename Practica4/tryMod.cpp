@@ -123,7 +123,7 @@ bool posible (const Matriz &tab, int pieza[5][5], pair<int,int> p1) {
 bool colocar  (Matriz &sol, int pieza[5][5], pair<int,int> p1) {
   for (int i=0,k=p1.second; i<ocupadcha(pieza) && k<COL; ++i, ++k) {
     for (int j=0,  h=p1.first;j<ocupabajo(pieza) && h<FIL; ++j, ++h) {
-      sol.set(h, k, pieza[j][i]);
+      sol.set(h, k, pieza[j][i] | tab.get(h,k));
     }
   }
 }
