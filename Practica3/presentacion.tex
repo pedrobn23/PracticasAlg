@@ -297,7 +297,9 @@ Por tanto, para comparar las longitudes de todas las cuerdas de un polígono, de
 \end{frame}
 
 \subsection{La complejidad del algoritmo}
-\hfill\\
+\begin{frame}{La complejidad del algoritmo}
+
+
 Es un algoritmo de complejidad $O(n^2)$, dado que para un polígono de $n$ nodos, en cada iteración del bucle \texttt{while} ($n$ iteraciones) llama a la función \textit{find\_min\_string}, de complejidad $O(n)$, para después eliminar un vértice.
 
 \[
@@ -308,8 +310,14 @@ donde:
 \begin{itemize}
 \item $T(n)$ es el número de instrucciones que ejecuta el algoritmo para un polígono de $n$ vértices.
 \item $k$ es una constante de proporcionalidad aproximada entre el número de instrucciones que se ejecutan para encontrar la cuerda mínima entre $i$ e $i$. 
-	
-\end{itemize}
 
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Alternativa}
+Existen implementaciones de este algoritmo que se ejecutan en tiempo $O(n\log(n))$, algunas están descritas en:
+\hfill\\\hfill\\
+Dickerson, Matthew T. (1997). \textit{«Fast greedy triangulation algorithms»}. Computational Geometry (Elsevier)  67-86
+\end{frame}
 
 \end{document}
