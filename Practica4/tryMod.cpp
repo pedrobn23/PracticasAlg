@@ -1,4 +1,4 @@
-#include <vector>
+#include <set>
 #include <utility>
 #include <string>
 #include <tuple>
@@ -35,20 +35,21 @@ public:
   }
 
   void set(int i, int j, int value){
+    assert (i<FIL && j<COL);
     m[i][j] = value;
   }
 
   
-bool llena () const{
-  for (int i=0; i<FIL; ++i) {
-    for (int j=0; j<COL; ++j) {
-      if (![i][j])
-	return false;
+  bool llena () const{
+    for (int i=0; i<FIL; ++i) {
+      for (int j=0; j<COL; ++j) {
+	if (!m[i][j])
+	  return false;
+      }
     }
-  }
 
-  return true;
-}
+    return true;
+  }
 
   // la comento por la posibilidad de que sea innecesaria
   //
@@ -74,50 +75,74 @@ bool llena () const{
   
 };
 
- //Sobrecarga del operador de escritura
-   std::ostream& operator<<(std::ostream& os, Matriz& m) {
-    for (int i=0; i<FIL; ++i) {
-      for (int j=0; j<COL; ++j) {
-  	os <<  m.m[i][j] << ' ';
-      }
-      os << '\n';
+//Sobrecarga del operador de escritura
+std::ostream& operator<<(std::ostream& os, Matriz& m) {
+  for (int i=0; i<FIL; ++i) {
+    for (int j=0; j<COL; ++j) {
+      os <<  m.m[i][j] << ' ';
     }
+    os << '\n';
   }
+}
 
 //supervisa cuantas posiciones a la derecha ocupa la pieza
 int ocupabajo (int pieza[5][5]) {
-  int i = 0, max = 0;
-  for (int j=0; j<5; ++j) {
-    for ( i=0; i<5; ++i)
-      if (!pieza[i][j]) break;
+  // int i = 0, max = 0;
+  // for (int j=0; j<5; ++j) {
+  //   for ( i=0; i<5; ++i)
+  //     if (!pieza[i][j]) break;
     
-    max = max>i+1 ? max : i+1;
+  //   max = max>i+1 ? max : i+1;
 
+  // }
+
+  // return max;
+
+  int max = 0, maxActual = 0;
+  for(int i = 0; i < 5; i++){
+    for(int j = 0; j < 5; j++)
+      {
+	if(pieza[j][i])
+	  maxActual++;
+
+      }
+    max = maxActual > max ? maxActual : max;
+    maxActual = 0;
   }
-
-  return max;
 }
 
 
 //supervisa cuantas posiciones hacia abajo ocupa la pieza
+// int ocupadcha (int pieza[5][5]) {
+//   int j = 0, max = 0,realmax = 0;
+//   for (int i=0; i<5; ++i) {
+//     for ( j= 0; j<5; ++j){
+//       if (pieza[i][j]!=0)      
+// 	max = max >j+1 ? max : j+1;
+//     }
+//   }
+
+//   return max;
+// }
+
 int ocupadcha (int pieza[5][5]) {
-  int j = 0, max = 0;
-  for (int i=0; i<5; ++i) {
-    for ( j= 0; j<5; ++j)
-      if (!pieza[i][j]) break;
-      
-    max = max >j+1 ? max : j+1;
+  int max = 0, maxActual = 0;
+  for(int i = 0; i < 5; i++){
+    for(int j = 0; j < 5; j++)
+      {
+	if(pieza[i][j])
+	  maxActual++;
 
+      }
+    max = maxActual > max ? maxActual : max;
+    maxActual = 0;
   }
-
-  return max;
 }
-
 
 bool cabe (const Matriz &tab, int pieza[5][5], pair<int,int> p1) {
   int derecha = ocupadcha(pieza),abajo = ocupabajo(pieza);
   
-  if ((FIL - p1.first <= derecha-1)|| (COL-p1.second <= abajo-1))
+  if ((FIL - p1.first < derecha-1)|| (COL-p1.second < abajo-1))
     return false;
 
   
@@ -138,16 +163,18 @@ bool cabe (const Matriz &tab, int pieza[5][5], int h, int j) {
   return cabe (tab, pieza, pair<int,int> (h,j));
 }
 
-void colocar  (Matriz &sol, int pieza[5][5], pair<int,int> p1) {
+void colocar  (Matriz &tab, int pieza[5][5], pair<int,int> p1) {
+  assert (cabe (tab, pieza, p1));
+
   for (int i=0,k=p1.second; i<ocupadcha(pieza) && k<COL; ++i, ++k) {
     for (int j=0,  h=p1.first;j<ocupabajo(pieza) && h<FIL; ++j, ++h) {
-      sol.set(h, k, pieza[j][i] | tab.get(h,k));
+      tab.set(h, k, pieza[j][i] | tab.get(h,k));
     }
   }
 }
 
 void colocar(Matriz &sol, int pieza[5][5], int h, int j) {
-  return colocar(sol, pieza, h, j);
+  return colocar(sol, pieza, pair<int,int> (h, j));
 }
 
 
@@ -184,44 +211,64 @@ void colocar(Matriz &sol, int pieza[5][5], int h, int j) {
 
 //Voy a empezar resolver desde el principio, utilizando una cosa  cutrecilla
 
-bool resolver (const int& pieza[8][4][5][5] , Matriz &tab, set<int> unusedNumbers){
+bool resolver (int pieza[8][4][5][5] , Matriz &tab, set<int> unusedNumbers){
   //si hemos conseguido llenar la matriz hemos ganado
   if (tab.llena())
     return true;
 
+  
   auto it = unusedNumbers.begin();
   int cutradaParaModificar = *it;
+
+  cout << "El valor guay es : " << *it << endl; 
   
   //Iteramos sobre las rotaciones
   for (int i=0; i<4; ++i){
 
     //con estos dos bucles y el if cogemos todas las casillas libres
     for (int j=0; j<FIL; ++j){
-      for (int k=0; k<COL; ++K){
+      for (int k=0; k<COL; ++k){
 	if (!tab.get(j,k)){ //cuando valga 0
 
-	  if (!cabe(tab, pieza[*it][i]), j, k)
+	  
+	  
+	  if (!cabe(tab, pieza[cutradaParaModificar][i], j, k))
 	    continue;
-
+ 
+	  Matriz copiaDeSeguridad = tab;	  
 	  colocar (tab, pieza[cutradaParaModificar][j], j, k);
 	  unusedNumbers.erase(cutradaParaModificar);
 
+	  char c;
+	  cout <<endl << tab << endl;
+	  //cin >> c;
+
+	  
 	  bool resuelto = resolver(pieza, tab, unusedNumbers);
 
 	  if(resuelto)
-	    return true;
-	  else
-	    unusedNumber.insert(cutradaParaModificar);
+	    return true; 
+	  else{
+	    unusedNumbers.insert(cutradaParaModificar);
+	    tab = copiaDeSeguridad;
+	  }
 	}
       }
     }
 
     return false;
+  }
 }
-
 
 int main () {
-  Matriz tab;
-  resolver(pieza, tab, 0);
-  cout << tab;
+
+  cout << ocupadcha(pieza[3][0]);
+  /*  Matriz tab;
+      set<int> s;
+      for (int i=0; i<8;++i)
+      s.insert(i);
+  
+      resolver(pieza, tab, s);
+      cout << tab;*/
 }
+ 
