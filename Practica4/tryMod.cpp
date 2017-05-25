@@ -262,13 +262,13 @@ bool resolver (int pieza[8][4][5][5] , Matriz &tab, set<int> unusedNumbers){
 
 int main () {
 
-  cout << ocupadcha(pieza[3][0]);
-  /*  Matriz tab;
-      set<int> s;
-      for (int i=0; i<8;++i)
-      s.insert(i);
+  //  cout << ocupadcha(pieza[3][0]);
+  Matriz tab;
+  set<int> s;
+  for (int i=0; i<8;++i)
+    s.insert(i);
   
-      resolver(pieza, tab, s);
-      cout << tab;*/
+  resolver(pieza, tab, s);
+  cout << tab;
 }
  
