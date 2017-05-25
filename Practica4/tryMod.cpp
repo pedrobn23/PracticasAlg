@@ -98,6 +98,7 @@ int ocupabajo (int pieza[5][5]) {
 
   // return max;
 
+
   int max = 0, maxActual = 0;
   for(int i = 0; i < 5; i++){
     for(int j = 0; j < 5; j++)
@@ -142,7 +143,7 @@ int ocupadcha (int pieza[5][5]) {
 bool cabe (const Matriz &tab, int pieza[5][5], pair<int,int> p1) {
   int derecha = ocupadcha(pieza),abajo = ocupabajo(pieza);
   
-  if ((FIL - p1.first < derecha-1)|| (COL-p1.second < abajo-1))
+  if ((FIL - p1.first <= abajo-1)|| (COL-p1.second <= derecha-1))
     return false;
 
   
@@ -178,38 +179,6 @@ void colocar(Matriz &sol, int pieza[5][5], int h, int j) {
 }
 
 
-
-//Esta funcion resuelve el problema por backtrack, hay que pasarle el vector de
-//piezas a usar y la matriz donde se almacena la solucion
-// bool resolver (int pieza[8][4][5][5] , Matriz &tab, int rep){
-//   pair <int,int> p1 = tab.primeraLibre();
-//   bool resolucionPosible = false, pos=false;
-//   Matriz copiaMatriz;
-  
-//   if (p1.first == -1 || p1.second == -1) {
-//     return true;
-//   }
-
-//   for (int i=rep; i<8 && !resolucionPosible; ++i) {
-//     for (int j=0; j<4 && !resolucionPosible; ++j) {
-//       if (posible (tab, pieza[i][j], p1) ){
-// 	copiaMatriz = tab;
-// 	colocar(tab, pieza[i][j], p1);
-// 	cout << tab << endl;
-// 	resolucionPosible = resolver(pieza, tab, ++rep);
-//      	if(!resolucionPosible)
-// 	  tab= copiaMatriz;
-//       }
-
-//     }
-//   }
-
-//   return resolucionPosible;
-// }
-
-
-
-//Voy a empezar resolver desde el principio, utilizando una cosa  cutrecilla
 
 bool resolver (int pieza[8][4][5][5] , Matriz &tab, int indice){
   //si hemos conseguido llenar la matriz hemos ganado
@@ -259,11 +228,18 @@ int main () {
 
   //  cout << ocupadcha(pieza[3][0]);
   Matriz tab;
- 
-  /* for (int i=0; i<8;++i)
-    s.insert(i);
-  */
-  resolver(pieza, tab, 0);
-  cout << tab;
+  Matriz aux;
+  
+    resolver(pieza, tab, 0);
+  
+  /*  for (int i=0; i<8;++i){
+  colocar(tab, pieza[3][0], 3, );
+  cout << endl << tab << endl;*/
+  /*for (int i=0; i<4;++i) {
+  cout << "\n\nEn main: "<< endl;
+  cout << "ocupa dcha: " << ocupadcha(pieza[i][0]) << endl;
+  cout << "ocupa bajo: " << ocupabajo(pieza[i][0]) << endl;
+  cout << cabe (tab, pieza[i][0], 4,8) << endl;
+  }*/
 }
  
