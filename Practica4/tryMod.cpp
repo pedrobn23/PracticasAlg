@@ -1,3 +1,4 @@
+#include <vector>
 #include <utility>
 #include <string>
 #include <tuple>
@@ -131,33 +132,52 @@ bool colocar  (Matriz &sol, int pieza[5][5], pair<int,int> p1) {
 
 //Esta funcion resuelve el problema por backtrack, hay que pasarle el vector de
 //piezas a usar y la matriz donde se almacena la solucion
-bool resolver (int pieza[8][4][5][5] , Matriz &tab, int rep){
-  pair <int,int> p1 = tab.primeraLibre();
-  bool resolucionPosible = false, pos=false;
-  Matriz copiaMatriz;
+// bool resolver (int pieza[8][4][5][5] , Matriz &tab, int rep){
+//   pair <int,int> p1 = tab.primeraLibre();
+//   bool resolucionPosible = false, pos=false;
+//   Matriz copiaMatriz;
   
-  if (p1.first == -1 || p1.second == -1) {
+//   if (p1.first == -1 || p1.second == -1) {
+//     return true;
+//   }
+
+//   for (int i=rep; i<8 && !resolucionPosible; ++i) {
+//     for (int j=0; j<4 && !resolucionPosible; ++j) {
+//       if (posible (tab, pieza[i][j], p1) ){
+// 	copiaMatriz = tab;
+// 	colocar(tab, pieza[i][j], p1);
+// 	cout << tab << endl;
+// 	resolucionPosible = resolver(pieza, tab, ++rep);
+//      	if(!resolucionPosible)
+// 	  tab= copiaMatriz;
+//       }
+
+//     }
+//   }
+
+//   return resolucionPosible;
+// }
+
+
+
+//Voy a empezar resolver desde el principio, utilizando una cosa  cutrecilla
+
+bool resolver (int pieza[8][4][5][5] , Matriz &tab){
+  set<int> noUsados, usados;
+  bool acabado = false;
+
+  if (tab.primeraLibre() == pair<int,int>(-1,-1))
     return true;
+  
+  for (int i=1; i<9;++i){
+    s.insert(i);
   }
 
-  for (int i=rep; i<8 && !resolucionPosible; ++i) {
-    for (int j=0; j<4 && !resolucionPosible; ++j) {
-      if (posible (tab, pieza[i][j], p1) ){
-	copiaMatriz = tab;
-	colocar(tab, pieza[i][j], p1);
-	cout << tab << endl;
-	resolucionPosible = resolver(pieza, tab, ++rep);
-     	if(!resolucionPosible)
-	  tab= copiaMatriz;
-      }
-
-    }
+  while (!abado) {
+    
   }
-
-  return resolucionPosible;
+  
 }
-
-
 
 
 int main () {
