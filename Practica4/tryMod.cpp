@@ -185,7 +185,7 @@ bool resolver (int pieza[8][4][5][5] , Matriz &tab, int indice){
   if (tab.llena() )
     return true;
 
-  
+  bool danimidani=false;
   //Iteramos sobre las rotaciones
   for (int i=0; i<4; ++i){
 
@@ -201,12 +201,16 @@ bool resolver (int pieza[8][4][5][5] , Matriz &tab, int indice){
  
 	  Matriz copiaDeSeguridad = tab;	  
 	  colocar (tab, pieza[indice][i], j, k);
-	  indice++;
 
+	  indice++;
+	 
 	  char c;
-	  cout <<endl << tab << endl;
+	  //cout <<endl << tab << endl;
 	  //cin >> c;
 
+	  danimidani=true;
+	  //if((tab.get(0,0)==5)&&(tab.get(2,0)==5))
+	    //cout << endl << tab << endl;
 	  
 	  bool resuelto = resolver(pieza, tab, indice);
 
@@ -231,7 +235,8 @@ int main () {
   Matriz aux;
   
     resolver(pieza, tab, 0);
-  
+
+    cout << tab;
   /*  for (int i=0; i<8;++i){
   colocar(tab, pieza[3][0], 3, );
   cout << endl << tab << endl;*/
