@@ -102,7 +102,7 @@ int ocupadcha (int pieza[5][5]) {
 }
 
 
-bool posible (const Matriz &tab, int pieza[5][5], pair<int,int> p1) {
+bool cabe (const Matriz &tab, int pieza[5][5], pair<int,int> p1) {
   int derecha = ocupadcha(pieza),abajo = ocupabajo(pieza);
   
   if ((FIL - p1.first <= derecha-1)|| (COL-p1.second <= abajo-1))
