@@ -211,16 +211,11 @@ void colocar(Matriz &sol, int pieza[5][5], int h, int j) {
 
 //Voy a empezar resolver desde el principio, utilizando una cosa  cutrecilla
 
-bool resolver (int pieza[8][4][5][5] , Matriz &tab, set<int> unusedNumbers){
+bool resolver (int pieza[8][4][5][5] , Matriz &tab, int indice){
   //si hemos conseguido llenar la matriz hemos ganado
-  if (tab.llena())
+  if (tab.llena() )
     return true;
 
-  
-  auto it = unusedNumbers.begin();
-  int cutradaParaModificar = *it;
-
-  cout << "El valor guay es : " << *it << endl; 
   
   //Iteramos sobre las rotaciones
   for (int i=0; i<4; ++i){
@@ -232,24 +227,24 @@ bool resolver (int pieza[8][4][5][5] , Matriz &tab, set<int> unusedNumbers){
 
 	  
 	  
-	  if (!cabe(tab, pieza[cutradaParaModificar][i], j, k))
+	  if (!cabe(tab, pieza[indice][i], j, k))
 	    continue;
  
 	  Matriz copiaDeSeguridad = tab;	  
-	  colocar (tab, pieza[cutradaParaModificar][j], j, k);
-	  unusedNumbers.erase(cutradaParaModificar);
+	  colocar (tab, pieza[indice][i], j, k);
+	  indice++;
 
 	  char c;
 	  cout <<endl << tab << endl;
 	  //cin >> c;
 
 	  
-	  bool resuelto = resolver(pieza, tab, unusedNumbers);
+	  bool resuelto = resolver(pieza, tab, indice);
 
 	  if(resuelto)
 	    return true; 
 	  else{
-	    unusedNumbers.insert(cutradaParaModificar);
+	    indice--;
 	    tab = copiaDeSeguridad;
 	  }
 	}
@@ -264,11 +259,11 @@ int main () {
 
   //  cout << ocupadcha(pieza[3][0]);
   Matriz tab;
-  set<int> s;
-  for (int i=0; i<8;++i)
+ 
+  /* for (int i=0; i<8;++i)
     s.insert(i);
-  
-  resolver(pieza, tab, s);
+  */
+  resolver(pieza, tab, 0);
   cout << tab;
 }
  
