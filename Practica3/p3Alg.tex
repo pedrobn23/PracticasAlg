@@ -42,6 +42,7 @@
 
 %% Listing settings
 
+\usepackage{tikz}
 \usepackage{color}
 
 \definecolor{dkgreen}{rgb}{0,0.6,0}
@@ -149,10 +150,10 @@ Se pide diseñar e implementar un algoritmo \textit{greedy} que solucione el pro
 
 \subsection{Descripción del algoritmo}
 La entrada del algoritmo es un conjunto de $n$ puntos del plano euclídeo, los vértices del polígono convexo que queremos triangular, ordenados. De esta forma, los lados del polígono quedan determinados por el orden, es decir, son: 
-\[\alpha_i \vee \alpha_{i+1} \forall i\in \mathbb{Z}_n\]
+\[\mathcal{L} = \{\alpha_i \vee \alpha_{i+1} \forall i\in \mathbb{Z}_n\}\]
 
 Del mismo modo, las cuerdas son:
-\[\alpha_i \vee \alpha_{i+2} \forall i\in \mathbb{Z}_n\]
+\[\mathcal{C} = \{\alpha_i \vee \alpha_{i+2} \forall i\in \mathbb{Z}_n\}\]
 
 Los pasos del algoritmo:
 
@@ -163,6 +164,62 @@ Los pasos del algoritmo:
 	\item Eliminar del conjunto de vértices el comprendido entre los dos vértices que une la cuerda.
 	\item Ejecutar el algoritmo desde el primer paso, siendo esta vez la entrada el conjunto de vértices resultante en el paso anterior.
 \end{enumerate}
+
+\subsubsection{Elementos del algoritmo \textit{greedy}}
+\begin{itemize}
+\item Lista de candidatos: son todas las cuerdas del polígono que se está evaluando en cada paso.                                     
+
+\item Lista de candidatos utilizados: diagonales (cuerdas o no) del primer polígono que han sido seleccionadas.                                                                         
+
+\item Función solución: el polígono tiene tres vértices.
+
+\item Criterio de factibilidad: el predicado $0$-ario verdadero.
+
+\item Función de selección: escogemos una cuerda de longitud mínima.                      
+
+\item Función objetivo: la suma de las longitudes de las cuerdas. Queremos minimizarla.
+\end{itemize}
+
+\subsubsection{Eficacia del algoritmo}
+El algoritmo no es óptimo, en el sentido de que no siempre encuentra una triangulación mínima, aunque lo hace en la mayoría de los casos o se aproxima muy bien.
+
+
+
+    
+\begin{center}
+  \begin{tikzpicture}
+    %% \node at (0.936153,1.76738) {A};
+    %% \node at(-1.12177,1.65579) {B};
+    %% \node at(-1.3,-1.51987) {C};
+    %% \node at(-1.03769,-1.70974) {D};
+    %% \node at(0.911164,-1.78039) {E};
+    %% \node at(1.65839,-1.11792) {F};
+    %% \node at(1.99906,-0.0612251) {G};
+    \draw (0.936153,1.76738) -- (-1.12177,1.65579);
+    \draw (-1.12177,1.65579) -- (-1.3,-1.51987);
+    \draw (-1.3,-1.51987) -- (-1.03769,-1.70974);
+    \draw (-1.03769,-1.70974) -- (0.911164,-1.78039);
+    \draw( 0.911164,-1.78039) -- (1.65839,-1.11792);
+    \draw( 1.65839,-1.11792) -- (1.99906,-0.0612251);
+    \draw (1.99906,-0.0612251) -- (0.936153,1.76738);
+
+  \end{tikzpicture}
+\end{center}
+
+
+
+   
+$\{      (0.936153,1.76738),
+      (-1.12177,1.65579),
+      (-1.3,-1.51987),
+      (-1.03769,-1.70974),$\\ $
+      (0.911164,-1.78039),
+      (1.65839,-1.11792),
+      (1.99906,-0.0612251)\}$
+
+
+En este ejemplo, el peso de la triangulación \textit{greedy} es $11.7845$, mientras que existe una de peso $11.43$.
+
 
 \subsection{Implementación}
 Para la implementación, hemos escogido el lenguaje de programación \texttt{C++}.
@@ -211,7 +268,7 @@ auto find_min_string = [&min_distance, &it_min, &min_string, &points](auto initi
 };
 \end{lstlisting}
 
-Esta función acumula la longitud de la cuerda mínima, empezando en un vértice y recorriendo las cuerdas hasta volver al primero. Si el número de vértices del polígono es impar, solo tiene un ciclo de cuerdas, en cambio tiene dos si es par ($\mathbb{Z}_n/2\mathbb{Z}_n \simeq \mathbb{F}_1$ si $n$ es impar, $\simeq \mathbb{F}_2$ si $n$ es par). Por tanto, en un polígono cuyo número de vértices sea par, ha de llamarse dos veces.
+Esta función acumula la longitud de una cuerda mínima, empezando en un vértice y recorriendo las cuerdas hasta volver al primero. Si el número de vértices del polígono es impar, solo tiene un ciclo de cuerdas, en cambio tiene dos si es par ($\mathbb{Z}_n/2\mathbb{Z}_n \simeq \mathbb{F}_1$ si $n$ es impar, $\simeq \mathbb{F}_2$ si $n$ es par). Por tanto, en un polígono cuyo número de vértices sea par, ha de llamarse dos veces.
 
 La eficiencia teórica de esta función es $O(n)$.
 \subsubsection{Bucle principal}
@@ -239,7 +296,7 @@ Este bucle es una transcripción a código de la descripción del algoritmo.
 Es un algoritmo de complejidad $O(n^2)$, dado que para un polígono de $n$ nodos, en cada iteración del bucle \texttt{while} ($n$ iteraciones) llama a la función \textit{find\_min\_string}, de complejidad $O(n)$, para después eliminar un vértice.
 
 \[
-T(n) = \sum_{i=3}^n ki = k\frac{n^2+n}{2} \in O(n^2)
+T(n) = \sum_{i=3}^n ki = k\frac{n^2+n}{2}-3k \in O(n^2)
 \]
 
 donde:
