@@ -125,10 +125,14 @@ int main(int argc, char** argv)
     points.erase(it_min);
   }
 
+  double min_weight = 0;
   for(auto& s : sol)
   {
+    min_weight += euclidean_distance(s.first, s.second);
     std::cout << s.first << " <-> " << s.second << " -> " << euclidean_distance(s.first, s.second) << std::endl;
   }
+
+  std::cout << min_weight << std::endl;
   
   return 0;
 }

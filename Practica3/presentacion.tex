@@ -170,7 +170,8 @@ Un polígono del plano se dice \textbf{convexo} si cada uno de sus vértices es 
 Una triangulación se dice \textbf{mínima} si es un elemento minimal del conjunto de triangulaciones posibles, con el preorden inducido por el orden en $\mathbb{R}$ de la suma de las longitudes de sus diagonales.
 \end{block}
 
-\end{frame}	
+\end{frame}
+
 
 \begin{frame}{Ejemplo de polígono triangulado}
 \begin{center}
@@ -208,13 +209,71 @@ Del mismo modo, las cuerdas son:
 
 \begin{enumerate}
     \item Si el polígono es un triángulo, no se hace nada.
-	\item Encontrar la cuerda de longitud mínima.
+	\item Encontrar una cuerda de longitud mínima.
 	\item Almacenar la cuerda en el conjunto solución.
 	\item Eliminar del conjunto de vértices el comprendido entre los dos vértices que une la cuerda.
 	\item Ejecutar el algoritmo desde el primer paso, siendo esta vez la entrada el conjunto de vértices resultante en el paso anterior.
 \end{enumerate}
 
-\end{frame}	
+\end{frame}
+
+\begin{frame}{Elementos del algoritmo \textit{greedy}}
+\begin{itemize}
+\item Lista de candidatos: son todas las cuerdas del polígono que se está evaluando en cada paso.                                     
+
+\item Lista de candidatos utilizados: diagonales (cuerdas o no) del primer polígono que han sido seleccionadas.                                                                         
+
+\item Función solución: el polígono tiene tres vértices.
+
+\item Criterio de factibilidad: el predicado $0$-ario verdadero.
+
+\item Función de selección: escogemos una cuerda de longitud mínima.                      
+
+\item Función objetivo: la suma de las longitudes de las cuerdas. Queremos minimizarla.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Eficacia del algoritmo}
+El algoritmo no es óptimo, en el sentido de que no siempre encuentra una triangulación mínima, aunque lo hace en la mayoría de los casos o se aproxima muy bien.
+\end{frame}
+
+\begin{frame}{}
+\begin{columns}[c] 
+    \column{.5\textwidth}
+     \begin{tikzpicture}
+%% \node at (0.936153,1.76738) {A};
+%% \node at(-1.12177,1.65579) {B};
+%% \node at(-1.3,-1.51987) {C};
+%% \node at(-1.03769,-1.70974) {D};
+%% \node at(0.911164,-1.78039) {E};
+%% \node at(1.65839,-1.11792) {F};
+%% \node at(1.99906,-0.0612251) {G};
+\draw (0.936153,1.76738) -- (-1.12177,1.65579);
+\draw (-1.12177,1.65579) -- (-1.3,-1.51987);
+\draw (-1.3,-1.51987) -- (-1.03769,-1.70974);
+\draw (-1.03769,-1.70974) -- (0.911164,-1.78039);
+\draw( 0.911164,-1.78039) -- (1.65839,-1.11792);
+\draw( 1.65839,-1.11792) -- (1.99906,-0.0612251);
+\draw (1.99906,-0.0612251) -- (0.936153,1.76738);
+
+\end{tikzpicture}
+
+    \column{.5\textwidth}
+(0.936153,1.76738)
+(-1.12177,1.65579)\\
+(-1.3,-1.51987)\\
+(-1.03769,-1.70974)\\
+(0.911164,-1.78039)\\
+(1.65839,-1.11792)\\
+(1.99906,-0.0612251)
+
+    \end{columns}
+\hfill\\
+\hfill\\
+En este ejemplo, el peso de la triangulación \textit{greedy} es $11.7845$, mientras que existe una de peso $11.43$.
+\end{frame}
+
 
 \subsection{Implementación}
 \begin{frame}[fragile]
@@ -260,7 +319,7 @@ auto find_min_string = [&min_distance, &it_min, &min_string, &points](auto initi
 };
 \end{lstlisting}
 \end{adjustbox}\hfill\\\hfill\\
-	Busca la cuerda de mínima longitud recorriendo los nodos hasta volver al nodo inicial.
+	Busca una cuerda de mínima longitud recorriendo los nodos hasta volver al nodo inicial.
 \end{frame}
 
 \begin{frame}
@@ -297,19 +356,27 @@ Por tanto, para comparar las longitudes de todas las cuerdas de un polígono, de
 \end{frame}
 
 \subsection{La complejidad del algoritmo}
-\hfill\\
+\begin{frame}{La complejidad del algoritmo}
+
+
 Es un algoritmo de complejidad $O(n^2)$, dado que para un polígono de $n$ nodos, en cada iteración del bucle \texttt{while} ($n$ iteraciones) llama a la función \textit{find\_min\_string}, de complejidad $O(n)$, para después eliminar un vértice.
 
 \[
-T(n) = \sum_{i=3}^n ki = k\frac{n^2+n}{2} \in O(n^2)
+T(n) = \sum_{i=3}^n ki = k\frac{n^2+n}{2} - 3k \in O(n^2)
 \]
 
 donde:
 \begin{itemize}
 \item $T(n)$ es el número de instrucciones que ejecuta el algoritmo para un polígono de $n$ vértices.
 \item $k$ es una constante de proporcionalidad aproximada entre el número de instrucciones que se ejecutan para encontrar la cuerda mínima entre $i$ e $i$. 
-	
-\end{itemize}
 
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Alternativa}
+Existen implementaciones de este algoritmo que se ejecutan en tiempo $O(n\log(n))$, algunas están descritas en:
+\hfill\\\hfill\\
+Dickerson, Matthew T. (1997). \textit{«Fast greedy triangulation algorithms»}. Computational Geometry (Elsevier)  67-86
+\end{frame}
 
 \end{document}
