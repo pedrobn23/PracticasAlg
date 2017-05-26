@@ -186,7 +186,7 @@ bool resolver (int pieza[8][4][5][5] , Matriz &tab, int indice){
     return true;
 
   //Iteramos sobre las rotaciones
-  for (int i=0; i<4; ++i){
+  for (int i=0; i<2; ++i){
 
     //con estos dos bucles y el if cogemos todas las casillas libres
     for (int j=0; j<FIL; ++j){
@@ -197,9 +197,10 @@ bool resolver (int pieza[8][4][5][5] , Matriz &tab, int indice){
 	  
 	  if (!cabe(tab, pieza[indice][i], j, k))
 	    continue;
- 
+	  
 	  Matriz copiaDeSeguridad = tab;	  
 	  colocar (tab, pieza[indice][i], j, k);
+	  	  cout<<tab<<endl;
 	  indice++;
 	  
 	  bool resuelto = resolver(pieza, tab, indice);
@@ -213,30 +214,30 @@ bool resolver (int pieza[8][4][5][5] , Matriz &tab, int indice){
 	}
       }
     }
-
-    return false;
   }
+    return false;  
 }
 
 int main () {
 
   //  cout << ocupadcha(pieza[3][0]);
   Matriz tab;
-  colocar(tab, pieza[0][0], 2, 2);
-  Matriz aux = tab;
+  // colocar(tab, pieza[0][0], 2, 2);
+  // Matriz aux = tab;
 
-  //int k=1;
-  //int j=0;
-  for(int k=0; k<8; ++k)
-  for(int j=0; j<4; ++j)
-  for(int i=0; i<FIL; ++i) {
-    tab=aux;
-    if (cabe (tab, pieza[k][j], i,0)) {
-      colocar(tab, pieza[k][j], i,0);
-      cout << endl <<  tab << endl;    
-    }
-    else
-      cout << endl << "no era posible" << endl;
-   } 
+  // //int k=1;
+  // //int j=0;
+  // for(int k=0; k<8; ++k)
+  // for(int j=0; j<4; ++j)
+  // for(int i=0; i<FIL; ++i) {
+  //   tab=aux;
+  //   if (cabe (tab, pieza[k][j], i,0)) {
+  //     colocar(tab, pieza[k][j], i,0);
+  //     cout << endl <<  tab << endl;    
+  //   }
+  //   else
+  //     cou
+  resolver (pieza, tab, 0);
+  cout << tab;
 }
  
