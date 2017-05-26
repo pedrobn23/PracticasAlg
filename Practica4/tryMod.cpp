@@ -186,7 +186,7 @@ bool resolver (int pieza[8][4][5][5] , Matriz &tab, int indice){
     return true;
 
   //Iteramos sobre las rotaciones
-  for (int i=0; i<2; ++i){
+  for (int i=0; i<4; ++i){
 
     //con estos dos bucles y el if cogemos todas las casillas libres
     for (int j=0; j<FIL; ++j){
@@ -200,7 +200,7 @@ bool resolver (int pieza[8][4][5][5] , Matriz &tab, int indice){
 	  
 	  Matriz copiaDeSeguridad = tab;	  
 	  colocar (tab, pieza[indice][i], j, k);
-	  	  cout<<tab<<endl;
+	  //	  cout<<tab<<endl;
 	  indice++;
 	  
 	  bool resuelto = resolver(pieza, tab, indice);
