@@ -29,13 +29,13 @@ public:
 
 
   int get (int i, int j) const {
-    assert (i<FIL && j<COL);
+    //    assert (i<FIL && j<COL);
 	      
     return m[i][j];
   }
 
   void set(int i, int j, int value){
-    assert (i<FIL && j<COL);
+    // assert (i<FIL && j<COL);
     m[i][j] = value;
   }
 
@@ -165,7 +165,7 @@ bool cabe (const Matriz &tab, int pieza[5][5], int h, int j) {
 }
 
 void colocar  (Matriz &tab, int pieza[5][5], pair<int,int> p1) {
-  assert (cabe (tab, pieza, p1));
+  //  assert (cabe (tab, pieza, p1));
 
   for (int i=0,k=p1.second; i<ocupadcha(pieza) && k<COL; ++i, ++k) {
     for (int j=0,  h=p1.first;j<ocupabajo(pieza) && h<FIL; ++j, ++h) {
