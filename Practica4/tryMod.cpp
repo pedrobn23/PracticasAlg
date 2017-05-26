@@ -200,16 +200,7 @@ bool resolver (int pieza[8][4][5][5] , Matriz &tab, int indice){
  
 	  Matriz copiaDeSeguridad = tab;	  
 	  colocar (tab, pieza[indice][i], j, k);
-
 	  indice++;
-	 
-	  char c;
-	  //cout <<endl << tab << endl;
-	  //cin >> c;
-
-	  danimidani=true;
-	  //if((tab.get(0,0)==5)&&(tab.get(2,0)==5))
-	    //cout << endl << tab << endl;
 	  
 	  bool resuelto = resolver(pieza, tab, indice);
 
@@ -231,19 +222,21 @@ int main () {
 
   //  cout << ocupadcha(pieza[3][0]);
   Matriz tab;
-  Matriz aux;
-  
-    resolver(pieza, tab, 0);
+  colocar(tab, pieza[0][0], 2, 2);
+  Matriz aux = tab;
 
-    cout << tab;
-  /*  for (int i=0; i<8;++i){
-  colocar(tab, pieza[3][0], 3, );
-  cout << endl << tab << endl;*/
-  /*for (int i=0; i<4;++i) {
-  cout << "\n\nEn main: "<< endl;
-  cout << "ocupa dcha: " << ocupadcha(pieza[i][0]) << endl;
-  cout << "ocupa bajo: " << ocupabajo(pieza[i][0]) << endl;
-  cout << cabe (tab, pieza[i][0], 4,8) << endl;
-  }*/
+  //int k=1;
+  //int j=0;
+  for(int k=0; k<8; ++k)
+  for(int j=0; j<4; ++j)
+  for(int i=0; i<FIL; ++i) {
+    tab=aux;
+    if (cabe (tab, pieza[k][j], i,0)) {
+      colocar(tab, pieza[k][j], i,0);
+      cout << endl <<  tab << endl;    
+    }
+    else
+      cout << endl << "no era posible" << endl;
+   } 
 }
  
