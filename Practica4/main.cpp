@@ -29,13 +29,10 @@ public:
 
 
   int get (int i, int j) const {
-    //    assert (i<FIL && j<COL);
-	      
     return m[i][j];
   }
 
   void set(int i, int j, int value){
-    // assert (i<FIL && j<COL);
     m[i][j] = value;
   }
 
@@ -51,20 +48,7 @@ public:
     return true;
   }
 
-  // la comento por la posibilidad de que sea innecesaria
-  //
-  // pair <int,int> primeraLibre () {
-  //   for (int i=0; i<FIL; ++i) {
-  //     for (int j=0; j<COL; ++j) {
-  // 	if (!m[i][j])
-  // 	  return pair <int,int> (i,j);
-  //     }
-  //   }
 
-  //   return  pair<int,int> (-1,-1);
-  // }
- 
-  
   Matriz& operator=(const Matriz &m) {
     for (int i=0; i<FIL; ++i)
       for (int j=0; j<COL; ++j)
@@ -75,7 +59,7 @@ public:
   
 };
 
-//Sobrecarga del operador de escritura
+
 std::ostream& operator<<(std::ostream& os, Matriz& m) {
   for (int i=0; i<FIL; ++i) {
     for (int j=0; j<COL; ++j) {
@@ -85,7 +69,7 @@ std::ostream& operator<<(std::ostream& os, Matriz& m) {
   }
 }
 
-//supervisa cuantas posiciones a la derecha ocupa la pieza
+
 int ocupabajo (int pieza[5][5]) {
   // int i = 0, max = 0;
   // for (int j=0; j<5; ++j) {
@@ -159,14 +143,12 @@ bool cabe (const Matriz &tab, int pieza[5][5], pair<int,int> p1) {
 }
 
 
-//esta funcion es para poder cambiar la interfaz de la funcion
+
 bool cabe (const Matriz &tab, int pieza[5][5], int h, int j) {
   return cabe (tab, pieza, pair<int,int> (h,j));
 }
 
 void colocar  (Matriz &tab, int pieza[5][5], pair<int,int> p1) {
-  //  assert (cabe (tab, pieza, p1));
-
   for (int i=0,k=p1.second; i<ocupadcha(pieza) && k<COL; ++i, ++k) {
     for (int j=0,  h=p1.first;j<ocupabajo(pieza) && h<FIL; ++j, ++h) {
       tab.set(h, k, pieza[j][i] | tab.get(h,k));
@@ -200,7 +182,6 @@ bool resolver (int pieza[8][4][5][5] , Matriz &tab, int indice){
 	  
 	  Matriz copiaDeSeguridad = tab;	  
 	  colocar (tab, pieza[indice][i], j, k);
-	  //	  cout<<tab<<endl;
 	  indice++;
 	  
 	  bool resuelto = resolver(pieza, tab, indice);
@@ -219,24 +200,7 @@ bool resolver (int pieza[8][4][5][5] , Matriz &tab, int indice){
 }
 
 int main () {
-
-  //  cout << ocupadcha(pieza[3][0]);
   Matriz tab;
-  // colocar(tab, pieza[0][0], 2, 2);
-  // Matriz aux = tab;
-
-  // //int k=1;
-  // //int j=0;
-  // for(int k=0; k<8; ++k)
-  // for(int j=0; j<4; ++j)
-  // for(int i=0; i<FIL; ++i) {
-  //   tab=aux;
-  //   if (cabe (tab, pieza[k][j], i,0)) {
-  //     colocar(tab, pieza[k][j], i,0);
-  //     cout << endl <<  tab << endl;    
-  //   }
-  //   else
-  //     cou
   resolver (pieza, tab, 0);
   cout << tab;
 }
