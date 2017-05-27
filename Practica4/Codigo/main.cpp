@@ -5,7 +5,7 @@
 #include <iostream>
 #include <cassert>
 #include <stdlib.h>
-#include "piezamod.h"
+#include "pieza.h"
 #include <stack>
 
 using namespace std;
