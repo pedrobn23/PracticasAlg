@@ -301,21 +301,11 @@ que, como vemos, ya está resuelto. Aún así, volverá a llamar recursivamente 
 
 \section{Un caso real}
 
+Un ejemplo en el que podríamos aplicar nuestro algoritmo sería en la construcción de un polideportivo. Al igual que en nuestro algoritmo, sabemos de antemano el espacio que tenemos, lo que queremos colocar dentro y cuánto ocupa cada uno. De esta forma, escribiendo en forma matricial el terreno y las pistas de los diferentes deportes que se quieran colocar, podríamos comprobar si estas caben o no en el espacio que tenemos y de qué forma cabrían.
+
 \section{Cálculo del orden de eficiencia teórica}
 
 
-Es un algoritmo de complejidad $O(n^2)$, dado que para un polígono de $n$ nodos, en cada iteración del bucle \texttt{while} ($n$ iteraciones) llama a la función \textit{find\_min\_string}, de complejidad $O(n)$, para después eliminar un vértice.
-
-\[
-T(n) = \sum_{i=3}^n ki = k\frac{n^2+n}{2} - 3k \in O(n^2)
-\]
-
-donde:
-\begin{itemize}
-\item $T(n)$ es el número de instrucciones que ejecuta el algoritmo para un polígono de $n$ vértices.
-\item $k$ es una constante de proporcionalidad aproximada entre el número de instrucciones que se ejecutan para encontrar la cuerda mínima entre $i$ e $i$. 
-
-\end{itemize}
 
 \section{Instrucciones de compilación}
 
