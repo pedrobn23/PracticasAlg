@@ -1,0 +1,2 @@
+all:
+	g++ -g -O2 -o Ejecutables/EncajarPiezas Codigo/v1.0.cpp

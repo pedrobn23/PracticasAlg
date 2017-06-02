@@ -305,9 +305,34 @@ Un ejemplo en el que podríamos aplicar nuestro algoritmo sería en la construcc
 
 \section{Cálculo del orden de eficiencia teórica}
 
+Lo primero en esta sección es comentar es que nuestro algoritmo, debido a sus dimensiones constantes , tendrá al final un tiempo de ejecución constante y una eficiencia por tanto $O(1)$.
 
+Ahora, intentaremos generalizar la eficiencia de nuestro problema.\\
+
+Sea ahora la matriz de dimensiones $\ \ m\times n, \quad m,n \in \mathbb N$. Ahora, tendremos $p\in \mathbb N$ piezas.Nuestra función de eficiencia será:
+\[
+T(p,n,m) = 4(T(p-1,n,m)) + mnO(cabe)
+\]
+Con $cabe$ la función que comprueba si una pieza cabe en el tablero. El orden de esta función es $m*n$. Tenemos que tener en consideración la condición de parada de $T$ que sería
+Si definimos la función:
+\[
+T(1,n,m) = nm
+\]
+
+Si quisiéramos establecer un orden de eficiencia en notación $O$ para nuestro algoritmo en el caso general, si desarrollamos en nuestra ecuación obtendríamos que es igual a:
+\[
+4^{p-1}T(1,n,m)+ (4(p-1)+1)mnO(cabe) = 4^{p}mn + (4p+1)mnO(cabe)
+\]
+Lo cual, en notación $O$ es
+\[
+O(pmn \cdot O(cabe))
+\]
+Y sabiendo $O(cabe)$, tenemos que eso es igual a:
+\[
+O(pm^2n^2)
+\]
 
 \section{Instrucciones de compilación}
 
-Para compilar nuestro código, en la carpeta donde se tengan los archivos, abrir la terminal y ejecutar $make$ para que se genere el ejecutable.
+Para compilar nuestro código, en la carpeta donde se tengan los archivos, abrir la terminal y ejecutar $make$ para que se genere el ejecutable. Este ejecutable estará en la carpeta Ejecutables correspondiente.
 \end{document}
