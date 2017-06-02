@@ -7,6 +7,8 @@
 #include <stdlib.h>
 #include "pieza.h"
 #include <stack>
+#include <omp.h>
+
 
 using namespace std;
 
@@ -38,14 +40,17 @@ public:
 
   
   bool llena () const{
+    bool salida=true;
     for (int i=0; i<FIL; ++i) {
-      for (int j=0; j<COL; ++j) {
-	if (!m[i][j])
-	  return false;
+      //#pragma omp parallel for shared(salida)
+      for (int j=0; j<COL && salida; ++j) {
+	if (!m[i][j]){
+	  salida= false;
+	}
       }
     }
 
-    return true;
+    return salida;
   }
 
 
