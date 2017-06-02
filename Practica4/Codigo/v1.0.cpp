@@ -29,10 +29,13 @@ public:
 
 
   int get (int i, int j) const {
+    assert (0<=i && i<FIL && 0<=j && j<COL);
     return m[i][j];
   }
 
   void set(int i, int j, int value){
+    assert (0<=i && i<FIL && 0<=j && j<COL);
+
     m[i][j] = value;
   }
 
@@ -145,6 +148,7 @@ bool cabe (const Matriz &tab, int pieza[5][5], pair<int,int> p1) {
 
 
 bool cabe (const Matriz &tab, int pieza[5][5], int h, int j) {
+    assert (0<=h && h<FIL && 0<=j && j<COL);
   return cabe (tab, pieza, pair<int,int> (h,j));
 }
 
@@ -157,6 +161,7 @@ void colocar  (Matriz &tab, int pieza[5][5], pair<int,int> p1) {
 }
 
 void colocar(Matriz &sol, int pieza[5][5], int h, int j) {
+
   return colocar(sol, pieza, pair<int,int> (h, j));
 }
 
