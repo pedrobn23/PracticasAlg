@@ -1,4 +1,4 @@
-
+	
 
 % microtype: Tipografía.
 % mathpazo: Usa la fuente Palatino.
@@ -9,8 +9,12 @@
 \usepackage{multicol}
 \usepackage{multirow}
 \usepackage{algorithm}
-\usepackage[noend]{algpseudocode}	
+\usepackage{algpseudocode}	
 \usepackage{amsmath}
+
+
+
+
 
 \makeatletter
 \def\BState{\State\hskip-\ALG@thistlm}
@@ -46,7 +50,6 @@
 
 
 \usepackage{listings}
-\usepackage{graphicx}
 
 %% Listing settings
 
@@ -184,52 +187,127 @@ componente representa una columna del tablero y cada valor de x es la fila en la
 
 \subsection{Esqueleto del algoritmo}
 
+Nuestro algoritmo se puede representar mediante pseudocódigo de la siguiente manera:
+
 \begin{algorithm}
-\caption{Solución}\label{euclid}
-\begin{algorithmic}[1]
-\Procedure{MyProcedure}{}
-\State $\textit{stringlen} \gets \text{length of }\textit{string}$
-\State $i \gets \textit{patlen}$
-\BState \emph{top}:
-\If {$i > \textit{stringlen}$} \Return false
-\EndIf
-\State $j \gets \textit{patlen}$
-\BState \emph{loop}:
-\If {$\textit{string}(i) = \textit{path}(j)$}
-\State $j \gets j-1$.
-\State $i \gets i-1$.
-\State \textbf{goto} \emph{loop}.
-\State \textbf{close};
-\EndIf
-\State $i \gets i+\max(\textit{delta}_1(\textit{string}(i)),\textit{delta}_2(j))$.
-\State \textbf{goto} \emph{top}.
-\EndProcedure
+\begin{algorithmic}
+\Function{EncajarPiezasEnMaleta}{Pieza, tablero, indice}
+	\If{Tablero Lleno}
+		\State \Return $true$
+	\EndIf
+	
+	\For{$i=1,\dots,4$} \Comment Rotaciones
+        \For{$j = 0,\dots,FILAS$} \Comment Filas
+        	\For{$k= 0, \dots,COLUMNAS$} \Comment Columnas
+        	
+        	\If{No cabe Pieza[indice][Rotacion i] en posición  (j,k)}
+        		\State Pasamos a siguiente rotación o pieza
+        	\EndIf
+        	
+        	\State $copiaSeguridad \gets  tablero$
+        	\State Colocamos pieza donde hemos visto que cabe
+        	\State $indice++$
+        	\State $resuelto \gets resolver(pieza,tablero,indice)$ \Comment Llamada recursiva
+        	
+        	\If{Resuelto}
+        		\State \Return $true$
+        	
+        	\Else
+        		\State $tablero \gets copiaSeguridad$
+        		\State $indice --$
+        	
+        	\EndIf
+        	
+        	
+        	
+        	\EndFor   \Comment Columnas	
+      	\EndFor \Comment Filas
+    \EndFor \Comment Rotaciones
+	
+\State \Return False \Comment Falso si no se encuentra la solución
+
+\EndFunction
 \end{algorithmic}
 \end{algorithm}
 
-\section{Conclusión}
+Se puede ver como la técnica de BackTracking se aplica en la generación mediante la llamada recursiva de un árbol de soluciones que se va explorando hasta encontrar la solución.
+
+\subsection{Ejemplo sencillo}
+
+Realizaremos un ejemplo muy sencillo sobre cómo funcionaría nuestro algoritmo. Pondremos las dos primeras piezas que se mostraron al principio y una matriz(un tablero) que será el siguiente:
+\[
+\begin{pmatrix}
+ 0 & 0 & 0 \\
+0 & 0 & 0\\
+0 & 0 & 0\\
+0 & 0 & 0 \\ 
+\end{pmatrix} 
+\]
+Donde los ceros significarán que la posición está vacía.
+
+Si las piezas son:
+\begin{center}
+	\includegraphics{ejemplo.png}
+\end{center}
+se puede ver que son de $3\times 3$ y $3\times 1$. Para identificarlas matricialmente, la primera será, en todas sus rotaciones:
+\[
+\begin{pmatrix}
+1 & 1 & 1\\
+1& 1 & 1\\
+1 & 1 & 1
+\end{pmatrix} 
+\]
+
+Y la segunda, será:
+\[
+\begin{pmatrix}
+2\\
+2\\
+2
+\end{pmatrix} 
+\]
+en su primera rotación y
+\[
+\begin{pmatrix}
+2&2&2
+\end{pmatrix} 
+\]
+en su segunda rotación.
+
+Ahora, nuestro algoritmo empezaría y vería que la matriz inicial no está llena y por tanto comprobará si en la primera posición libre que haya, cabe la primera pieza. Como el resultado es afirmativo,la introducirá y quedará la matriz:
+\[
+\begin{pmatrix}
+ 1 & 1 & 1 \\
+1 & 1 & 1\\
+1 & 1 & 1\\
+0 & 0 & 0 \\ 
+\end{pmatrix} 
+\]
+
+Seguidamente, intentará seguir colocando las demás piezas para ver si se puede resolver. Pasará a la segunda pieza, habiendo hecho una copia de la matriz antes de seguir por si tiene que volver. Para seguir colocando, llamará recursivamente con la siguiente pieza.
+
+Sigue nuestro algorimo intentando ahora introducir la pieza 2 en su primera rotación mediante la llamada recursiva. El resultado de la función cabe será falso, por lo que seguirá con la siguiente rotación. En este caso, sí podrá introducirla y la introducirá, quedando la matriz(tablero) de la forma:
+
+\[
+\begin{pmatrix}
+ 1 & 1 & 1 \\
+1 & 1 & 1\\
+1 & 1 & 1\\
+2 & 2 & 2
+\end{pmatrix} 
+\]
+que, como vemos, ya está resuelto. Aún así, volverá a llamar recursivamente sumando el índice, pero en la llamada la función llena devolverá verdadero, y así todas las llamadas recursivas devolverán verdadero y terminará la función y quedará resuelto el problema.
 
 
-4.
-Esqueleto  del  al
-goritmo  (pseudocódigo)  que  soluciona  el  problema,  explicando 
-cómo  se  ha  incorporado  cada  una  de  las  componentes 
-de  diseño  de  la  técnica 
-(BackTracking o Branch\&Bound, según se aplique)
-.
-5.
-Explicación   del   funcionamiento   del   algoritmo,   sobre   un   caso   de   ejemplo 
-pequeño propuesto por los estudiantes.
+\section{Un caso real}
 
- 
-6.
-Enunciado  de  un  problema  o  caso  real  donde  se  pueda  utilizar 
-la  técnica 
-seleccionada
-para solucionarlo (distinto de los comentados en clase).
-7.
-Cálculo del orden de eficiencia teórico del algoritmo.
-8.
-Instrucciones sobre 
-cómo compilar y ejecutar el código de l
+Un ejemplo en el que podríamos aplicar nuestro algoritmo sería en la construcción de un polideportivo. Al igual que en nuestro algoritmo, sabemos de antemano el espacio que tenemos, lo que queremos colocar dentro y cuánto ocupa cada uno. De esta forma, escribiendo en forma matricial el terreno y las pistas de los diferentes deportes que se quieran colocar, podríamos comprobar si estas caben o no en el espacio que tenemos y de qué forma cabrían.
+
+\section{Cálculo del orden de eficiencia teórica}
+
+
+
+\section{Instrucciones de compilación}
+
+Para compilar nuestro código, en la carpeta donde se tengan los archivos, abrir la terminal y ejecutar $make$ para que se genere el ejecutable.
 \end{document}
